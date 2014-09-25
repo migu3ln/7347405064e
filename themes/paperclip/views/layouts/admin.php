@@ -9,13 +9,9 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/img/favicon.ico">
-
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-
-
         <!-- Custom styles for this template -->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" rel="stylesheet">
-
         <!-- Resources -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
@@ -175,12 +171,106 @@
                 </div>
             </div>
         </div>
-
-
         <!-- Wrapper -->
         <div class="wrapper">
-            <div class="row">
-                <div class="col-md-12">
+            <div class="topic">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h3><?php echo Yii::t('AweCrud.app', 'Administración') ?></h3>
+                        </div>
+                        <div class="col-sm-8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="col-sm-3">
+                    <!-- Categories -->
+                    <div class="panel-group" id="help-nav">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-one" class="collapsed">
+                                    Eventos
+                                </a>
+                            </div>
+                            <div id="help-nav-one" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="#">Nuevo</a></li>
+                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="#">Vistas</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-two" class="collapsed">
+                                    Escenarios
+                                </a>
+                            </div>
+                            <div id="help-nav-two" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="#">Nuevo</a></li>
+                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="#">Vistas</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-three" class="collapsed">
+                                    Elencos
+                                </a>
+                            </div>
+                            <div id="help-nav-three" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="#">Nuevo</a></li>
+                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="#">Vistas</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-four" class="collapsed">
+                                    Proyectos
+                                </a>
+                            </div>
+                            <div id="help-nav-four" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="#">Nuevo</a></li>
+                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="#">Vistas</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-five" class="collapsed">
+                                    Producciones
+                                </a>
+                            </div>
+                            <div id="help-nav-five" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="#">Nuevo</a></li>
+                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="#">Vistas</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
                     <?php echo $content; ?>
                 </div>
             </div>
@@ -195,3 +285,4 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
     </body>
 </html>
+
