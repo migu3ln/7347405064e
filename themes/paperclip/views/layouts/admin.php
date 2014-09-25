@@ -261,8 +261,8 @@
                             <div id="help-nav-five" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Nuevo</a></li>
-                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="<?php echo Yii::app()->createUrl('producciones/produccion/create') ?>">Nuevo</a></li>
+                                        <li><a href="<?php echo Yii::app()->createUrl('producciones/produccion/admin') ?>">Administración</a></li>
                                         <li><a href="#">Vistas</a></li>
                                     </ul>
                                 </div>
