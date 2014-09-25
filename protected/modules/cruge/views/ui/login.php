@@ -30,6 +30,5 @@
         </label>    
     </div>
     <input class="btn btn-theme-primary" type="submit" value="<?php echo CrugeTranslator::t('logon', "Login") ?>">
-    </fieldset>
     <?php $this->endWidget(); ?>
 <?php endif; ?>
