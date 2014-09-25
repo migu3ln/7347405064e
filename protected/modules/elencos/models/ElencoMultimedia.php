@@ -14,7 +14,7 @@ class ElencoMultimedia extends BaseElencoMultimedia
 
     public static function label($n = 1)
     {
-        return Yii::t('app', 'ElencoMultimedia|ElencoMultimedias', $n);
+        return Yii::t('app', 'Elenco Multimedia|Elenco Multimedias', $n);
     }
 
 }

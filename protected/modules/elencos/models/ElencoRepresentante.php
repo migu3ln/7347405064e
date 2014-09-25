@@ -14,7 +14,7 @@ class ElencoRepresentante extends BaseElencoRepresentante
 
     public static function label($n = 1)
     {
-        return Yii::t('app', 'ElencoRepresentante|ElencoRepresentantes', $n);
+        return Yii::t('app', 'Elenco Representante|Elenco Representantes', $n);
     }
 
 }
