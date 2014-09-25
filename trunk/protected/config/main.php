@@ -22,10 +22,25 @@ return array(
 //        cruge
         'application.modules.cruge.components.*',
         'application.modules.cruge.extensions.crugemailer.*',
+        //eventos
+        'application.modules.eventos.components.*',
+        'application.modules.eventos.models.*',
+        //escenarios
+        'application.modules.escenarios.components.*',
+        'application.modules.escenarios.models.*',
+        //elencos
+        'application.modules.elencos.components.*',
+        'application.modules.elencos.models.*',
+        //proyectos
+        'application.modules.proyectos.components.*',
+        'application.modules.proyectos.models.*',
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool
-
+        'eventos',
+        'escenarios',
+        'elencos',
+        'proyectos',
         'cruge' => array(
             'tableprefix' => 'cruge_',
             // para que utilice a protected.modules.cruge.models.auth.CrugeAuthDefault.php
