@@ -107,68 +107,6 @@ class Menu {
         return $menu;
     }
 
-    /**
-     * Function to compare the menu active rules with the current url
-     * @param array $active_rules the array of rules to compare
-     * @return boolean true if the rules match the current url
-     */
-//    private static function getActive($active_rules) {
-//        $current = false;
-//
-//        if (self::$_controller) {
-//            if (is_array(current($active_rules))) {
-//                foreach ($active_rules as $rule) {
-//                    $operator = isset($rule['operator']) ? $rule['operator'] : '==';
-//
-//                    if (isset($rule['module']) && self::$_controller->module) {
-//                        if ($operator == "==")
-//                            $current = self::$_controller->module->id == $rule['module'];
-//                        if ($operator == "!=")
-//                            $current = self::$_controller->module->id != $rule['module'];
-//                    }
-//                    if (isset($rule['controller'])) {
-//                        if ($operator == "==")
-//                            $current = self::$_controller->id == $rule['controller'];
-//                        if ($operator == "!=")
-//                            $current = self::$_controller->id != $rule['controller'];
-//                    }
-//                    if (isset($rule['action'])) {
-//                        if ($operator == "==")
-//                            $current = self::$_controller->action->id == $rule['action'];
-//                        if ($operator == "!=")
-//                            $current = self::$_controller->action->id != $rule['action'];
-//                    }
-//
-//                    if (!$current)
-//                        break;
-//                }
-//            } else {
-//                $operator = isset($active_rules['operator']) ? $active_rules['operator'] : '==';
-//
-//                if (isset($active_rules['module']) && self::$_controller->module) {
-//                    if ($operator == "==")
-//                        $current = self::$_controller->module->id == $active_rules['module'];
-//                    if ($operator == "!=")
-//                        $current = self::$_controller->module->id != $active_rules['module'];
-//                }
-//                if (isset($active_rules['controller'])) {
-//                    if ($operator == "==")
-//                        $current = self::$_controller->id == $active_rules['controller'];
-//                    if ($operator == "!=")
-//                        $current = self::$_controller->id != $active_rules['controller'];
-//                }
-//                if (isset($active_rules['action'])) {
-//                    if ($operator == "==")
-//                        $current = self::$_controller->action->id == $active_rules['action'];
-//                    if ($operator == "!=")
-//                        $current = self::$_controller->action->id != $active_rules['action'];
-//                }
-//            }
-//        }
-//        return $current;
-//    }
-
-
     private static function getActive2($active_rules) {
         $current = false;
         //MODULE

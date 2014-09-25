@@ -34,6 +34,9 @@ return array(
         //proyectos
         'application.modules.proyectos.components.*',
         'application.modules.proyectos.models.*',
+        //proyectos
+        'application.modules.producciones.components.*',
+        'application.modules.producciones.models.*',
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool
@@ -41,6 +44,7 @@ return array(
         'escenarios',
         'elencos',
         'proyectos',
+        'producciones',
         'cruge' => array(
             'tableprefix' => 'cruge_',
             // para que utilice a protected.modules.cruge.models.auth.CrugeAuthDefault.php
