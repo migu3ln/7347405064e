@@ -40,7 +40,8 @@
                 <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),))) ?>
 
 
-            </div>                        <div class="form-group">
+            </div>                        
+            <div class="form-group">
                 <div class="col-lg-7 col-lg-offset-5">
                     <?php
                     $this->widget('booster.widgets.TbButton', array(

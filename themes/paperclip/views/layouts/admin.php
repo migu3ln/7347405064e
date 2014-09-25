@@ -12,6 +12,8 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <!-- Custom styles for this template -->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" rel="stylesheet">
+        <!-- ladda submit -->
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/ladda-themeless.min.css" rel="stylesheet">
         <!-- Resources -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
@@ -213,8 +215,8 @@
                             <div id="help-nav-two" class="panel-collapse collapse" style="height: 0px;">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Nuevo</a></li>
-                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="<?php echo Yii::app()->createUrl('escenarios/escenario/create') ?>">Nuevo</a></li>
+                                        <li><a href="<?php echo Yii::app()->createUrl('escenarios/escenario/') ?>">Administración</a></li>
                                         <li><a href="#">Vistas</a></li>
                                     </ul>
                                 </div>
@@ -281,6 +283,11 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/scrolltopcontrol.js"></script>
+        <!-- ladda submit -->
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.min.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/spin.min.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.jquery.min.js"></script>
+        <!-- script principal -->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
     </body>
