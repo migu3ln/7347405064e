@@ -51,7 +51,7 @@
                                 <a class="navbar-brand" href="index.html"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/img/logo.png" alt="..."></a>
                             </div>
                             <div class="collapse navbar-collapse">
-                                <a class="navbar-btn btn btn-theme-primary pull-right hidden-sm hidden-xs" href="<?php echo Yii::app()->user->ui->loginUrl?>">Sign In</a>
+                                <a class="navbar-btn btn btn-theme-primary pull-right hidden-sm hidden-xs" href="<?php echo Yii::app()->user->ui->loginUrl ?>">Sign In</a>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown active">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
