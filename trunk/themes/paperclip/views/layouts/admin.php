@@ -247,8 +247,8 @@
                             <div id="help-nav-four" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Nuevo</a></li>
-                                        <li><a href="#">Administración</a></li>
+                                        <li><a href="<?php echo Yii::app()->createUrl('proyectos/proyecto/create') ?>">Nuevo</a></li>
+                                        <li><a href="<?php echo Yii::app()->createUrl('proyectos/proyecto/create') ?>">Administración</a></li>
                                         <li><a href="#">Vistas</a></li>
                                     </ul>
                                 </div>
