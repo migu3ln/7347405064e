@@ -14,7 +14,7 @@ class Produccion extends BaseProduccion
 
     public static function label($n = 1)
     {
-        return Yii::t('app', 'Produccion|Produccions', $n);
+        return Yii::t('app', 'Produccion|Producciones', $n);
     }
 
 }
