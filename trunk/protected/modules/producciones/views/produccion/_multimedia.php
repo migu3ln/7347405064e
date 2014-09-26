@@ -7,10 +7,10 @@ Util::tsRegisterAssetJs('_form.js')
 /** @var Produccion $model */
 /** @var AweActiveForm $form */
 ?>
-<div class="col-lg-12">
+<div class="col-lg-6">
     <div class="panel panel-theme-secondary">
         <div class="panel-heading">
-            <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Produccion::label(1); ?></h3>
+            <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' '.'Imagenes'  ?></h3>
         </div>
         <div class="panel-body">
             <div class="row-fluid">
