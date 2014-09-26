@@ -25,19 +25,32 @@
 
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150, 'wrapperHtmlOptions' => array('class' => 'col-sm-7'))) ?>
                 <?php echo $form->dropDownListGroup($model, 'escenario_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),))) ?>
-                <?php echo $form->dropDownListGroup($model, 'produccion_categoria_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), "prepend" => ' <div class="social social-sm">
-                    <ul class="list-inline">
-                        <li><a href="#" class="rss"><i class="fa fa-plus
-                                                       "></i></a></li>
-
-                    </ul>
-                </div>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),))) ?>  
+                <?php echo $form->select2Group($model, 'produccion_categoria_id', 
+                        array('wrapperHtmlOptions' =>
+                            array('class' => 'col-sm-7',), "prepend" => '<a href="#" class="rss"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),))) ?>  
 
 
+                <?php
+//                echo $form->select2Group($model, 'produccion_categoria_id', array(
+//                    'asDropDownList' => true,
+//                    'data' => CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()),
+////                    'class' => 'span6',
+////                    'ajax' => array(
+////                        'type' => 'POST',
+////                        'url' => CController::createUrl('incidencia/cuentaContacto'),
+////                        'update' => '#Incidencia_contacto_id',
+//////                    'success' => 'function(data) {
+//////                        $("#Incidencia_contacto_id").html(data); 
+//////                        $("#Incidencia_contacto_id").selectBox("refresh"); ',
+////                    ),
+////                    'empty' => '- Ninguno -',
+//                ));
+                ?>
+             
 
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
 
-                <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),))) ?>
+                <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),)))  ?>
 
 
             </div>                        
