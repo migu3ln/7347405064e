@@ -30,6 +30,7 @@
                             array('class' => 'col-sm-7',), "prepend" => '<a href="#" class="rss"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),))) ?>  
 
 
+                
                 <?php
 //                echo $form->select2Group($model, 'produccion_categoria_id', array(
 //                    'asDropDownList' => true,
