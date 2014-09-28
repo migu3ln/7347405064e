@@ -49,6 +49,24 @@ class ProyectoController extends AweController {
     }
 
     /**
+     * Crear proyecto mediante un popover
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionAjaxCreate() {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new Proyecto;
+            $model->estado = Proyecto::ESTADO_ACTIVO;
+            $this->ajaxValidation($model);
+            $result = array();
+            if (isset($_POST['Proyecto'])) {
+                $model->attributes = $_POST['Proyecto'];
+                $result['success'] = $model->save();
+                echo CJSON::encode($result);
+            }
+        }
+    }
+
+    /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
@@ -121,6 +139,25 @@ class ProyectoController extends AweController {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'proyecto-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    /**
+     * funcion para validaciones en jquery.ajaxValidate.js
+     * @param type $model
+     */
+    protected function ajaxValidation($model, $form_id = "proyecto-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
+            }
         }
     }
 

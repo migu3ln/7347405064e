@@ -287,6 +287,7 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/spin.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.jquery.min.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.validateAjax.js"></script>
         <!-- script principal -->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
