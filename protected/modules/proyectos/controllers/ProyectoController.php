@@ -96,7 +96,13 @@ class ProyectoController extends AweController {
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+            $model = $this->loadModel($id);
+//            die(var_dump($model->proyectoMultimedias));
+            if (empty($model->proyectoMultimedias)) {
+                echo '<div class = "alert alert-success"><button data-dismiss = "alert" class = "close" type = "button">×</button>Borrado Exitosamente.</div>';
+            } else {
+                echo '<div class = "alert alert-error"><button data-dismiss = "alert" class = "close" type = "button">×</button>Imposible eliminar el Proyecto, existen contenido multimedia que dependen de éste.</div>';
+            }
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
