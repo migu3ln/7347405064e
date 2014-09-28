@@ -1,0 +1,10 @@
+a#popover ~ div.popover{
+    border-radius: 8px;
+}
+a#popover ~ div.popover > div.popover-content{
+    margin: 15px;
+}
+
+a#popover ~ div.popover > div.popover-content > .form-inline > button.btn-xs{
+    margin-top: 5%;
+}
