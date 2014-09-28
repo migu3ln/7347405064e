@@ -42,6 +42,24 @@ class EscenarioController extends AweController {
             'model' => $model,
         ));
     }
+    
+     /**
+     * Crear proyecto mediante un popover
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionAjaxCreate() {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new Escenario;
+            $model->estado = Escenario::ESTADO_ACTIVO;
+            $this->ajaxValidation($model);
+            $result = array();
+            if (isset($_POST['Escenario'])) {
+                $model->attributes = $_POST['Escenario'];
+                $result['success'] = $model->save();
+                echo CJSON::encode($result);
+            }
+        }
+    }
 
     /**
      * Updates a particular model.
@@ -116,6 +134,21 @@ class EscenarioController extends AweController {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'escenario-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+    
+    protected function ajaxValidation($model, $form_id = "escenario-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
+            }
         }
     }
 
