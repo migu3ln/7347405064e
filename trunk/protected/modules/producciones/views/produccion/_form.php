@@ -30,17 +30,19 @@ Util::tsRegisterAssetJs('_form.js')
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150, 'wrapperHtmlOptions' => array('class' => 'col-sm-7'))) ?>
                 <?php // echo $form->dropDownListGroup($model, 'escenario_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),))) ?>
 
-                 <?php echo $form->select2Group($model, 'escenario_id', 
-                        array('wrapperHtmlOptions' =>
-                            array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),))) ?>  
+                <?php
+                echo $form->select2Group($model, 'escenario_id', array('wrapperHtmlOptions' =>
+                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+                ?>  
 
 
-                <?php echo $form->select2Group($model, 'produccion_categoria_id', 
-                        array('wrapperHtmlOptions' =>
-                            array('class' => 'col-sm-7',), "prepend" => '<a href="#" class="rss" onclick="crearCategoria()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),))) ?>  
+                <?php
+                echo $form->select2Group($model, 'produccion_categoria_id', array('wrapperHtmlOptions' =>
+                    array('class' => 'col-sm-7',), "prepend" => '<a href="#" class="rss" onclick="crearCategoria()"><i  class="fa fa-plus "></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),)))
+                ?>  
 
 
-                
+
                 <?php
 //                echo $form->select2Group($model, 'produccion_categoria_id', array(
 //                    'asDropDownList' => true,
@@ -57,15 +59,15 @@ Util::tsRegisterAssetJs('_form.js')
 ////                    'empty' => '- Ninguno -',
 //                ));
                 ?>
-             
+
 
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
 
-                <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),)))  ?>
+                <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),)))   ?>
 
 
             </div>   
-            
+
             <div class="form-group">
                 <div class="col-lg-7 col-lg-offset-5">
                     <?php
@@ -87,6 +89,48 @@ Util::tsRegisterAssetJs('_form.js')
     </div>
 </div>
 
-<div class="">
+<div class="col-lg-6">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Imagenes'; ?></h3>
+        </div>
+        <div class="panel-body">
+            <div class="jumbotron">
+                <h1><span class="
+                          glyphicon glyphicon-open"></span></h1>
+               
+             SUBIR IMAGEN
+            </div>
+            <div class="row-fluid">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Videos'; ?></h3>
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-6">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Archivos'; ?></h3>
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid">
+
+            </div>
+        </div>
+    </div>
 
 </div>
