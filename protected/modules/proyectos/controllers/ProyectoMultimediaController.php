@@ -32,7 +32,6 @@ class ProyectoMultimediaController extends AweController {
      */
     public function actionCreate() {
         $model = new ProyectoMultimedia;
-
         $this->performAjaxValidation($model, 'proyecto-multimedia-form');
 
         if (isset($_POST['ProyectoMultimedia'])) {

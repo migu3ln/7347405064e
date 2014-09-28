@@ -863,7 +863,7 @@ class TbActiveForm extends CActiveForm {
 	 */
 	public function select2Group($model, $attribute, $options = array()) {
 		
-		return $this->widgetGroupInternal('booster.widgets.TbSelect2', $model, $attribute, $options);
+		return $this->widgetGroupInternal('ext.booster.widgets.TbSelect2', $model, $attribute, $options);
 	}
 
 	/**
