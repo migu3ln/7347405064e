@@ -96,11 +96,12 @@ Util::tsRegisterAssetJs('_form.js');
         </div>
     </div>
 </div>
-<div id="popover-head" class="hide">Nuevo Evento</div>
+<div id="popover-head" class="hide">Nuevo Proyecto</div>
 <div id="popover-content" class="hide">
     <?php $modelProyecto = new Proyecto ?>
     <?php
     $formProyecto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+        'type' => 'inline',
         'id' => 'proyecto-form',
         'enableAjaxValidation' => true,
         'action' => Yii::app()->createUrl('/proyectos/proyecto/ajaxCreate'),
@@ -109,34 +110,32 @@ Util::tsRegisterAssetJs('_form.js');
     ));
     ?>
 
-
-    <?php echo $formProyecto->textField($modelProyecto, 'nombre', array('maxlength' => 150, 'placeholder' => 'Evento')) ?>
-    <?php echo $formProyecto->error($modelProyecto, 'nombre') ?>
-
+    <?php echo $formProyecto->textFieldGroup($modelProyecto, 'nombre', array('maxlength' => 150, 'placeholder' => 'Proyecto', 'class' => 'form-control ')) ?>
+    <?php // echo $formProyecto->error($modelProyecto, 'nombre') ?>
     <br />
-    <br />
-    <div class="form-group">
-        <div class="col-xs-offset-2">
-            <?php
-            $this->widget('ext.booster.widgets.TbButton', array(
+    <!--    <div class="form-group">
+            <div class="col-xs-offset-2">-->
+    <?php
+    $this->widget('ext.booster.widgets.TbButton', array(
 //                'buttonType' => 'submit',
-                'label' => $modelProyecto->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-                'htmlOptions' => array(
-                    'onclick' => 'js:saveProyecto("#proyecto-form");',
-                    'class' => 'btn-xs'
-                )
-            ));
-            ?>
-            <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'label' => Yii::t('AweCrud.app', 'Cancel'),
-                'htmlOptions' => array('onclick' => 'javascript:history.go(-1)',
-                    'class' => 'btn-xs'
-                )
-            ));
-            ?>
-            <?php $this->endWidget(); ?>
-        </div>
-
-    </div>
+        'size' => 'mini',
+        'label' => $modelProyecto->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+        'htmlOptions' => array(
+            'onclick' => 'js:saveProyecto("#proyecto-form")',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'label' => Yii::t('AweCrud.app', 'Cancel'),
+        'htmlOptions' => array('onclick' => 'js:cerrarpopover();',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php $this->endWidget(); ?>
+    <!--        </div>
+    
+        </div>-->
 </div>
