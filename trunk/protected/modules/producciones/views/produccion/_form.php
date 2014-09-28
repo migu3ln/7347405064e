@@ -32,13 +32,14 @@ Util::tsRegisterAssetJs('_form.js')
 
                 <?php
                 echo $form->select2Group($model, 'escenario_id', array('wrapperHtmlOptions' =>
-                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+                    array('class' => 'col-sm-7',), "append" => '<a href="#" id="popover1" class="pop" entidad="Escenario" ><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+//                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
                 ?>  
 
 
                 <?php
                 echo $form->select2Group($model, 'produccion_categoria_id', array('wrapperHtmlOptions' =>
-                    array('class' => 'col-sm-7',), "prepend" => '<a href="#" class="rss" onclick="crearCategoria()"><i  class="fa fa-plus "></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),)))
+                    array('class' => 'col-sm-7',), "prepend" => '<a href="#" id="popover2"  class="pop"  entidad="ProduccionCategoria"><i  class="fa fa-plus "></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),)))
                 ?>  
 
 
@@ -133,4 +134,93 @@ Util::tsRegisterAssetJs('_form.js')
         </div>
     </div>
 
+</div>
+
+
+<div id="popover-head-Escenario" class="hide popover-head">Nuevo Escenario</div>
+<div id="popover-content-Escenario" class="hide popover-content">
+    <?php $modelEscenario = new Escenario ?>
+    <?php
+    $formProyecto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+        'type' => 'inline',
+        'id' => 'escenario-form',
+        'enableAjaxValidation' => true,
+        'action' => Yii::app()->createUrl('/escenarios/escenario/ajaxCreate'),
+        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
+        'enableClientValidation' => false,
+    ));
+    ?>
+
+    <?php echo $formProyecto->textFieldGroup($modelEscenario, 'nombre', array('maxlength' => 150, 'placeholder' => 'Proyecto', 'class' => 'form-control ')) ?>
+    <?php // echo $formProyecto->error($modelEscenario, 'nombre') ?>
+    <br />
+    <!--    <div class="form-group">
+            <div class="col-xs-offset-2">-->
+    <?php
+    $this->widget('ext.booster.widgets.TbButton', array(
+//                'buttonType' => 'submit',
+        'size' => 'mini',
+        'label' => $modelEscenario->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+        'htmlOptions' => array(
+            'onclick' => 'js:saveProyecto("#escenario-form")',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'label' => Yii::t('AweCrud.app', 'Cancel'),
+        'htmlOptions' => array('onclick' => 'js:cerrarpopover();',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php $this->endWidget(); ?>
+    <!--        </div>
+    
+        </div>-->
+</div>
+
+<div id="popover-head-ProduccionCategoria" class="hide popover-head">Nueva Categoria</div>
+<div id="popover-content-ProduccionCategoria" class="hide popover-content">
+    <?php $modelCategoria = new ProduccionCategoria ?>
+    <?php
+    $formProyecto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+        'type' => 'inline',
+        'id' => 'produccion-categoria-form',
+        'enableAjaxValidation' => true,
+        'action' => Yii::app()->createUrl('/producciones/produccionCategoria/ajaxCreate'),
+        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
+        'enableClientValidation' => false,
+    ));
+    ?>
+
+    <?php echo $formProyecto->textFieldGroup($modelCategoria, 'nombre', array('maxlength' => 150, 'placeholder' => 'Proyecto', 'class' => 'form-control ')) ?>
+    <?php // echo $formProyecto->error($modelCategoria, 'nombre') ?>
+    <br />
+    <!--    <div class="form-group">
+            <div class="col-xs-offset-2">-->
+    <?php
+    $this->widget('ext.booster.widgets.TbButton', array(
+//                'buttonType' => 'submit',
+        'size' => 'mini',
+        'label' => $modelCategoria->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+        'htmlOptions' => array(
+            'onclick' => 'js:saveProyecto("#produccion-categoria-form")',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'label' => Yii::t('AweCrud.app', 'Cancel'),
+        'htmlOptions' => array('onclick' => 'js:cerrarpopover();',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php $this->endWidget(); ?>
+    <!--        </div>
+    
+        </div>-->
 </div>
