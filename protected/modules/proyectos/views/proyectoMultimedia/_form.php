@@ -26,7 +26,7 @@ Util::tsRegisterAssetJs('_form.js');
             echo $form->switchGroup($model, 'local', array(
                 'widgetOptions' => array(
                     'options' => array(
-                        'onText' => 'SI',
+//                        'onText' => 'SI',
                         'offText' => 'NO',
                     )
                 )
@@ -36,8 +36,8 @@ Util::tsRegisterAssetJs('_form.js');
             echo $form->switchGroup($model, 'menu', array(
                 'widgetOptions' => array(
                     'options' => array(
-                        'onText' => 'SI',
-                        'offText' => 'NO',
+//                        'onText' => 'SI',
+//                        'offText' => 'NO',
                     )
                 )
             ));
@@ -46,8 +46,8 @@ Util::tsRegisterAssetJs('_form.js');
             echo $form->switchGroup($model, 'encabezado', array(
                 'widgetOptions' => array(
                     'options' => array(
-                        'onText' => 'SI',
-                        'offText' => 'NO',
+//                        'onText' => 'SI',
+//                        'offText' => 'NO',
                     )
                 )
             ));
