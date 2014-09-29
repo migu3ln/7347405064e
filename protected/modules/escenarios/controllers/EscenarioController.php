@@ -28,22 +28,23 @@ class EscenarioController extends AweController {
      */
     public function actionCreate() {
         $model = new Escenario;
-
-        $this->performAjaxValidation($model, 'escenario-form');
-
+        $result = array();
+        $this->ajaxValidation($model);
         if (isset($_POST['Escenario'])) {
             $model->attributes = $_POST['Escenario'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
+            $result['success'] = $model->save();
+            if ($result['success']) {
+                $result['attr'] = $model->attributes;
             }
+            echo CJSON::encode($result);
+        } else {
+            $this->render('create', array(
+                'model' => $model,
+            ));
         }
-
-        $this->render('create', array(
-            'model' => $model,
-        ));
     }
-    
-     /**
+
+    /**
      * Crear proyecto mediante un popover
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
@@ -136,7 +137,12 @@ class EscenarioController extends AweController {
             Yii::app()->end();
         }
     }
-    
+
+    /**
+     * funcion de validacion por ajax
+     * @param type $model
+     * @param type $form_id
+     */
     protected function ajaxValidation($model, $form_id = "escenario-form") {
         $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
         $portAtt = ucwords(strtolower($portAtt));

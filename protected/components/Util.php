@@ -8,6 +8,18 @@
 class Util {
 
     /**
+     * Register a specific css file in the asset's css folder
+     * @param string $jsFile
+     * @param int $position the position of the JavaScript code.
+     * @see CClientScript::registerScriptFile
+     */
+    public static function tsRegisterAssetCss($jsFile) {
+        $assetsPath = Yii::getPathOfAlias(YiiBase::app()->getController()->getModule()->getId() . '.assets');
+        $assetsUrl = Yii::app()->assetManager->publish($assetsPath, false, -1, true);
+        Yii::app()->getClientScript()->registerCssFile($assetsUrl . '/css/' . YiiBase::app()->getController()->getId() . "/" . $jsFile);
+    }
+
+    /**
      * fucnion para el guardado de multiples registrsos
      * @param type $inserValues
      * @param type $tableName
@@ -585,4 +597,5 @@ class Util {
     }
 
 }
+
 ?>

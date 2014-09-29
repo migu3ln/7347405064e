@@ -13,6 +13,7 @@
         <!-- Custom styles for this template -->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" rel="stylesheet">
         <!-- ladda submit -->
+        <!--<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/ladda.min.css" rel="stylesheet">-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/ladda-themeless.min.css" rel="stylesheet">
         <!-- Resources -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -20,7 +21,7 @@
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
-       <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/custom_fixes.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/custom_fixes.css" rel="stylesheet">
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -286,9 +287,10 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/scrolltopcontrol.js"></script>
         <!-- ladda submit -->
-        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/spin.min.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.jquery.min.js"></script>
+        
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.validateAjax.js"></script>
         <!-- script principal -->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
