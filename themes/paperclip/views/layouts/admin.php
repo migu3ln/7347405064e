@@ -22,6 +22,8 @@
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/custom_fixes.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2-bootstrap.css" rel="stylesheet">
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -294,6 +296,9 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.validateAjax.js"></script>
         <!-- script principal -->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2_locale_es.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
     </body>
 </html>
