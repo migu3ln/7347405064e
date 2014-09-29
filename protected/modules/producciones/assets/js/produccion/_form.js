@@ -38,7 +38,7 @@ $(function() {
 //            }
         },
         ajax: {// instead of writing the function to execute the request we use Select2's convenient helper
-            url: baseUrl + "crm/cuenta/ajaxlistCuentas",
+            url: baseUrl + "escenarios/escenario/ajaxlistCuentas",
             type: "get",
             dataType: 'json',
             data: function(term, page) {
