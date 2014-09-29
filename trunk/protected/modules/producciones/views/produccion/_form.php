@@ -30,16 +30,34 @@ Util::tsRegisterAssetJs('_form.js')
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150, 'wrapperHtmlOptions' => array('class' => 'col-sm-7'))) ?>
                 <?php // echo $form->dropDownListGroup($model, 'escenario_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),))) ?>
 
+
+                <div class="form-group">
+                    <label class="control-label" for="Producion_escenario_id">Escenario</label>
+                    <div class="form-control">
+                        <?php
+                        $wrapperHtmlOptions = array('class' => "col-sm-7");
+                        if ($model->escenario_id) {
+                            $model_escenario = Escenario::model()->findByPk($model->escenario_id);
+                            $wrapperHtmlOptions = array_merge($wrapperHtmlOptions, array(
+//                                'selected-text' => $model_cuenta->documento . ' ' . $model_cuenta->nombre
+                            ));
+                        }
+                        echo $form->hiddenField($model, 'escenario_id',$wrapperHtmlOptions);
+                        ?>
+                        <span class="help-inline error" id="Producion_escenario_id_em_" style="display: none"></span>
+                    </div>
+                </div>
+
                 <?php
-                echo $form->select2Group($model, 'escenario_id', array('wrapperHtmlOptions' =>
-                    array('class' => 'col-sm-7',), "append" => '<a href="#" id="popover1" class="pop" entidad="Escenario" ><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+//                echo $form->select2Group($model, 'escenario_id', array('wrapperHtmlOptions' =>
+//                    array('class' => 'col-sm-7',), "append" => '<a href="#" id="popover1" class="pop" entidad="Escenario" ><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
 //                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
                 ?>  
 
 
                 <?php
-                echo $form->select2Group($model, 'produccion_categoria_id', array('wrapperHtmlOptions' =>
-                    array('class' => 'col-sm-7',), "prepend" => '<a href="#" id="popover2"  class="pop"  entidad="ProduccionCategoria"><i  class="fa fa-plus "></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),)))
+//                echo $form->select2Group($model, 'produccion_categoria_id', array('wrapperHtmlOptions' =>
+//                    array('class' => 'col-sm-7',), "prepend" => '<a href="#" id="popover2"  class="pop"  entidad="ProduccionCategoria"><i  class="fa fa-plus "></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ProduccionCategoria::model()->findAll(), 'id', ProduccionCategoria::representingColumn()), 'htmlOptions' => array(),)))
                 ?>  
 
 
@@ -99,8 +117,8 @@ Util::tsRegisterAssetJs('_form.js')
             <div class="jumbotron">
                 <h1><span class="
                           glyphicon glyphicon-open"></span></h1>
-               
-             SUBIR IMAGEN
+
+                SUBIR IMAGEN
             </div>
             <div class="row-fluid">
 
