@@ -4,7 +4,7 @@
 /** @var AweActiveForm $form */
 ?>
 <div class="col-lg-12">
-    <div class="panel panel-primary">
+    <div class="panel panel-theme-secondary">
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Elenco::label(1); ?></h3>
         </div>
@@ -19,9 +19,18 @@
                 'enableClientValidation' => true,
             ));
             ?>
-
+            <?php
+            echo $form->select2Group($model, 'elenco_representante_id', array(
+                'wrapperHtmlOptions' =>
+                array('class' => 'col-sm-7',),
+                "append" => '<a href="#" id="popover1" class="pop" entidad="Escenario" ><i class="fa fa-plus"></i></a>',
+                'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ElencoRepresentante::model()->findAll(), 'id', ElencoRepresentante::representingColumn()),
+                    'htmlOptions' => array(),)))
+//                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+            ?>  
             <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
-            <?php echo $form->dropDownListGroup($model, 'elenco_representante_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',), 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(ElencoRepresentante::model()->findAll(), 'id', ElencoRepresentante::representingColumn()), 'htmlOptions' => array(),))) ?>
+
+
             <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
 
             <div class="form-group">
