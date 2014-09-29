@@ -157,5 +157,11 @@ class EscenarioController extends AweController {
             }
         }
     }
+    
+     public function actionAjaxlistCuentas($search_value) {
+        if (Yii::app()->request->isAjaxRequest) {
+            echo CJSON::encode(Escenario::model()->getListSelect2($search_value));
+        }
+    }
 
 }

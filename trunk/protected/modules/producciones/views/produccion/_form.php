@@ -39,7 +39,7 @@ Util::tsRegisterAssetJs('_form.js')
                         if ($model->escenario_id) {
                             $model_escenario = Escenario::model()->findByPk($model->escenario_id);
                             $wrapperHtmlOptions = array_merge($wrapperHtmlOptions, array(
-//                                'selected-text' => $model_cuenta->documento . ' ' . $model_cuenta->nombre
+                                'selected-text' => $model_escenario->nombre
                             ));
                         }
                         echo $form->hiddenField($model, 'escenario_id',$wrapperHtmlOptions);
