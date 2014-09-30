@@ -2,10 +2,6 @@
 /** @var EscenarioController $this */
 /** @var Escenario $model */
 /** @var AweActiveForm $form */
-//plugins
-Util::tsRegisterAssetCss('plugins/switchery.min.css');
-Util::tsRegisterAssetJs('plugins/switchery.min.js');
-
 Util::tsRegisterAssetJs('_form.js');
 ?>
 <div class="col-lg-12">
@@ -26,12 +22,13 @@ Util::tsRegisterAssetJs('_form.js');
                 ?>
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label required" for="Escenario_teatro_sucre">¿Pertenece al Teatro Sucre?<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label required" for="Escenario_teatro_sucre">¿Pertenece al Teatro Sucre ? </label>
                     <div class="col-sm-9">
-                        <input type="checkbox" id="Escenario_teatro_sucre" class="js-switch" checked />
+                        <input class="form-control" type="checkbox"  data-switch-left="NO" data-switch-right="SI" name="Escenario[teatro_sucre]" id="Escenario_teatro_sucre">
+                        <div class="help-block error" id="Escenario_teatro_sucre_em_" style="display:none">
+                        </div>
                     </div>
                 </div>
-                <?php // echo $form->textFieldGroup($model, 'teatro_sucre') ?>
                 <?php echo $form->textFieldGroup($model, 'ubicacion', array('maxlength' => 100)) ?>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="Escenario_descripcion">Descripcion</label>

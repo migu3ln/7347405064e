@@ -18,10 +18,23 @@ $(function () {
         saveEscenario(form_id);
         return false;
     });
-    //switchery
-    var elem = document.querySelector('#Escenario_teatro_sucre');
-    sc_teatro_sucre = new Switchery(elem);
-
+    //bootstrapSwitch
+    $("#Escenario_teatro_sucre").bootstrapSwitch({
+        onColor: 'success',
+        onText: 'Si',
+        offText: 'No',
+        onSwitchChange: function (event, state) {
+            if (state) {
+                $(this).val(1);
+            } else {
+                $(this).val(0);
+            }
+        }
+    });
+//    $('input[type="checkbox"]').adaptiveSwitch();
+//    $('input[type="checkbox"]').on('change', function (e) {
+//        console.log($(this).val());
+//    });
 });
 function saveEscenario($form) {
     ajaxValidarFormulario({
