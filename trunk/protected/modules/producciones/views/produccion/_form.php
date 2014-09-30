@@ -43,7 +43,16 @@ Util::tsRegisterAssetJs('_form.js')
                         ?>
                         <?php echo $form->error($model, 'escenario_id', array('class' => 'help-block error')); ?>
                     </div>
+
                 </div>
+
+                <?php
+//                echo $form->select2Group($model, 'escenario_id', array('wrapperHtmlOptions' =>
+//                    array('class' => 'col-sm-7',), "append" => '<a href="#" id="popover1" class="pop" entidad="Escenario" ><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+////                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+                ?>  
+
+
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
 
                 <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),)))    ?>
@@ -78,12 +87,8 @@ Util::tsRegisterAssetJs('_form.js')
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Imagenes'; ?></h3>
         </div>
         <div class="panel-body">
-            <div class="jumbotron">
-                <h1><span class="
-                          glyphicon glyphicon-open"></span></h1>
+            <a onclick="js:formModalSmsMotivo()" class="empty-portlet btn" id="add-motivo-sms"><span class="glyphicon glyphicon-open"></span> <br>Subir Imagenes</a>
 
-                SUBIR IMAGEN
-            </div>
             <div class="row-fluid">
 
             </div>
@@ -97,6 +102,7 @@ Util::tsRegisterAssetJs('_form.js')
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Videos'; ?></h3>
         </div>
         <div class="panel-body">
+            <a onclick="js:formModalSmsMotivo()" class="empty-portlet btn" id="add-motivo-sms"><span class="glyphicon glyphicon-open"></span> <br>Subir Videos</a>
             <div class="row-fluid">
 
             </div>
@@ -110,6 +116,8 @@ Util::tsRegisterAssetJs('_form.js')
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Archivos'; ?></h3>
         </div>
         <div class="panel-body">
+            <a onclick="js:formModalSmsMotivo()" class="empty-portlet btn" id="add-motivo-sms"><span class="glyphicon glyphicon-open"></span> <br>Subir Archivos</a>
+
             <div class="row-fluid">
 
             </div>
