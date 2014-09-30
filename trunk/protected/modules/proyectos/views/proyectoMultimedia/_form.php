@@ -21,36 +21,60 @@ Util::tsRegisterAssetJs('_form.js');
             ?>
 
             <?php echo $form->textFieldGroup($model, 'tipo', array('maxlength' => 45)) ?>
+            <div class="form-group">
+                <label class="col-sm-3 control-label required" for="ProyectoMultimedia_local">Local <span class="required">*</span></label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="checkbox"  data-switch-left="NO" data-switch-right="SI" name="ProyectoMultimedia[local]" id="ProyectoMultimedia_local">
+                    <div class="help-block error" id="ProyectoMultimedia_local_em_" style="display:none">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label required" for="ProyectoMultimedia_menu">Menu </label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="checkbox"  data-switch-left="NO" data-switch-right="SI" name="ProyectoMultimedia[menu]" id="ProyectoMultimedia_menu">
+                    <div class="help-block error" id="ProyectoMultimedia_menu_em_" style="display:none">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label required" for="ProyectoMultimedia_encabezado">Encabezado </label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="checkbox" data-switch-left="NO" data-switch-right="SI" name="ProyectoMultimedia[encabezado]" id="ProyectoMultimedia_encabezado">
+                    <div class="help-block error" id="ProyectoMultimedia_encabezado_em_" style="display:none">
+                    </div>
+                </div>
+            </div>
 
             <?php
-            echo $form->switchGroup($model, 'local', array(
-                'widgetOptions' => array(
-                    'options' => array(
-//                        'onText' => 'SI',
-                        'offText' => 'NO',
-                    )
-                )
-            ));
+//            echo $form->switchGroup($model, 'local', array(
+//                'widgetOptions' => array(
+//                    'options' => array(
+////                        'onText' => 'SI',
+//                        'offText' => 'NO',
+//                    )
+//                )
+//            ));
             ?>
             <?php
-            echo $form->switchGroup($model, 'menu', array(
-                'widgetOptions' => array(
-                    'options' => array(
-//                        'onText' => 'SI',
-//                        'offText' => 'NO',
-                    )
-                )
-            ));
+//            echo $form->switchGroup($model, 'menu', array(
+//                'widgetOptions' => array(
+//                    'options' => array(
+////                        'onText' => 'SI',
+////                        'offText' => 'NO',
+//                    )
+//                )
+//            ));
             ?>
             <?php
-            echo $form->switchGroup($model, 'encabezado', array(
-                'widgetOptions' => array(
-                    'options' => array(
-//                        'onText' => 'SI',
-//                        'offText' => 'NO',
-                    )
-                )
-            ));
+//            echo $form->switchGroup($model, 'encabezado', array(
+//                'widgetOptions' => array(
+//                    'options' => array(
+////                        'onText' => 'SI',
+////                        'offText' => 'NO',
+//                    )
+//                )
+//            ));
             ?>
 
             <?php // echo $form->dropDownListGroup($model, 'proyecto_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',), 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Proyecto::model()->findAll(), 'id', Proyecto::representingColumn()), 'htmlOptions' => array(),)))  ?>
@@ -96,46 +120,46 @@ Util::tsRegisterAssetJs('_form.js');
         </div>
     </div>
 </div>
-<div id="popover-head" class="hide">Nuevo Proyecto</div>
+<!--<div id="popover-head" class="hide">Nuevo Proyecto</div>
 <div id="popover-content" class="hide">
-    <?php $modelProyecto = new Proyecto ?>
+    <?php // $modelProyecto = new Proyecto ?>
     <?php
-    $formProyecto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
-        'type' => 'inline',
-        'id' => 'proyecto-form',
-        'enableAjaxValidation' => true,
-        'action' => Yii::app()->createUrl('/proyectos/proyecto/ajaxCreate'),
-        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
-        'enableClientValidation' => false,
-    ));
+//    $formProyecto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+//        'type' => 'inline',
+//        'id' => 'proyecto-form',
+//        'enableAjaxValidation' => true,
+//        'action' => Yii::app()->createUrl('/proyectos/proyecto/ajaxCreate'),
+//        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
+//        'enableClientValidation' => false,
+//    ));
     ?>
 
-    <?php echo $formProyecto->textFieldGroup($modelProyecto, 'nombre', array('maxlength' => 150, 'placeholder' => 'Proyecto', 'class' => 'form-control ')) ?>
+    <?php // echo $formProyecto->textFieldGroup($modelProyecto, 'nombre', array('maxlength' => 150, 'placeholder' => 'Proyecto', 'class' => 'form-control ')) ?>
     <?php // echo $formProyecto->error($modelProyecto, 'nombre') ?>
     <br />
-    <!--    <div class="form-group">
-            <div class="col-xs-offset-2">-->
+        <div class="form-group">
+            <div class="col-xs-offset-2">
     <?php
-    $this->widget('ext.booster.widgets.TbButton', array(
-//                'buttonType' => 'submit',
-        'size' => 'mini',
-        'label' => $modelProyecto->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-        'htmlOptions' => array(
-            'onclick' => 'js:saveProyecto("#proyecto-form")',
-            'class' => 'btn-xs'
-        )
-    ));
+//    $this->widget('ext.booster.widgets.TbButton', array(
+////                'buttonType' => 'submit',
+//        'size' => 'mini',
+//        'label' => $modelProyecto->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+//        'htmlOptions' => array(
+//            'onclick' => 'js:saveProyecto("#proyecto-form")',
+//            'class' => 'btn-xs'
+//        )
+//    ));
     ?>
     <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'label' => Yii::t('AweCrud.app', 'Cancel'),
-        'htmlOptions' => array('onclick' => 'js:cerrarpopover();',
-            'class' => 'btn-xs'
-        )
-    ));
+//    $this->widget('booster.widgets.TbButton', array(
+//        'label' => Yii::t('AweCrud.app', 'Cancel'),
+//        'htmlOptions' => array('onclick' => 'js:cerrarpopover();',
+//            'class' => 'btn-xs'
+//        )
+//    ));
     ?>
-    <?php $this->endWidget(); ?>
-    <!--        </div>
+    <?php // $this->endWidget(); ?>
+            </div>
     
-        </div>-->
-</div>
+        </div>
+</div>-->
