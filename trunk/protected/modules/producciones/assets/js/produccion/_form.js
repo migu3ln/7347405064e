@@ -26,7 +26,7 @@ $(function() {
         }
     });
 
-    $("#Producion_escenario_id").select2({
+    $("#Produccion_escenario_id").select2({
         enable: true,
         initSelection: function(element, callback) {
             if ($(element).val()) {

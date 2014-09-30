@@ -35,14 +35,15 @@ Util::tsRegisterAssetJs('_form.js')
                     <label class="control-label" for="Producion_escenario_id">Escenario</label>
                     <div class="form-control">
                         <?php
-                        $wrapperHtmlOptions = array('class' => "col-sm-7");
+                        $htmlOptions = array('class' => "");
+//                        $htmlOptions = array('class' => "col-sm-7");
                         if ($model->escenario_id) {
                             $model_escenario = Escenario::model()->findByPk($model->escenario_id);
-                            $wrapperHtmlOptions = array_merge($wrapperHtmlOptions, array(
+                            $htmlOptions = array_merge($htmlOptions, array(
                                 'selected-text' => $model_escenario->nombre
                             ));
                         }
-                        echo $form->hiddenField($model, 'escenario_id',$wrapperHtmlOptions);
+                        echo $form->hiddenField($model, 'escenario_id',$htmlOptions);
                         ?>
                         <span class="help-inline error" id="Producion_escenario_id_em_" style="display: none"></span>
                     </div>
