@@ -1,17 +1,19 @@
 $(function () {
-    $('#popover').on('show.bs.popover', function () {
-        abrirpopover();
-    });
-    $('#popover').popover({
-        html: true,
-        placement: 'left',
-        title: function () {
-            return $("#popover-head").html();
-        },
-        content: function () {
-            return $("#popover-content").html();
-        }
-    });
+    $('input[type="checkbox"]').adaptiveSwitch();
+
+//    $('#popover').on('show.bs.popover', function () {
+//        abrirpopover();
+//    });
+//    $('#popover').popover({
+//        html: true,
+//        placement: 'left',
+//        title: function () {
+//            return $("#popover-head").html();
+//        },
+//        content: function () {
+//            return $("#popover-content").html();
+//        }
+//    });
 });
 function saveProyecto(form) {
     ajaxValidarFormulario({
