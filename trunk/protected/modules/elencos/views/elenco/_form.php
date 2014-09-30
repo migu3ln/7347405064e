@@ -31,13 +31,18 @@
             <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
 
 
-            <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
+            <?php
+        
+
+            echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50))
+            ?>
 
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <?php
                     $this->widget('booster.widgets.TbButton', array(
                         'buttonType' => 'submit',
+                        'context' => 'success',
                         'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
                     ));
                     ?>
@@ -47,7 +52,7 @@
                         'htmlOptions' => array('onclick' => 'javascript:history.go(-1)')
                     ));
                     ?>
-                    <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
                 </div>
             </div>
         </div>
