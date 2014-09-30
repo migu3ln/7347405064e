@@ -37,6 +37,10 @@ return array(
         //proyectos
         'application.modules.producciones.components.*',
         'application.modules.producciones.models.*',
+        'ext.xupload.models.XUploadForm',
+    ),
+    'aliases' => array(
+        'xupload' => 'ext.xupload'
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool
