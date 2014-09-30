@@ -19,6 +19,8 @@
         <!-- Select2 -->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2-bootstrap.css" rel="stylesheet">
+        <!-- bootstrap-switch -->
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/bootstrap-switch/bootstrap-switch.min.css" rel="stylesheet">
 
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
@@ -306,6 +308,8 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2_locale_es.js"></script>
         <!-- swicth-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.adaptive-switch.js"></script>
+        <!--bootstrap-switch-->
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/bootstrap-switch/bootstrap-switch.min.js"></script>
         <!--ckeditor-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/ckeditor.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/adapters/jquery.js"></script>
