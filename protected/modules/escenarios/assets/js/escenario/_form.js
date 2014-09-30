@@ -1,4 +1,5 @@
 var btn_save;
+var sc_teatro_sucre;
 $(function () {
 
     //ladda submit
@@ -10,6 +11,10 @@ $(function () {
         saveEscenario(form_id);
         return false;
     });
+    //switchery
+    var elem = document.querySelector('#Escenario_teatro_sucre');
+    sc_teatro_sucre = new Switchery(elem);
+//    sc_teatro_sucre = new Switchery($("#Escenario_teatro_sucre"));
 
 });
 function saveEscenario($form) {

@@ -12,18 +12,21 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <!-- Custom styles for this template -->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" rel="stylesheet">
-        <!-- ladda submit -->
-        <!--<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/ladda.min.css" rel="stylesheet">-->
-        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/ladda-themeless.min.css" rel="stylesheet">
+
         <!-- Resources -->
+        <!-- ladda submit -->
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/ladda-themeless.min.css" rel="stylesheet">
+        <!-- Select2 -->
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2-bootstrap.css" rel="stylesheet">
+
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/custom_fixes.css" rel="stylesheet">
-        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.css" rel="stylesheet">
-        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2-bootstrap.css" rel="stylesheet">
+
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -292,12 +295,13 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/spin.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/ladda.jquery.min.js"></script>
-        
+
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.validateAjax.js"></script>
         <!-- script principal -->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
-        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.js"></script>
+        <!--select 2-->
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2_locale_es.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
     </body>

@@ -49,7 +49,8 @@ function ajaxValidarFormulario(options)
                     //elemento con error
                     selectElementoFormError = "form" + options.formId + ' [name="' + formIdent.replace('#', '') + "[" + parametro + ']"';
                     //agregar la clase error
-                    $(selectElementoFormError).parent().parent('div.form-group').addClass('has-error');
+                    //.parents("div.form-group").addClass('has-error')
+                    $(selectElementoFormError).parents("div.form-group").addClass('has-error');
                     //mostrar mensaje de error
                     $("form" + options.formId + ' ' + formIdent + '_' + parametro + '_em_').html(mensaje[0]);
                     $("form" + options.formId + ' ' + formIdent + '_' + parametro + '_em_').attr('style', '');

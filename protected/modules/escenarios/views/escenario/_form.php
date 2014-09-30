@@ -25,7 +25,14 @@ Util::tsRegisterAssetJs('_form.js');
                 ));
                 ?>
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
-                <?php echo $form->textFieldGroup($model, 'teatro_sucre') ?>
+                <div class="form-group">
+                    <label></label>
+                    <div class="col-sm-9">
+                        <input type="checkbox" id="Escenario_teatro_sucre" class="js-switch" checked />
+                        <?php // echo $form->hiddenField($model, 'teatro_sucre'); ?>
+                    </div>
+                </div>
+                <?php // echo $form->textFieldGroup($model, 'teatro_sucre') ?>
                 <?php echo $form->textFieldGroup($model, 'ubicacion', array('maxlength' => 100)) ?>
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
             </div>                       
