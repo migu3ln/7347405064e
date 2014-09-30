@@ -304,7 +304,11 @@
         <!--select 2-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/select2/select2_locale_es.js"></script>
+        <!-- swicth-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.adaptive-switch.js"></script>
+        <!--ckeditor-->
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/ckeditor.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/adapters/jquery.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
     </body>
 </html>

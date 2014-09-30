@@ -1,7 +1,14 @@
 var btn_save;
 var sc_teatro_sucre;
 $(function () {
-
+    //ckeditor 
+    $("#Escenario_descripcion").ckeditor(function () {
+    }, {
+        toolbarGroups: [
+            {name: 'mode', groups: ['mode', 'basicstyles', 'colors', 'list', 'indent', 'blocks']},
+            {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'styles']}
+        ]
+    });
     //ladda submit
     $("#btn_save_escenario").click(function (e) {
         e.preventDefault();
@@ -14,7 +21,6 @@ $(function () {
     //switchery
     var elem = document.querySelector('#Escenario_teatro_sucre');
     sc_teatro_sucre = new Switchery(elem);
-//    sc_teatro_sucre = new Switchery($("#Escenario_teatro_sucre"));
 
 });
 function saveEscenario($form) {
