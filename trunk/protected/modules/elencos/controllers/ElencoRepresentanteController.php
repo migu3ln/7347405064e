@@ -127,4 +127,33 @@ class ElencoRepresentanteController extends AweController {
         }
     }
 
+    public function actionAjaxCreate() {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new ElencoRepresentante;
+//            $model->estado = Escenario::ESTADO_ACTIVO;
+            $this->ajaxValidation($model);
+            $result = array();
+            if (isset($_POST['ElencoRepresentante'])) {
+                $model->attributes = $_POST['ElencoRepresentante'];
+                $result['success'] = $model->save();
+                echo CJSON::encode($result);
+            }
+        }
+    }
+
+    protected function ajaxValidation($model, $form_id = "elenco-representante-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
+            }
+        }
+    }
+
 }
