@@ -234,8 +234,8 @@ $.Widget.prototype = {
 			this.widget()
 				[ value ? "addClass" : "removeClass"](
 					this.widgetBaseClass + "-disabled" + " " +
-					"ui-state-disabled" )
-				.attr( "aria-disabled", value );
+					"" )
+				.attr( "", '' );
 		}
 
 		return this;

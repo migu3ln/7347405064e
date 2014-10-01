@@ -293,7 +293,7 @@
         <div class="row-fluid">
             <?php
 // El modal de la página
-            $this->beginWidget('booster.widgets.TbModal', array('id' => 'mainModal', 'options' => array('backdrop' => 'static')));
+            $this->beginWidget('ext.booster.widgets.TbModal', array('id' => 'mainModal', 'options' => array('backdrop' => 'static')));
             $this->endWidget();
             ?>
         </div>
