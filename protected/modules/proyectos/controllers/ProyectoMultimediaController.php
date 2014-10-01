@@ -217,12 +217,24 @@ class ProyectoMultimediaController extends AweController {
     public function actionAjaxCreate($proyecto_id) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProyectoMultimedia;
-            $model->tipo=  Constants::MULTIMEDIA_TIPO_IMAGEN;
+            $model->tipo = Constants::MULTIMEDIA_TIPO_IMAGEN;
+            $model->proyecto_id = $proyecto_id;
+            $this->ajaxValidation($model);
+            $result = array();
             if (isset($_POST['ProyectoMultimedia'])) {
-                
+                $model->attributes = $_POST['ProyectoMultimedia'];
+                $result['success'] = $model->save();
+                if ($result['success'])
+                    $result['attr'] = $model->attributes;
+                else
+                    $result['message'] = 'No se pudo registrar la imagen, porfavor intenet nuevamente';
+
+                echo CJSON::encode($result);
             } else {
+                $archivo = new XUploadForm;
                 $this->renderPartial('_form_modal', array(
                     'model' => $model,
+                    'archivo_modal' => $archivo,
                         ), false, true);
             }
         }
@@ -248,6 +260,25 @@ class ProyectoMultimediaController extends AweController {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'proyecto-multimedia-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    /**
+     * funcion para validaciones en jquery.ajaxValidate.js
+     * @param type $model
+     */
+    protected function ajaxValidation($model, $form_id = "proyecto-multimedia-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
+            }
         }
     }
 
