@@ -1,9 +1,12 @@
 <?php
+Util::tsRegisterAssetJs('_form.js');
 /** @var ProyectoController $this */
 /** @var Proyecto $model */
 /** @var AweActiveForm $form */
 ?>
-<div class="row">
+<!-- begin contendor-form -->
+<div class="row" id='contenedor-form'>
+      
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -16,7 +19,7 @@
                     'type' => 'horizontal',
                     'id' => 'proyecto-form',
                     'enableAjaxValidation' => true,
-                    'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
+                    'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => false,),
                     'enableClientValidation' => false,
                 ));
                 ?>
@@ -24,16 +27,11 @@
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
 
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
-
-                <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),))) ?>
-                <div class="form-group">
+                 <div class="form-group">
                     <div class="col-lg-7 col-lg-offset-2">
-                        <?php
-                        $this->widget('booster.widgets.TbButton', array(
-                            'buttonType' => 'submit',
-                            'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-                        ));
-                        ?>
+                        <button id="btn_save_proyecto" class="btn btn-success ladda-button" form-id="#proyecto-form" data-style="expand-right">
+                            <span class="ladda-label">Registrar</span>
+                        </button>
                         <?php
                         $this->widget('booster.widgets.TbButton', array(
                             'label' => Yii::t('AweCrud.app', 'Cancel'),
@@ -46,8 +44,10 @@
             </div>
         </div>
     </div>
-</div>
+  </div>
+<!-- end contenedor-form -->
 
+<!-- begin contenedor-multimedia -->
 <div id="contenedor-multimedia" class="hidden">
     <div class="row">
         <div class="col-md-6">
@@ -66,41 +66,6 @@
                                         </div>',
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => ProyectoMultimedia::model()->search(),
-//                            'columns' => array(
-//                                'nombre',
-//                                array(
-//                                    'name' => 'estado',
-//                                    'filter' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',),
-//                                ),
-//                                array(
-//                                    'class' => 'CButtonColumn',
-//                                    'template' => '{update} {delete}',
-//                                    'afterDelete' => 'function(link,success,data){ 
-//                    if(success) {
-//                         $("#flashMsg").empty();
-//                         $("#flashMsg").css("display","");
-//                         $("#flashMsg").html(data).animate({opacity: 1.0}, 5500).fadeOut("slow");
-//                    }
-//                    }',
-//                                    'buttons' => array(
-//                                        'update' => array(
-//                                            'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
-//                                            'options' => array('title' => 'Actualizar'),
-//                                            'imageUrl' => false,
-//                                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
-//                                        ),
-//                                        'delete' => array(
-//                                            'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
-//                                            'options' => array('title' => 'Eliminar'),
-//                                            'imageUrl' => false,
-//                                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
-//                                        ),
-//                                    ),
-//                                    'htmlOptions' => array(
-//                                        'width' => '80px'
-//                                    )
-//                                ),
-//                            ),
                     ));
                     ?>
 
@@ -137,3 +102,4 @@
         </div>
     </div>
 </div>
+<!-- end contenedor-multimedia -->

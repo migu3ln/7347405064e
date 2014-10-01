@@ -289,6 +289,21 @@
             </div>
 
         </div> <!-- / .wrapper -->
+        <!-- MAIN MODAL -->
+        <div class="row-fluid">
+            <?php
+// El modal de la página
+            $this->beginWidget('booster.widgets.TbModal', array('id' => 'mainModal', 'options' => array('backdrop' => 'static')));
+            $this->endWidget();
+            ?>
+        </div>
+        <div class="row-fluid">
+            <?php
+// El modal de la página
+            $this->beginWidget('ext.booster.widgets.TbModal', array('id' => 'mainBigModal', 'options' => array('backdrop' => 'static')));
+            $this->endWidget();
+            ?>
+        </div>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
