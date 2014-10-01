@@ -41,13 +41,33 @@ class ProyectoController extends AweController {
         if (isset($_POST['Proyecto'])) {
             $model->attributes = $_POST['Proyecto'];
             $result['success'] = $model->save();
+
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
+                if ($_POST['Proyecto']['logo'] != null) {
+                    $modelpMultimedia = new ProyectoMultimedia;
+                    $modelpMultimedia->local = false;
+                    $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
+                    $modelpMultimedia->menu = false;
+                    $modelpMultimedia->encabezado = false;
+                    $modelpMultimedia->proyecto_id = $model->id;
+                    $src = $_POST['Proyecto']['logo'];
+                    if (!file_exists("uploads/proyecto/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {
+                        mkdir("uploads/proyecto/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO, 0777, true);
+                    }
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/proyecto/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/proyecto/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO . '/';
+                    if (rename($pathorigen . $src, $path . $src)) {
+                        $modelpMultimedia->ubicacion = $publicPath . $src;
+                        $modelpMultimedia->save();
+                    }
+                }
             }
             echo CJSON::encode($result);
         } else {
 
-            $this->render('create', array('model' => $model,'archivo'=>$archivo));
+            $this->render('create', array('model' => $model, 'archivo' => $archivo));
         }
     }
 
