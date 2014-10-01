@@ -70,11 +70,11 @@
   .files .preview * {
     width: 40px;
   }
-  .files .name * {
+/*  .files .name * {
     width: 80px;
     display: inline-block;
     word-wrap: break-word;
-  }
+  }*/
   .files .progress {
     width: 20px;
   }

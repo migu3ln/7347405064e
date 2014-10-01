@@ -1,17 +1,17 @@
 var btn_save;
-$(function (){
+$(function () {
     init();
 });
 
-function init(){
-	 $("#btn_save_proyecto").click(function (e) {
+function init() {
+    $("#btn_save_proyecto").click(function (e) {
         e.preventDefault();
         btn_save = Ladda.create(this);
         var form_id = $(this).attr('form-id');
         btn_save.start();
         saveProyecto(form_id);
         return false;
-    });  
+    });
 }
 
 function saveProyecto($form) {
@@ -20,14 +20,13 @@ function saveProyecto($form) {
         beforeCall: function () {
             btn_save.setProgress(0.6);
         },
-        successCall:function (data) {
-
-        	if(data.success){
-        		 habilitarPaneles() ;
-        	}else{
-        		btn_save.setProgress(1);
-            	btn_save.stop();
-        	}
+        successCall: function (data) {
+            if (data.success) {
+                habilitarPaneles();
+            } else {
+                btn_save.setProgress(1);
+                btn_save.stop();
+            }
         },
         errorCall: function () {
             btn_save.setProgress(1);
@@ -37,7 +36,6 @@ function saveProyecto($form) {
 }
 
 function habilitarPaneles() {
-
     $('#contenedor-form').animate({
         'height': 'toggle'
     }, 200, function () {

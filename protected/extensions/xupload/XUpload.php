@@ -1,5 +1,7 @@
 <?php
+
 Yii::import('zii.widgets.jui.CJuiInputWidget');
+
 /**
  * XUpload extension for Yii.
  *
@@ -30,29 +32,23 @@ class XUpload extends CJuiInputWidget {
      * The upload template id to display files available for upload
      * defaults to null, meaning using the built-in template
      */
-    public $uploadTemplate;
+    public $uploadTemplate = null;
 
     /**
      * The template id to display files available for download
      * defaults to null, meaning using the built-in template
      */
-    public $downloadTemplate;
+    public $downloadTemplate = null;
 
     /**
-     * Whether or not to preview image files before upload
+     * Wheter or not to preview image files before upload
      */
-    public $previewImages = true;
+    public $previewImages = false;
 
     /**
-     * Whether or not to add the image processing plugin
+     * Wheter or not to add the image processing pluing
      */
     public $imageProcessing = true;
-
-    /**
-     * Whether or not to include our CSS style
-     * @var bool defaults to true
-     */
-    public $registerCSS = true;
 
     /**
      * set to true to auto Uploading Files
@@ -68,24 +64,25 @@ class XUpload extends CJuiInputWidget {
     /**
      * @var string name of the upload view to be rendered
      */
-    public $uploadView = 'upload';
+    public $uploadView = null;
 
     /**
      * @var string name of the download view to be rendered
      */
-    public $downloadView = 'download';
+    public $downloadView = null;
 
     /**
      * @var bool whether form tag should be used at widget
      */
     public $showForm = true;
+    public $add = null;
 
     /**
      * Publishes the required assets
      */
     public function init() {
         parent::init();
-        $this -> publishAssets();
+        $this->publishAssets();
     }
 
     /**
@@ -93,103 +90,112 @@ class XUpload extends CJuiInputWidget {
      */
     public function run() {
 
-        list($name, $id) = $this -> resolveNameID();
+        list($name, $id) = $this->resolveNameID();
 
-        $model = $this -> model;
-
-        if ($this -> uploadTemplate === null) {
-            $this -> uploadTemplate = "#template-upload";
-        }
-        if ($this -> downloadTemplate === null) {
-            $this -> downloadTemplate = "#template-download";
-        }
-
-        $this -> render($this->uploadView);
-        $this -> render($this->downloadView);
-
-        if (!isset($this -> htmlOptions['enctype'])) {
-            $this -> htmlOptions['enctype'] = 'multipart/form-data';
+        $model = $this->model;
+        if (!$this->previewImages) {
+            $this->downloadView = 'download';
+            $this->uploadView = 'upload';
+            $this->uploadTemplate = "#template-upload";
+            $this->downloadTemplate = "#template-download";
+        } else {
+            $this->downloadView = 'download_preview';
+            $this->uploadView = 'upload_preview';
+            $this->uploadTemplate = "#template-upload-preview";
+            $this->downloadTemplate = "#template-download-preview";
         }
 
-        if (!isset($this -> htmlOptions['id'])) {
-            $this -> htmlOptions['id'] = get_class($model) . "-form";
+        $this->render($this->uploadView);
+        $this->render($this->downloadView);
+
+        if (!isset($this->htmlOptions['enctype'])) {
+            $this->htmlOptions['enctype'] = 'multipart/form-data';
+        }
+
+        if (!isset($this->htmlOptions['id'])) {
+            $this->htmlOptions['id'] = get_class($model) . "-form";
         }
 
         $this->options['url'] = $this->url;
-        $this->options['autoUpload'] = $this -> autoUpload;
+        if (!$this->add === null) {
+            $this->options['add'] = $this->add;
+        }
+
+        $this->options['autoUpload'] = $this->autoUpload;
 
         if (!$this->multiple) {
             $this->options['maxNumberOfFiles'] = 1;
         }
 
-        $options = CJavaScript::encode($this -> options);
-
-        Yii::app() -> clientScript -> registerScript(__CLASS__ . '#' . $this -> htmlOptions['id'], "jQuery('#{$this->htmlOptions['id']}').fileupload({$options});", CClientScript::POS_READY);
+        $options = CJavaScript::encode($this->options);
+        Yii::app()->clientScript->registerScript(__CLASS__ . '#' . $this->htmlOptions['id'], "jQuery('#{$this->htmlOptions['id']}').fileupload({$options});", CClientScript::POS_READY);
         $htmlOptions = array();
-        if ($this -> multiple) {
+        if ($this->multiple) {
             $htmlOptions["multiple"] = true;
             /* if($this->hasModel()){
-                 $this -> attribute = "[]" . $this -> attribute;
-             }else{
-                 $this -> attribute = "[]" . $this -> name;
-             }*/
+              $this -> attribute = "[]" . $this -> attribute;
+              }else{
+              $this -> attribute = "[]" . $this -> name;
+              } */
         }
 
-        $this -> render($this->formView, compact('htmlOptions'));
-
+        $this->render($this->formView, compact('htmlOptions'));
     }
 
     /**
-     * Publishes and registers the required CSS and Javascript
+     * Publises and registers the required CSS and Javascript
      * @throws CHttpException if the assets folder was not found
      */
     public function publishAssets() {
         $assets = dirname(__FILE__) . '/assets';
-        $baseUrl = Yii::app() -> assetManager -> publish($assets);
+        $baseUrl = Yii::app()->assetManager->publish($assets);
         if (is_dir($assets)) {
-            if($this->registerCSS){
-                Yii::app() -> clientScript -> registerCssFile($baseUrl . '/css/jquery.fileupload-ui.css');
-            }
+            //@ALEXTODO make ui interface optional
+            Yii::app()->clientScript->registerCssFile($baseUrl . '/css/jquery.fileupload-ui.css');
             //The Templates plugin is included to render the upload/download listings
-            Yii::app() -> clientScript -> registerScriptFile($baseUrl . '/js/tmpl.min.js', CClientScript::POS_END);
+            Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/tmpl.min.js', CClientScript::POS_END);
             // The basic File Upload plugin
-            Yii::app() -> clientScript -> registerScriptFile($baseUrl . '/js/jquery.fileupload.js', CClientScript::POS_END);
-            if($this->previewImages || $this->imageProcessing){
-                Yii::app() -> clientScript -> registerScriptFile($baseUrl . '/js/load-image.min.js', CClientScript::POS_END);
-                Yii::app() -> clientScript -> registerScriptFile($baseUrl . '/js/canvas-to-blob.min.js', CClientScript::POS_END);
+            Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/jquery.fileupload.js', CClientScript::POS_END);
+            if ($this->previewImages || $this->imageProcessing) {
+                Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/load-image.min.js', CClientScript::POS_END);
+                Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/canvas-to-blob.min.js', CClientScript::POS_END);
             }
             //The Iframe Transport is required for browsers without support for XHR file uploads
-            Yii::app() -> clientScript -> registerScriptFile($baseUrl . '/js/jquery.iframe-transport.js', CClientScript::POS_END);
+            Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/jquery.iframe-transport.js', CClientScript::POS_END);
             // The File Upload image processing plugin
-            if($this->imageProcessing){
-                Yii::app() -> clientScript -> registerScriptFile($baseUrl . '/js/jquery.fileupload-ip.js', CClientScript::POS_END);
+            if ($this->imageProcessing) {
+                Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/jquery.fileupload-ip.js', CClientScript::POS_END);
             }
             //The File Upload user interface plugin
-            Yii::app() -> clientScript -> registerScriptFile($baseUrl . '/js/jquery.fileupload-ui.js', CClientScript::POS_END);
+            if ($this->previewImages) {
+                Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/jquery.fileupload-ui-preview.js', CClientScript::POS_END);
+            } else {
+                Yii::app()->clientScript->registerScriptFile($baseUrl . '/js/jquery.fileupload-ui.js', CClientScript::POS_END);
+            }
 
             //The localization script
             $messages = CJavaScript::encode(array(
-                'fileupload' => array(
-                    'errors' => array(
-                        "maxFileSize" => $this->t('File is too big'),
-                        "minFileSize" => $this->t('File is too small'),
-                        "acceptFileTypes" => $this->t('Filetype not allowed'),
-                        "maxNumberOfFiles" => $this->t('Max number of files exceeded'),
-                        "uploadedBytes" => $this->t('Uploaded bytes exceed file size'),
-                        "emptyResult" => $this->t('Empty file upload result'),
-                    ),
-                    'error' => $this->t('Error'),
-                    'start' => $this->t('Start'),
-                    'cancel' => $this->t('Cancel'),
-                    'destroy' => $this->t('Delete'),
-                ),
+                        'fileupload' => array(
+                            'errors' => array(
+                                "maxFileSize" => $this->t('File is too big'),
+                                "minFileSize" => $this->t('File is too small'),
+                                "acceptFileTypes" => $this->t('Filetype not allowed'),
+                                "maxNumberOfFiles" => $this->t('Max number of files exceeded'),
+                                "uploadedBytes" => $this->t('Uploaded bytes exceed file size'),
+                                "emptyResult" => $this->t('Empty file upload result'),
+                            ),
+                            'error' => $this->t('Error'),
+                            'start' => $this->t('Start'),
+                            'cancel' => $this->t('Cancel'),
+                            'destroy' => $this->t('Delete'),
+                        ),
             ));
             $js = "window.locale = {$messages}";
 
             Yii::app()->clientScript->registerScript('XuploadI18N', $js, CClientScript::POS_END);
             /**
-            <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
-            <!--[if gte IE 8]><script src="<?php echo Yii::app()->baseUrl; ?>/js/cors/jquery.xdr-transport.js"></script><![endif]-->
+              <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+              <!--[if gte IE 8]><script src="<?php echo Yii::app()->baseUrl; ?>/js/cors/jquery.xdr-transport.js"></script><![endif]-->
              *
              */
         } else {
@@ -197,8 +203,7 @@ class XUpload extends CJuiInputWidget {
         }
     }
 
-    protected function t($message, $params=array ( ))
-    {
+    protected function t($message, $params = array()) {
         return Yii::t('xupload.widget', $message, $params);
     }
 

@@ -34,6 +34,8 @@ class ProyectoController extends AweController {
         $model = new Proyecto;
         $model->estado = Proyecto::ESTADO_ACTIVO;
         $result = array();
+        $archivo = new XUploadForm;
+
         $this->ajaxValidation($model);
 
         if (isset($_POST['Proyecto'])) {
@@ -43,12 +45,10 @@ class ProyectoController extends AweController {
                 $result['attr'] = $model->attributes;
             }
             echo CJSON::encode($result);
-        }else{
+        } else {
 
-             $this->render('create', array('model' => $model,));
-             
-         }
-
+            $this->render('create', array('model' => $model,'archivo'=>$archivo));
+        }
     }
 
     /**

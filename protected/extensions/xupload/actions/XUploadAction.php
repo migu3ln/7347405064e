@@ -165,9 +165,9 @@ class XUploadAction extends CAction {
             chmod( $this->path, 0777 );
             //throw new CHttpException(500, "{$this->path} is not writable.");
         }
-        if( $this->subfolderVar !== null && $this->subfolderVar !== false ) {
+        if( $this->subfolderVar === null ) {
             $this->_subfolder = Yii::app( )->request->getQuery( $this->subfolderVar, date( "mdY" ) );
-        } else if( $this->subfolderVar !== false ) {
+        } else if($this->subfolderVar !== false ) {
             $this->_subfolder = date( "mdY" );
         }
 
@@ -274,7 +274,8 @@ class XUploadAction extends CAction {
                     Yii::log("XUploadAction: " . $returnValue, CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction");
                 }
             } else {
-                $this->afterValidateError($model);
+                echo json_encode(array(array("error" => $model->getErrors($this->fileAttribute),)));
+                Yii::log("XUploadAction: " . CVarDumper::dumpAsString($model->getErrors()), CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction");
             }
         } else {
             throw new CHttpException(500, "Could not upload file");
@@ -363,16 +364,5 @@ class XUploadAction extends CAction {
      */
     protected function fileExists($file) {
         return is_file( $file['path'] );
-    }
-
-    /**
-     * Returns an error to our client via Ajax
-     * Also allows for logging and sending any other notifications needed about our validation error
-     * @author acorncom
-     * @param $model
-     */
-    protected function afterValidateError($model) {
-        echo json_encode(array(array("error" => $model->getErrors($this->fileAttribute),)));
-        Yii::log("XUploadAction: " . CVarDumper::dumpAsString($model->getErrors()), CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction");
     }
 }
