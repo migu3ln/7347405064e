@@ -210,14 +210,21 @@ class ProyectoMultimediaController extends AweController {
         }
     }
 
-    public function actionAjaxCreate() {
+    /**
+     * Save new model(ProyectoMultimedia) via ajax(modal) linked for Proyecto
+     * @param type $proyecto_id
+     */
+    public function actionAjaxCreate($proyecto_id) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProyectoMultimedia;
-            $this->renderPartial('_form_modal', array(
-                'model' => $model,
-//                'archivo' => $archivo,
-//                'load' => $load
-                    ), false, true);
+            $model->tipo=  Constants::MULTIMEDIA_TIPO_IMAGEN;
+            if (isset($_POST['ProyectoMultimedia'])) {
+                
+            } else {
+                $this->renderPartial('_form_modal', array(
+                    'model' => $model,
+                        ), false, true);
+            }
         }
     }
 

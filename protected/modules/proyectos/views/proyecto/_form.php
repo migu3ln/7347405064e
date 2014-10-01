@@ -5,7 +5,7 @@ Util::tsRegisterAssetJs('_form.js');
 /** @var AweActiveForm $form */
 ?>
 <script type="text/javascript">
-    var proyecto_id =<?php print $model->id ? $model->id : 0 ?>;
+    var proyecto_id =<?php print $model->id ? $model->id : 0  ?>;
 </script>
 <!-- begin contendor-form -->
 <div class="row" id='contenedor-form'>
@@ -38,9 +38,9 @@ Util::tsRegisterAssetJs('_form.js');
                 ?>
 
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
-                
+
                 <input type="hidden" name="Proyecto[logo]" id="logo" value=null />
-                
+
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
                 <div class="form-group">
                     <div class="col-lg-7 col-lg-offset-2">
@@ -76,10 +76,10 @@ Util::tsRegisterAssetJs('_form.js');
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
-                        'emptyText' => '<div onclick="js:viewModal(' . "'proyectos/proyectoMultimedia/ajaxCreate'" . ');" class="jumbotron">
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id" . ',function(){});" class="jumbotron">
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
-                                        </div>',
+                                        </a>',
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => ProyectoMultimedia::model()->search(),
                     ));
