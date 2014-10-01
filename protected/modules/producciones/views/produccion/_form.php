@@ -39,9 +39,29 @@ Util::tsRegisterAssetJs('_form.js')
                                 'selected-text' => $model_escenario->nombre
                             ));
                         }
-                        echo $form->hiddenField($model, 'escenario_id', $htmlOptions);
-                        ?>
+                        echo $form->hiddenField($model, 'escenario_id', $htmlOptions); 
+                        ?> 
+                        <!--<span class="input-group-addon">.00</span>-->
                         <?php echo $form->error($model, 'escenario_id', array('class' => 'help-block error')); ?>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Produccion_produccion_categoria_id">Categoria <span class="required">*</span></label>
+                    <div class="col-sm-7 col-sm-9">
+                        <?php
+                        $htmlOptions = array('class' => "form-control");
+                        if ($model->escenario_id) {
+                            $model_categoria = ProduccionCategoria::model()->findByPk($model->produccion_categoria_id);
+                            $htmlOptions = array_merge($htmlOptions, array(
+                                'selected-text' => $model_categoria->nombre
+                            ));
+                        }
+                        echo $form->hiddenField($model, 'produccion_categoria_id', $htmlOptions); 
+                        ?> 
+                        <span class="input-group-addon"><a href="#" id="popover2" class="pop" entidad="Categoria" data-original-title="" title=""><i class="fa fa-plus"></i></a></span>
+                        <!--<span class="input-group-addon">.00</span>-->
+                        <?php echo $form->error($model, 'produccion_categoria_id', array('class' => 'help-block error')); ?>
                     </div>
 
                 </div>
@@ -49,7 +69,7 @@ Util::tsRegisterAssetJs('_form.js')
                 <?php
 //                echo $form->select2Group($model, 'escenario_id', array('wrapperHtmlOptions' =>
 //                    array('class' => 'col-sm-7',), "append" => '<a href="#" id="popover1" class="pop" entidad="Escenario" ><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
-////                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
+//                    array('class' => 'col-sm-7',), "append" => '<a href="#" class="rss" onclick="crearEscenario()"><i class="fa fa-plus"></i></a>', 'widgetOptions' => array('data' => array('' => ' -- Seleccione -- ') + CHtml::listData(Escenario::model()->findAll(), 'id', Escenario::representingColumn()), 'htmlOptions' => array(),)))
                 ?>  
 
 
@@ -82,12 +102,13 @@ Util::tsRegisterAssetJs('_form.js')
 </div>
 
 <div class="col-lg-6">
+
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Imagenes'; ?></h3>
         </div>
         <div class="panel-body">
-            <a onclick="js:formModalSmsMotivo()" class="empty-portlet btn" id="add-motivo-sms"><span class="glyphicon glyphicon-open"></span> <br>Subir Imagenes</a>
+            <a onclick="js:$('#mainModal').modal('show')" class="empty-portlet btn" id="add-motivo-sms"><span class="glyphicon glyphicon-open "></span> <br>Subir Imagenes</a>
 
             <div class="row-fluid">
 
