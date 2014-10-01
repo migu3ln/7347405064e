@@ -70,9 +70,9 @@ endif;
     </div>
 </div>-->
 <!-- The loading indicator is shown during image processing -->
-<div class="fileupload-loading">
+<!--<div class="fileupload-loading">
 
-</div>
+</div>-->
 <!-- The table listing the files available for upload/download -->
 <!--<select class='hidden' name='archivos[]' multiple>-->
 
