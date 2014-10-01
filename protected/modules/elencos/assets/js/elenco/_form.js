@@ -1,28 +1,28 @@
 $(function() {
-    $('#popover1').on('show.bs.popover', function() {
-        abrirpopover($(this).attr('entidad'));
-    });
+//    $('#popover1').on('show.bs.popover', function() {
+//        abrirpopover($(this).attr('entidad'));
+//    });
     $('#popover2').on('show.bs.popover', function() {
         abrirpopover($(this).attr('entidad'));
     });
-    $('#popover1').popover({
-        html: true,
-        placement: 'left',
-        title: function() {
-            return $("#popover-head-Escenario").html();
-        },
-        content: function() {
-            return $("#popover-content-Escenario").html();
-        }
-    });
+//    $('#popover1').popover({
+//        html: true,
+//        placement: 'left',
+//        title: function() {
+//            return $("#popover-head-ElencoRepresentante").html();
+//        },
+//        content: function() {
+//            return $("#popover-content-ElencoRepresentante").html();
+//        }
+//    });
     $('#popover2').popover({
         html: true,
         placement: 'left',
         title: function() {
-            return $("#popover-head-ProduccionCategoria").html();
+            return $("#popover-head-ElencoRepresentante").html();
         },
         content: function() {
-            return $("#popover-content-ProduccionCategoria").html();
+            return $("#popover-content-ElencoRepresentante").html();
         }
     });
 
@@ -70,11 +70,11 @@ function abrirpopover(entidad_tipo) {
 function cerrarpopover() {
     $('#popover1').popover('hide');
     $('#popover2').popover('hide');
-    $('#escenario-form').trigger("reset");
+    $('#elenco-representante-form').trigger("reset");
     $('#produccion-categoria-form').trigger("reset");
 }
 
-function saveProyecto(form) {
+function saveElencoRepresentante(form) {
     ajaxValidarFormulario({
         formId: form,
         beforeCall: function() {

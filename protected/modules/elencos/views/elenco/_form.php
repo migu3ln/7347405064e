@@ -42,7 +42,10 @@ Util::tsRegisterAssetJs('_form.js')
                     }
                     echo $form->hiddenField($model, 'elenco_representante_id', $htmlOptions);
                     ?>
+                    <span class="input-group-addon"><a href="#" id="popover2" class="pop" entidad="ElencoRepresentante" data-original-title="" title=""><i class="fa fa-plus"></i></a></span>
+
                     <?php echo $form->error($model, 'elenco_representante_id', array('class' => 'help-block error')); ?>
+
                 </div>
             </div>
             <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
@@ -165,22 +168,23 @@ Util::tsRegisterAssetJs('_form.js')
         </div>-->
 </div>
 
-<div id="popover-head-ProduccionCategoria" class="hide popover-head">Nueva Categoria</div>
-<div id="popover-content-ProduccionCategoria" class="hide popover-content">
-    <?php $modelCategoria = new ProduccionCategoria ?>
+<div id="popover-head-ElencoRepresentante" class="hide popover-head">Nuevo Elenco Representante</div>
+<div id="popover-content-ElencoRepresentante" class="hide popover-content">
+    <?php $modelElencoRepresentante = new ElencoRepresentante ?>
     <?php
-    $formProyecto = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+    $formElencoRepresentate = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         'type' => 'inline',
-        'id' => 'produccion-categoria-form',
+        'id' => 'elenco-representante-form',
         'enableAjaxValidation' => true,
-        'action' => Yii::app()->createUrl('/producciones/produccionCategoria/ajaxCreate'),
+        'action' => Yii::app()->createUrl('/elencos/elencoRepresentante/ajaxCreate'),
         'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
         'enableClientValidation' => false,
     ));
     ?>
+    <?php echo $formElencoRepresentate->textFieldGroup($modelElencoRepresentante, 'titulo', array('maxlength' => 45)) ?>
 
-    <?php echo $formProyecto->textFieldGroup($modelCategoria, 'nombre', array('maxlength' => 150, 'placeholder' => 'Proyecto', 'class' => 'form-control ')) ?>
-    <?php // echo $formProyecto->error($modelCategoria, 'nombre') ?>
+    <?php echo $formElencoRepresentate->textFieldGroup($modelElencoRepresentante, 'nombre', array('maxlength' => 150)) ?>
+
     <br />
     <!--    <div class="form-group">
             <div class="col-xs-offset-2">-->
@@ -188,9 +192,9 @@ Util::tsRegisterAssetJs('_form.js')
     $this->widget('ext.booster.widgets.TbButton', array(
 //                'buttonType' => 'submit',
         'size' => 'mini',
-        'label' => $modelCategoria->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+        'label' => $modelElencoRepresentante->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
         'htmlOptions' => array(
-            'onclick' => 'js:saveProyecto("#produccion-categoria-form")',
+            'onclick' => 'js:saveElencoRepresentante("#elenco-representante-form")',
             'class' => 'btn-xs'
         )
     ));
