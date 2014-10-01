@@ -38,7 +38,33 @@ $(function() {
 //            }
         },
         ajax: {// instead of writing the function to execute the request we use Select2's convenient helper
-            url: baseUrl + "escenarios/escenario/ajaxlistCuentas",
+            url: baseUrl + "escenarios/escenario/ajaxlistEscenarios",
+            type: "get",
+            dataType: 'json',
+            data: function(term, page) {
+                return {
+                    search_value: term, // search term
+                };
+            },
+            results: function(data, page) { // parse the results into the format expected by Select2.
+                // since we are using custom formatting functions we do not need to alter remote JSON data
+                return {results: data};
+            }
+        }
+    });
+    $("#Produccion_produccion_categoria_id").select2({
+        enable: true,
+        initSelection: function(element, callback) {
+            if ($(element).val()) {
+                var data = {id: element.val(), text: $(element).attr('selected-text')};
+                callback(data);
+            }
+//            else {
+//                $("#Incidencia_contacto_id").select2("enable", false);
+//            }
+        },
+        ajax: {// instead of writing the function to execute the request we use Select2's convenient helper
+            url: baseUrl + "producciones/produccionCategoria/ajaxlistProduccionCategorias",
             type: "get",
             dataType: 'json',
             data: function(term, page) {
