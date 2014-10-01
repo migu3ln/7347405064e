@@ -33,19 +33,22 @@ class ProyectoController extends AweController {
     public function actionCreate() {
         $model = new Proyecto;
         $model->estado = Proyecto::ESTADO_ACTIVO;
-
-        $this->performAjaxValidation($model, 'proyecto-form');
+        $result = array();
+        $this->ajaxValidation($model);
 
         if (isset($_POST['Proyecto'])) {
             $model->attributes = $_POST['Proyecto'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
+            $result['success'] = $model->save();
+            if ($result['success']) {
+                $result['attr'] = $model->attributes;
             }
-        }
+            echo CJSON::encode($result);
+        }else{
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+             $this->render('create', array('model' => $model,));
+             
+         }
+
     }
 
     /**
