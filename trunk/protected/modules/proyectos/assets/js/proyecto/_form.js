@@ -1,4 +1,5 @@
 var btn_save;
+
 $(function () {
     init();
 });
@@ -15,6 +16,11 @@ function init() {
 }
 
 function saveProyecto($form) {
+    if ($('img.imageslink').length > 0) {
+        $('#logo').val($('img.imageslink').attr('filename'));
+    } else {
+        $('#logo').val(null);
+    }
     ajaxValidarFormulario({
         formId: $form,
         beforeCall: function () {
@@ -22,6 +28,8 @@ function saveProyecto($form) {
         },
         successCall: function (data) {
             if (data.success) {
+                proyecto_id = data.attr.id;
+
                 habilitarPaneles();
             } else {
                 btn_save.setProgress(1);
