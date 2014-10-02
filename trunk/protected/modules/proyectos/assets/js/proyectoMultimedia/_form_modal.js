@@ -45,6 +45,10 @@ $(function () {
         saveProyectoMultimedia(form_id);
         return false;
     });
+    $('.btn_cerrar_modal').on('click', function () {
+        $('#mainModal').modal('hide');
+        $('#images-grid').yiiGridView('update');
+    });
 
 });
 function saveProyectoMultimedia(form) {

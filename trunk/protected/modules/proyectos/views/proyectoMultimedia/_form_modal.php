@@ -8,6 +8,7 @@ Yii::app()->clientScript->scriptMap['canvas-to-blob.min.js'] = false;
 Yii::app()->clientScript->scriptMap['jquery.iframe-transport.js'] = false;
 Yii::app()->clientScript->scriptMap['jquery.fileupload-ip.js'] = false;
 Yii::app()->clientScript->scriptMap['jquery.fileupload-ui-preview.js'] = false;
+Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
 
 
 
@@ -20,7 +21,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <button type="button"  class="close btn_cerrar_modal" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" id="myModalLabel"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . ProyectoMultimedia::label(1); ?></h4>
         </div>
         <div class="modal-body">
@@ -89,7 +90,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                             $this->widget('booster.widgets.TbButton', array(
                                 'label' => Yii::t('AweCrud.app', 'Cancel'),
                                 'htmlOptions' => array(
-                                    'data-dismiss' => "modal",
+                                    'class' => "btn_cerrar_modal",
                                 )
                             ));
                             ?>
@@ -121,8 +122,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-default btn_cerrar_modal" data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
