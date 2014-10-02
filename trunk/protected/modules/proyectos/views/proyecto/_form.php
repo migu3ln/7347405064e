@@ -37,13 +37,14 @@ Util::tsRegisterAssetJs('_form.js');
                 ));
                 ?>
 
-                <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
-
-                <input type="hidden" name="Proyecto[logo]" id="logo" value=null />
-
-                <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
                 <div class="form-group">
                     <div class="col-lg-7 col-lg-offset-2">
+                        <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
+
+                        <input type="hidden" name="Proyecto[logo]" id="logo" value=null />
+
+                        <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
+
                         <button id="btn_save_proyecto" class="btn btn-success ladda-button" form-id="#proyecto-form" data-style="expand-right">
                             <span class="ladda-label">Registrar</span>
                         </button>
