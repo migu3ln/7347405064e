@@ -32,20 +32,63 @@ class ElencoController extends AweController {
      */
     public function actionCreate() {
         $model = new Elenco;
+        $result = array();
 
-
+        $model->estado = Elenco::ESTADO_ACTIVO;
+        $archivo = new XUploadForm;
+        $this->ajaxValidation($model);
         if (isset($_POST['Elenco'])) {
-
             $model->attributes = $_POST['Elenco'];
-            $model->estado = Elenco::ESTADO_ACTIVO;
-            if ($model->save()) {
-                $this->redirect(array('admin'));
+//            die(var_dump("·proyet"));
+            $result['success'] = $model->save();
+
+            if ($result['success']) {
+                $result['attr'] = $model->attributes;
+
+                if ($_POST['Elenco']['logo'] != null) {
+//                    die(var_dump("logo entro"));
+                    $modelpMultimedia = new ElencoMultimedia;
+                    $modelpMultimedia->local = 0;
+                    $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
+                    $modelpMultimedia->menu = 0;
+                    $modelpMultimedia->encabezado = 0;
+                    $modelpMultimedia->elenco_id = $model->id;
+                    $src = $_POST['Elenco']['logo'];
+//                    die(var_dump($modelpMultimedia->attributes,$modelpMultimedia->validate(),$modelpMultimedia->errors));
+                    if (!file_exists("uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {
+                        mkdir("uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO, 0777, true);
+                    }
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO . '/';
+                    if (rename($pathorigen . $src, $path . $src)) {
+                        $modelpMultimedia->ubicacion = $publicPath . $src;
+//                        die(var_dump($modelpMultimedia->attributes, $modelpMultimedia->validate(), $modelpMultimedia->errors));
+
+                        $modelpMultimedia->save();
+                    }
+                }
+            }
+            echo CJSON::encode($result);
+        } else {
+
+            $this->render('create', array('model' => $model, 'archivo' => $archivo));
+        }
+    }
+
+    protected function ajaxValidation($model, $form_id = "elenco-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
             }
         }
-
-        $this->render('create', array(
-            'model' => $model,
-        ));
     }
 
     /**
