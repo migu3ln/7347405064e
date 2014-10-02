@@ -63,7 +63,7 @@ class ProyectoController extends AweController {
                         $modelpMultimedia->ubicacion = $publicPath . $src;
 //                        die(var_dump($modelpMultimedia->attributes, $modelpMultimedia->validate(), $modelpMultimedia->errors));
 
-                        $modelpMultimedia->save();
+//                        $modelpMultimedia->save();
                     }
                 }
             }
