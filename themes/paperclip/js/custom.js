@@ -81,8 +81,13 @@ function viewModal(url, CallBack, tipo)
 
 function showModalLoading(tipo) {
     var html = "";
+
+    html += '<div class="modal-dialog">';
+    html += '<div class="modal-content">';
     html += "<div class='modal-header'><a class='close' data-dismiss='modal'>&times;</a><h4><i class='icon-refresh'></i> Cargando</h4></div>";
     html += "<div class='modal-body'><div class='loading'><img src='" + themeUrl + "img/loading.gif' /></div></div>";
+    html += "</div>";
+    html += "</div>";
     if (tipo)
     {
         $("#mainBigModal").html(html);
