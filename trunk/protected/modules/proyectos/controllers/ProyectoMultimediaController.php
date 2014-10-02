@@ -224,11 +224,22 @@ class ProyectoMultimediaController extends AweController {
             if (isset($_POST['ProyectoMultimedia'])) {
                 $model->attributes = $_POST['ProyectoMultimedia'];
                 $result['success'] = $model->save();
-                if ($result['success'])
+                if ($result['success']) {
                     $result['attr'] = $model->attributes;
-                else
-                    $result['message'] = 'No se pudo registrar la imagen, porfavor intenet nuevamente';
+                    if (!file_exists("uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN)) {
 
+                        mkdir("uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN, 0777, true);
+                    }
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN . '/';
+                    if (rename($pathorigen . $model->ubicacion, $path . $model->ubicacion)) {
+                        $model->ubicacion = $publicPath . $model->ubicacion;
+                        $model->save();
+                    }
+                } else {
+                    $result['message'] = 'No se pudo registrar la imagen, porfavor intenet nuevamente';
+                }
                 echo CJSON::encode($result);
             } else {
                 $archivo = new XUploadForm;

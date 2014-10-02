@@ -25,6 +25,22 @@ Util::tsRegisterAssetJs('_form_modal.js');
         </div>
         <div class="modal-body">
             <div class="row">
+                <div id="container_img_modal" class="col-md-6">
+                    <?php
+                    $this->widget('ext.xupload.XUpload', array(
+                        'model' => $archivo_modal,
+                        'url' => CController::createUrl('/proyectos/proyectoMultimedia/uploadTmp'),
+                        'htmlOptions' => array('id' => 'logo-proyecto-form_modal', 'class' => 'form-horizontal'),
+                        'attribute' => 'file',
+                        'multiple' => false,
+                        'previewImages' => true,
+                        'autoUpload' => true,
+                    ));
+                    ?>
+                    <div class="help-block error" id="ProyectoMultimedia_ubicacion_em_" style="display:none">
+                    </div>
+                </div>
+
                 <div class="col-md-6">
                     <?php
                     $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
@@ -60,41 +76,46 @@ Util::tsRegisterAssetJs('_form_modal.js');
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!--<input type="hidden" name="ProyectoMultimedia[ubicacion]" id="ProyectoMultimedia_ubicacion" value=""/>-->
 
+                    <?php echo $form->hiddenField($model, 'ubicacion') ?>
+
+                    <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <?php
-                            $this->widget('booster.widgets.TbButton', array(
-                                'buttonType' => 'submit',
-                                'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-                            ));
-                            ?>
+                            <button id="btn_save_proyecto_multimedia" class="btn btn-success ladda-button" form-id="#proyecto-multimedia-form" data-style="expand-right">
+                                <span class="ladda-label">Registrar</span>
+                            </button>
                             <?php
                             $this->widget('booster.widgets.TbButton', array(
                                 'label' => Yii::t('AweCrud.app', 'Cancel'),
                                 'htmlOptions' => array(
-                                    'data-dismiss' => "modal",)
+                                    'data-dismiss' => "modal",
+                                )
                             ));
                             ?>
                             <?php $this->endWidget(); ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <?php
-                    $this->widget('ext.xupload.XUpload', array(
-                        'model' => $archivo_modal,
-                        'url' => CController::createUrl('/proyectos/proyectoMultimedia/uploadTmp'),
-                        'htmlOptions' => array('id' => 'logo-proyecto-form_modal', 'class' => 'form-horizontal'),
-                        'attribute' => 'file',
-                        'multiple' => false,
-                        'previewImages' => true,
-                        'autoUpload' => true,
+                    $this->widget('ext.booster.widgets.TbGridView', array(
+                        'id' => 'images-modal-grid',
+                        'showTableOnEmpty' => false,
+                        'emptyText' => '<a class="empty-portlet btn" class="jumbotron">
+                                        <h1><span class="glyphicon glyphicon-open"></span></h1>
+                                        SUBIR IMAGEN
+                                        </a>',
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $model->de_proyecto($model->proyecto_id)->search(),
                     ));
                     ?>
 
                 </div>
-
             </div>
 
 
