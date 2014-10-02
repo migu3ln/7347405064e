@@ -17,8 +17,8 @@
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" rel="stylesheet">
 
         <!-- Resources -->
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+        <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>-->
+        <!--<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
@@ -38,9 +38,10 @@
         <div class="container-fluid">
             <br/>
             <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <img src="<?php echo Yii::app()->theme->baseUrl ?>/img/fundacionTeatroNacionalSucre_img.png">
-                </div>
+                <div class="col-xs-6 col-md-3 art-fundacionTeatroNacionalSucre_img"></div>
+                <!--                <div class="col-xs-6 col-md-3">
+                                    <img src="<?php echo Yii::app()->theme->baseUrl ?>/img/fundacionTeatroNacionalSucre_img.png">
+                                </div>-->
             </div>
             <br/>
             <div class="row">
@@ -54,16 +55,18 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#">Brand</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">Link</a></li>
-                                <li><a href="#">Link</a></li>
+                                <li class="active"><a href="#">INICIO <i class="fa fa-home"></i></a></li>
+                                <li><a href="#">¿QUIÉNES SOMOS?</a></li>
+                                <li><a href="#">PRESENTACIÓN PROPUESTA</a></li>
+                                <li><a href="#">SUSCRIPCIÓN AGENDA</a></li>
+                                <li><a href="#">AGENDA ELENCOS</a></li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">INFORMACIÓN PÚBLICA<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="#">Action</a></li>
                                         <li><a href="#">Another action</a></li>
@@ -74,25 +77,8 @@
                                         <li><a href="#">One more separated link</a></li>
                                     </ul>
                                 </li>
-                            </ul>
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Link</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="#">CONTÁCTANOS</a></li>
+                                <li><form action="<?php echo Yii::app()->baseUrl ?>/cruge/ui/login"><button class="navbar-btn btn btn-theme-primary" >Sign In</button></form></li>
                             </ul>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->

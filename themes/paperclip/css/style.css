@@ -14,10 +14,11 @@ Last change:    14/08/2014
     margin-left: -4px;
     position: absolute;
     top: 12px;
-    width: 170px;
-    height: 126px;
-    background-image: url('../images/fundacionTeatroNacionalSucre_img.png');
+    width: 100px;
+    height: 70px;
+    background-image: url('../img/fundacionTeatroNacionalSucre_img.png');
     background-position: 0 0;
+    background-size:contain;
     background-repeat: no-repeat;
     z-index: 1;
 }
@@ -6530,7 +6531,8 @@ Last change:    14/08/2014
         height: 0;
         left: 0;
         width: 100%;
-        border-top: 3px solid #ed3e49;
+        /*border-top: 3px solid #ed3e49;*/
+        border-top: 3px solid #BDCCCB;
         -webkit-transition: top 100ms;
         -o-transition: top 100ms;
         transition: top 100ms;
