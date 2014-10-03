@@ -64,7 +64,7 @@ Util::tsRegisterAssetJs('_form.js');
 <!-- end contenedor-form -->
 
 <!-- begin contenedor-multimedia -->
-<div id="contenedor-multimedia" class="">
+<div id="contenedor-multimedia" class="hidden">
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-success">
@@ -82,8 +82,7 @@ Util::tsRegisterAssetJs('_form.js');
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
-                        'template' =>($numItem > 0) ? "{summary}\n{items}\n{pager}\n<br><button class=\"btn btn-info\">sdfsdf</button>" : "{summary}\n{items}\n{pager}",
-//                        'template' => "{summary}\n{items}\n{pager}\n{summary}",
+                        'template' => ($numItem > 0) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => ProyectoMultimedia::model()->search(),
                     ));
