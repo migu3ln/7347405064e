@@ -64,7 +64,7 @@ Util::tsRegisterAssetJs('_form.js');
 <!-- end contenedor-form -->
 
 <!-- begin contenedor-multimedia -->
-<div id="contenedor-multimedia" class="hidden">
+<div id="contenedor-multimedia" class="">
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-success">
@@ -72,7 +72,9 @@ Util::tsRegisterAssetJs('_form.js');
                     <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', 'Upload') . ' ' . 'Imagenes'; ?></h3>
                 </div>
                 <div class="panel-body">
+
                     <?php
+                    $numItem = ProyectoMultimedia::model()->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
@@ -80,10 +82,9 @@ Util::tsRegisterAssetJs('_form.js');
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
-                        'template' => "{summary}\n{items}\n{pager}\n<br><button class=\"btn btn-info\">sdfsdf</button>",
+                        'template' =>($numItem > 0) ? "{summary}\n{items}\n{pager}\n<br><button class=\"btn btn-info\">sdfsdf</button>" : "{summary}\n{items}\n{pager}",
 //                        'template' => "{summary}\n{items}\n{pager}\n{summary}",
                         'type' => 'striped bordered hover advance',
-                        
                         'dataProvider' => ProyectoMultimedia::model()->search(),
                     ));
                     ?>
