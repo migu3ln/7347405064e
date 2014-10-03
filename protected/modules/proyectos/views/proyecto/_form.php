@@ -38,7 +38,7 @@ Util::tsRegisterAssetJs('_form.js');
                 ?>
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
-                        <input type="hidden" name="Proyecto[logo]" id="logo" value=null />
+                <input type="hidden" name="Proyecto[logo]" id="logo" value=null />
 
 
                 <div class="form-group">
@@ -80,7 +80,10 @@ Util::tsRegisterAssetJs('_form.js');
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
+                        'template' => "{summary}\n{items}\n{pager}\n<br><button class=\"btn btn-info\">sdfsdf</button>",
+//                        'template' => "{summary}\n{items}\n{pager}\n{summary}",
                         'type' => 'striped bordered hover advance',
+                        
                         'dataProvider' => ProyectoMultimedia::model()->search(),
                     ));
                     ?>
