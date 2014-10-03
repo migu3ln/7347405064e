@@ -207,7 +207,7 @@
                                     Eventos
                                 </a>
                             </div>
-                            <div id="help-nav-one" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "evento" ? "in" : "" ?>" style="height: 0px;">
+                            <div id="help-nav-one" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "evento" ? "in" : "" ?>" >
                                 <div class="panel-body">
                                     <ul>
                                         <li><a href="#">Nuevo</a></li>
@@ -223,7 +223,7 @@
                                     Escenarios
                                 </a>
                             </div>
-                            <div id="help-nav-two" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "escenario" ? "in" : "" ?>" style="height: 0px;">
+                            <div id="help-nav-two" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "escenario" ? "in" : "" ?>">
                                 <div class="panel-body">
                                     <ul>
                                         <li><a href="<?php echo Yii::app()->createUrl('escenarios/escenario/create') ?>">Nuevo</a></li>
