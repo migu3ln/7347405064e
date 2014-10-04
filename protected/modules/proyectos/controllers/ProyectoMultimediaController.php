@@ -251,6 +251,20 @@ class ProyectoMultimediaController extends AweController {
         }
     }
 
+    public function actionAjaxLoadForm($proyecto_id) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new ProyectoMultimedia;
+            $archivo = new XUploadForm;
+
+            $result = array();
+            $result['success'] = true;
+
+            $result['html'] = $this->renderPartial('_form_modal_partial', array('model' => $model, 'archivo_modal' => $archivo,
+                    ), true, true);
+            echo CJSON::encode($result);
+        }
+    }
+
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.

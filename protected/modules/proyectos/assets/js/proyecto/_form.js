@@ -29,7 +29,6 @@ function saveProyecto($form) {
         successCall: function (data) {
             if (data.success) {
                 proyecto_id = data.attr.id;
-
                 habilitarPaneles();
             } else {
                 btn_save.setProgress(1);
