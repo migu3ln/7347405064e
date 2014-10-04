@@ -14,7 +14,7 @@
         <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img width="150" height="150" src="{%=file.url%}"></a>
         {% } %}</td>
         <td class="name">
-        <a href="{%=file.url%}" class='imageslink' url="{%=file.url%}"  title="{%=file.name%}" filename="{%=file.filename%}" rel="{%=file.url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+        <a href="{%=file.url%}" class='imageslink file' url="{%=file.url%}"  title="{%=file.name%}" filename="{%=file.filename%}" rel="{%=file.url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
         </td> 
         {% } %}
         <td class="delete">
@@ -36,7 +36,7 @@
             {% if (file.url) { %}
                     <div class="thumbnail template-download fade" >
                         <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}">
-                          <img class='imageslink'  url="{%=file.url%}"  title="{%=file.name%}" filename="{%=file.filename%}" rel="{%=file.url&&'gallery'%}" width="150" height="150" src="{%=file.url%}">
+                          <img class='imageslink file'  url="{%=file.url%}"  title="{%=file.name%}" filename="{%=file.filename%}" rel="{%=file.url&&'gallery'%}" width="150" height="150" src="{%=file.url%}">
                         </a>
                         <div class="caption">
                             <p class='delete'>

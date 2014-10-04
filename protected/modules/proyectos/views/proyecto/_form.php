@@ -76,31 +76,34 @@ Util::tsRegisterAssetJs('_form.js');
                     $modelImagen = new ProyectoMultimedia('search');
                     $modelImagen->unsetAttributes();
                     $modelImagen->proyecto_id = $model->id ? $model->id : 0;
-                    $dataProvider =$modelImagen->de_proyecto($model->id)->search();
+                    $dataProvider = $modelImagen->de_tipo(Constants::MULTIMEDIA_TIPO_IMAGEN)->de_proyecto($model->id)->search();
                     $fData = $dataProvider->getData();
 //                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
-                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id" . ',function(){});" class="jumbotron">
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id+'/tipo/IMAGEN'" . ',function(){});" class="jumbotron">
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
-                        'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id+'/tipo/IMAGEN',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $dataProvider,
-                         'columns'=>array(
-                             array(
-                                 'class'=>'ext.booster.widgets.TbImageColumn',
+                        'columns' => array(
+                            array(
+                                'class' => 'ext.booster.widgets.TbImageColumn',
 //                                 'name'=>'ubicacion',
-                                 'imagePathExpression'=>'$data->ubicacion',
-                                 'imageOptions'=>array(
-                                     'width'=>150,
-                                     'height'=>150
-                                 )
-                                 )
-                             )
+                                'imagePathExpression' => '$data->ubicacion',
+                                'imageOptions' => array(
+                                    'width' => 150,
+                                    'height' => 150
+                                )
+                            )
+                        )
                     ));
+                    unset($modelImagen);
+                    unset($dataProvider);
+                    unset($fData);
                     ?>
 
                 </div>
@@ -113,9 +116,33 @@ Util::tsRegisterAssetJs('_form.js');
                     <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', 'Upload') . ' ' . 'Videos'; ?></h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
 
-                    </div>
+                    <?php
+//                    var_dump('id  '.$model->id);
+                    $modelVideo = new ProyectoMultimedia('search');
+                    $modelVideo->unsetAttributes();
+                    $modelVideo->proyecto_id = $model->id ? $model->id : 0;
+                    $dataProvideVideo = $modelVideo->de_tipo(Constants::MULTIMEDIA_TIPO_VIDEO)->de_proyecto($model->id)->search();
+                    $fDataVideo = $dataProvideVideo->getData();
+//                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
+                    $this->widget('ext.booster.widgets.TbGridView', array(
+                        'id' => 'video-grid',
+                        'showTableOnEmpty' => false,
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id+'/tipo/VIDEO'" . ',function(){});" class="jumbotron">
+                                        <h1><span class="glyphicon glyphicon-open"></span></h1>
+                                        SUBIR VIDEO
+                                        </a>',
+                        'template' => (!empty($fDataVideo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id+'/tipo/VIDEO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $dataProvideVideo,
+                        'columns' => array(
+                            'ubicacion'
+                        )
+                    ));
+                    unset($modelVideo);
+                    unset($dataProvideVideo);
+                    unset($fDataVideo);
+                    ?>
                 </div>
             </div>
         </div>
@@ -128,9 +155,30 @@ Util::tsRegisterAssetJs('_form.js');
 
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-
-                    </div>
+                    <?php
+                    $modelArchivo = new ProyectoMultimedia('search');
+                    $modelArchivo->unsetAttributes();
+                    $modelArchivo->proyecto_id = $model->id ? $model->id : 0;
+                    $dataProvideArchivo = $modelArchivo->de_tipo(Constants::MULTIMEDIA_TIPO_ARCHIVO)->de_proyecto($model->id)->search();
+                    $fDataArchivo = $dataProvideArchivo->getData();
+                    $this->widget('ext.booster.widgets.TbGridView', array(
+                        'id' => 'file-grid',
+                        'showTableOnEmpty' => false,
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id+'/tipo/ARCHIVO'" . ',function(){});" class="jumbotron">
+                                        <h1><span class="glyphicon glyphicon-open"></span></h1>
+                                        SUBIR ARCHIVOS
+                                        </a>',
+                        'template' => (!empty($fDataArchivo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id+'/tipo/ARCHIVO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $dataProvideArchivo,
+                        'columns' => array(
+                            'ubicacion'
+                        )
+                    ));
+                    unset($modelArchivo);
+                    unset($dataProvideArchivo);
+                    unset($fDataArchivo);
+                    ?>
                 </div>
             </div>
         </div>

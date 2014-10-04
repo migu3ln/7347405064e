@@ -13,7 +13,7 @@
     <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
     {% } %}</td>
     <td class="name">
-    <a href="{%=file.url%}" class='archivosNota' url="{%=file.url%}"  title="{%=file.name%}" filename="{%=file.filename%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+    <a href="{%=file.url%}" class='archivosNota file' url="{%=file.url%}"  title="{%=file.name%}" filename="{%=file.filename%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
     <!--<option type="hidden" value="{%=file.name%}"></option>-->
     <!--<input type="hidden" class='archivosNota'>-->
     </td>

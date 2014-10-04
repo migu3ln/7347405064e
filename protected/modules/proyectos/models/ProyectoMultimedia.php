@@ -26,5 +26,16 @@ class ProyectoMultimedia extends BaseProyectoMultimedia {
         );
         return $this;
     }
+    public function de_tipo($tipo) {
+        $this->getDbCriteria()->mergeWith(
+                array(
+                    'condition' => 'tipo = :tipo',
+                    'params' => array(
+                        ':tipo' => $tipo
+                    ),
+                )
+        );
+        return $this;
+    }
 
 }

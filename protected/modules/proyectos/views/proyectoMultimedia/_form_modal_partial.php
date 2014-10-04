@@ -10,9 +10,6 @@ Yii::app()->clientScript->scriptMap['jquery.fileupload-ip.js'] = false;
 Yii::app()->clientScript->scriptMap['jquery.fileupload-ui-preview.js'] = false;
 Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
 
-
-
-
 //Util::tsRegisterAssetJs('_form_modal.js');
 /** @var ProyectoMultimediaController $this */
 /** @var ProyectoMultimedia $model */
@@ -21,13 +18,14 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
 
 <div id="container_img_modal" class="col-md-6">
     <?php
+    echo $model->tipo;
     $this->widget('ext.xupload.XUpload', array(
         'model' => $archivo_modal,
         'url' => CController::createUrl('/proyectos/proyectoMultimedia/uploadTmp'),
         'htmlOptions' => array('id' => 'logo-proyecto-form_modal', 'class' => 'form-horizontal'),
         'attribute' => 'file',
         'multiple' => false,
-        'previewImages' => true,
+        'previewImages' => $model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN ? true : false,
         'autoUpload' => true,
     ));
     ?>
@@ -40,7 +38,7 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
     $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         'type' => 'horizontal',
         'id' => 'proyecto-multimedia-form',
-        'action' => Yii::app()->createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id),
+        'action' => Yii::app()->createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id . '/tipo/' . $model->tipo),
         'enableAjaxValidation' => true,
         'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
         'enableClientValidation' => false,
@@ -80,13 +78,26 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
             <button id="btn_save_proyecto_multimedia" class="btn btn-success ladda-button" form-id="#proyecto-multimedia-form" data-style="expand-right">
                 <span class="ladda-label">Registrar</span>
             </button>
+
             <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'label' => Yii::t('AweCrud.app', 'Cancel'),
-                'htmlOptions' => array(
-                    'class' => "btn_cerrar_modal",
-                )
-            ));
+            if ($model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN) {
+                $this->widget('booster.widgets.TbButton', array(
+                    'label' => Yii::t('AweCrud.app', 'Cancel'),
+                    'htmlOptions' => array(
+                        'class' => "btn_cerrar_modal",
+                        'id-grid' => "#images-grid",
+                    )
+                ));
+            } else {
+
+                $this->widget('booster.widgets.TbButton', array(
+                    'label' => Yii::t('AweCrud.app', 'Cancel'),
+                    'htmlOptions' => array(
+                        'class' => "btn_cerrar_modal",
+                        'id-grid' => "#file-grid",
+                    )
+                ));
+            }
             ?>
             <?php $this->endWidget(); ?>
         </div>

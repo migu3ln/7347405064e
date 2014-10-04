@@ -10,9 +10,6 @@ Yii::app()->clientScript->scriptMap['jquery.fileupload-ip.js'] = false;
 Yii::app()->clientScript->scriptMap['jquery.fileupload-ui-preview.js'] = false;
 Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
 
-
-
-
 Util::tsRegisterAssetJs('_form_modal.js');
 /** @var ProyectoMultimediaController $this */
 /** @var ProyectoMultimedia $model */
@@ -21,7 +18,13 @@ Util::tsRegisterAssetJs('_form_modal.js');
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button"  class="close btn_cerrar_modal" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <?php if ($model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN): ?>
+
+                <button type="button"  class="close btn_cerrar_modal"  id-grid="#images-grid"  data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <?php else: ?>
+                <button type="button"  class="close btn_cerrar_modal"  id-grid="#file-grid"  data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+            <?php endif; ?>
             <h4 class="modal-title" id="myModalLabel"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . ProyectoMultimedia::label(1); ?></h4>
         </div>
         <div class="modal-body">
@@ -34,7 +37,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                         'htmlOptions' => array('id' => 'logo-proyecto-form_modal', 'class' => 'form-horizontal'),
                         'attribute' => 'file',
                         'multiple' => false,
-                        'previewImages' => true,
+                        'previewImages' => $model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN ? true : false,
                         'autoUpload' => true,
                     ));
                     ?>
@@ -47,7 +50,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                     $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                         'type' => 'horizontal',
                         'id' => 'proyecto-multimedia-form',
-                        'action' => Yii::app()->createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id),
+                        'action' => Yii::app()->createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id . '/tipo/' . $model->tipo),
                         'enableAjaxValidation' => true,
                         'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
                         'enableClientValidation' => false,
@@ -88,12 +91,24 @@ Util::tsRegisterAssetJs('_form_modal.js');
                                 <span class="ladda-label">Registrar</span>
                             </button>
                             <?php
-                            $this->widget('booster.widgets.TbButton', array(
-                                'label' => Yii::t('AweCrud.app', 'Cancel'),
-                                'htmlOptions' => array(
-                                    'class' => "btn_cerrar_modal",
-                                )
-                            ));
+                            if ($model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN) {
+                                $this->widget('booster.widgets.TbButton', array(
+                                    'label' => Yii::t('AweCrud.app', 'Cancel'),
+                                    'htmlOptions' => array(
+                                        'class' => "btn_cerrar_modal",
+                                        'id-grid' => "#images-grid",
+                                    )
+                                ));
+                            } else {
+
+                                $this->widget('booster.widgets.TbButton', array(
+                                    'label' => Yii::t('AweCrud.app', 'Cancel'),
+                                    'htmlOptions' => array(
+                                        'class' => "btn_cerrar_modal",
+                                        'id-grid' => "#file-grid",
+                                    )
+                                ));
+                            }
                             ?>
                             <?php $this->endWidget(); ?>
                         </div>
@@ -104,6 +119,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
             </div>
             <div class="row">
                 <div class="col-md-12">
+
                     <?php
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-modal-grid',
@@ -114,7 +130,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                                         </a>',
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $model->de_proyecto($model->proyecto_id)->search(),
-                        'columns' => array(
+                        'columns' => $model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN ? array(
                             array(
                                 'class' => 'ext.booster.widgets.TbImageColumn',
 //                                 'name'=>'ubicacion',
@@ -124,7 +140,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                                     'height' => 150
                                 )
                             )
-                        )
+                                ) : array('ubicacion')
                     ));
                     ?>
 
@@ -134,8 +150,14 @@ Util::tsRegisterAssetJs('_form_modal.js');
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default btn_cerrar_modal" data-dismiss="modal">Close</button>
+            <?php if ($model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN): ?>
+                <button type="button" id-grid="#images-grid" class="btn btn-default btn_cerrar_modal" data-dismiss="modal">Close</button>
+            <?php else: ?>
+                <button type="button" id-grid="#file-grid" class="btn btn-default btn_cerrar_modal" data-dismiss="modal">Close</button>
+
+            <?php endif; ?>
         </div>
     </div>
 </div>
+<?php unset($archivo_modal) ?>
 
