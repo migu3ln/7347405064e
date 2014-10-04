@@ -5,7 +5,7 @@ Util::tsRegisterAssetJs('_form.js');
 /** @var AweActiveForm $form */
 ?>
 <script type="text/javascript">
-    var proyecto_id =<?php print $model->id ? $model->id : 0 ;?>;
+    var proyecto_id =<?php print $model->id ? $model->id : 0 ; ?>;
 </script>
 <!-- begin contendor-form -->
 <div class="row" id='contenedor-form'>
@@ -74,9 +74,13 @@ Util::tsRegisterAssetJs('_form.js');
                 <div class="panel-body">
 
                     <?php
-
-
-                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
+//                    var_dump('id  '.$model->id);
+                    $modelImagen = new ProyectoMultimedia('search');
+                    $modelImagen->unsetAttributes();
+                    $modelImagen->proyecto_id = $model->id ? $model->id : 0;
+                    $dataProvider =$modelImagen->de_proyecto($model->id)->search();
+                    $fData = $dataProvider->getData();
+//                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
@@ -84,9 +88,9 @@ Util::tsRegisterAssetJs('_form.js');
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
-                        'template' => ($numItem > 0) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
-                        'dataProvider' =>ProyectoMultimedia::model()->de_proyecto($model->id)->search(),
+                        'dataProvider' => $dataProvider,
                     ));
                     ?>
 

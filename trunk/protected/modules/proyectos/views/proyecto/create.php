@@ -1,1 +1,1 @@
-<?php echo $this->renderPartial('_form', array('model' => $model,'archivo'=>$archivo)); ?>
+<?php echo $this->renderPartial('_form', array('model' => $model,'modelpMultimedia'=>$modelpMultimedia,'archivo'=>$archivo)); ?>
