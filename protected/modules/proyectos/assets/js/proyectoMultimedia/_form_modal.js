@@ -89,7 +89,7 @@ function initconpoment () {
     });
     $('.btn_cerrar_modal').on('click', function () {
         $('#mainModal').modal('hide');
-        $('#images-grid').yiiGridView('update');
+        $('#images-grid').yiiGridView('update',{url:baseUrl + 'proyectos/proyecto/create/id/'+proyecto_id});
     });
 
 }

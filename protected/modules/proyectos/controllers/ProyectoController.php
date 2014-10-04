@@ -30,12 +30,15 @@ class ProyectoController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id = null) {
         $model = new Proyecto;
+        if ($id) {
+            $model->id = $id;
+        }
         $model->estado = Proyecto::ESTADO_ACTIVO;
         $result = array();
+        $modelpMultimedia = new ProyectoMultimedia('search');
         $archivo = new XUploadForm;
-
         $this->ajaxValidation($model);
 
         if (isset($_POST['Proyecto'])) {
@@ -45,7 +48,6 @@ class ProyectoController extends AweController {
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
                 if ($_POST['Proyecto']['logo'] != null) {
-                    $modelpMultimedia = new ProyectoMultimedia;
                     $modelpMultimedia->local = 0;
                     $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
                     $modelpMultimedia->menu = 0;
@@ -63,14 +65,13 @@ class ProyectoController extends AweController {
                         $modelpMultimedia->ubicacion = $publicPath . $src;
 //                        die(var_dump($modelpMultimedia->attributes, $modelpMultimedia->validate(), $modelpMultimedia->errors));
 
-                       $modelpMultimedia->save();
+                        $modelpMultimedia->save();
                     }
                 }
             }
             echo CJSON::encode($result);
         } else {
-            
-            $this->render('create', array('model' => $model, 'archivo' => $archivo));
+            $this->render('create', array('model' => $model, 'modelpMultimedia' => $modelpMultimedia, 'archivo' => $archivo));
         }
     }
 
