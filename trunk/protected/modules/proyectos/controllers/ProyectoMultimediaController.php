@@ -255,6 +255,7 @@ class ProyectoMultimediaController extends AweController {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProyectoMultimedia;
             $archivo = new XUploadForm;
+            $model->proyecto_id=$proyecto_id;
 
             $result = array();
             $result['success'] = true;

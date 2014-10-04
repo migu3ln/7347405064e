@@ -40,7 +40,7 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
     $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
         'type' => 'horizontal',
         'id' => 'proyecto-multimedia-form',
-        'action' => CController::createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id?' . $model->proyecto_id),
+        'action' => Yii::app()->createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id),
         'enableAjaxValidation' => true,
         'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
         'enableClientValidation' => false,
