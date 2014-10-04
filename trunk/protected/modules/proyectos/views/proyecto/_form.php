@@ -5,7 +5,7 @@ Util::tsRegisterAssetJs('_form.js');
 /** @var AweActiveForm $form */
 ?>
 <script type="text/javascript">
-    var proyecto_id =<?php print $model->id ? $model->id : 0  ?>;
+    var proyecto_id =<?php print $model->id ? $model->id : 0 ;?>;
 </script>
 <!-- begin contendor-form -->
 <div class="row" id='contenedor-form'>

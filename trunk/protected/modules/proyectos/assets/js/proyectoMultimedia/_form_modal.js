@@ -68,6 +68,9 @@ function saveProyectoMultimedia(form) {
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
                 $('#images-modal-grid').yiiGridView('update');
+                ajaxUpdateElement(baseUrl + 'proyectos/proyectoMultimedia/ajaxLoadForm/proyecto_id/' + proyecto_id, "#contenedor-form-modal", function () {
+
+                });
             } else {
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();

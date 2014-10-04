@@ -112,3 +112,30 @@ function showModalData(html, tipo) {
     }
 //    $('select.fix').selectBox();
 }
+/**
+ * Actualizacion de vistas por ajax
+ * @param {type} url
+ * @param {type} elemento
+ * @param {type} callBack
+ * @returns {undefined}
+ */
+function ajaxUpdateElement(url, elemento, callBack)
+{
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        beforeSend: function (xhr) {
+            var html = "<div class='loading'><img src='" + themeUrl + "img/loading.gif' /></div>";
+            $(elemento).html(html);
+        },
+        success: function (data) {
+            if (data.success) {
+                $(elemento).html(data.html);
+                callBack();
+            } else {
+                bootbox.alert(data.messages.error.toString());
+            }
+        }
+    });
+}

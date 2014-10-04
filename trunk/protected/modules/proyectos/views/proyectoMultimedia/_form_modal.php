@@ -25,7 +25,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
             <h4 class="modal-title" id="myModalLabel"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . ProyectoMultimedia::label(1); ?></h4>
         </div>
         <div class="modal-body">
-            <div class="row">
+            <div class="row" id="contenedor-form-modal">
                 <div id="container_img_modal" class="col-md-6">
                     <?php
                     $this->widget('ext.xupload.XUpload', array(
@@ -47,6 +47,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                     $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                         'type' => 'horizontal',
                         'id' => 'proyecto-multimedia-form',
+                        'action' => CController::createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id),
                         'enableAjaxValidation' => true,
                         'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
                         'enableClientValidation' => false,
