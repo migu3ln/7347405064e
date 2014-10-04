@@ -39,8 +39,6 @@ Util::tsRegisterAssetJs('_form.js');
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
                 <input type="hidden" name="Proyecto[logo]" id="logo" value=null />
-
-
                 <div class="form-group">
                     <div class="col-lg-7 col-lg-offset-2">
 

@@ -1,4 +1,5 @@
 var btn_save;
+var btn_save_taquilla;
 var sc_teatro_sucre;
 $(function () {
     //ckeditor 
@@ -10,12 +11,22 @@ $(function () {
         ]
     });
     //ladda submit
+    //save escenario
     $("#btn_save_escenario").click(function (e) {
         e.preventDefault();
         btn_save = Ladda.create(this);
         var form_id = $(this).attr('form-id');
         btn_save.start();
         saveEscenario(form_id);
+        return false;
+    });
+    //save taquilla
+    $("#btn_save_taquilla").click(function (e) {
+        e.preventDefault();
+        btn_save_taquilla = Ladda.create(this);
+        var form_id = $(this).attr('form-id');
+        btn_save_taquilla.start();
+        saveTaquilla(form_id);
         return false;
     });
     //bootstrapSwitch
@@ -31,12 +42,25 @@ $(function () {
             }
         }
     });
-//    $('input[type="checkbox"]').adaptiveSwitch();
-//    $('input[type="checkbox"]').on('change', function (e) {
-//        console.log($(this).val());
-//    });
 });
 function saveEscenario($form) {
+    if ($('img.imageslink').length > 0) {
+        $('#logo').val($('img.imageslink').attr('filename'));
+    } else {
+        $('#logo').val(null);
+    }
+    ajaxValidarFormulario({
+        formId: $form,
+        beforeCall: function () {
+            btn_save_taquilla.setProgress(0.6);
+        },
+        errorCall: function () {
+            btn_save_taquilla.setProgress(1);
+            btn_save_taquilla.stop();
+        }
+    });
+}
+function saveTaquilla($form) {
     ajaxValidarFormulario({
         formId: $form,
         beforeCall: function () {
