@@ -78,11 +78,7 @@ function initconpoment() {
                 $(this).val(0);
             }
         },
-        onInit: function () {
-//            $(this).val(0);
-            console.log('entre');
 
-        }
     });
     $("input[type='checkbox']#ProyectoMultimedia_menu").bootstrapSwitch({
         onColor: 'success',
@@ -95,12 +91,7 @@ function initconpoment() {
                 $(this).val(0);
             }
         },
-        onInit: function () {
-//            $(this).val(0);
-            console.log('entre');
-
-
-        }
+  
     });
     $("input[type='checkbox']#ProyectoMultimedia_encabezado").bootstrapSwitch({
         onColor: 'success',
@@ -113,12 +104,7 @@ function initconpoment() {
                 $(this).val(0);
             }
         },
-        onInit: function () {
-//            $(this).val(0);
-            console.log('entre');
-
-
-        }
+     
     });
     $("#btn_save_proyecto_multimedia").click(function (e) {
         e.preventDefault();
