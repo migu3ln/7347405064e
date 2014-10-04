@@ -26,21 +26,18 @@ class EscenarioTaquillaController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionAjaxCreate() {
         $model = new EscenarioTaquilla;
-
-        $this->performAjaxValidation($model, 'escenario-taquilla-form');
-
+        $result = array();
+        $this->ajaxValidation($model);
         if (isset($_POST['EscenarioTaquilla'])) {
             $model->attributes = $_POST['EscenarioTaquilla'];
             if ($model->save()) {
-                $this->redirect(array('admin'));
+                $result['success'] = $model->validate();
+                $result['attr'] = $model->attributes;
             }
         }
-
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        echo CJSON::encode($result);
     }
 
     /**
@@ -116,6 +113,26 @@ class EscenarioTaquillaController extends AweController {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'escenario-taquilla-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    /**
+     * funcion de validacion por ajax
+     * @param type $model
+     * @param type $form_id
+     */
+    protected function ajaxValidation($model, $form_id = "escenario-taquilla-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
+            }
         }
     }
 

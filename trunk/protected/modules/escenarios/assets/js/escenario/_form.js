@@ -52,23 +52,36 @@ function saveEscenario($form) {
     ajaxValidarFormulario({
         formId: $form,
         beforeCall: function () {
-            btn_save_taquilla.setProgress(0.6);
-        },
-        errorCall: function () {
-            btn_save_taquilla.setProgress(1);
-            btn_save_taquilla.stop();
-        }
-    });
-}
-function saveTaquilla($form) {
-    ajaxValidarFormulario({
-        formId: $form,
-        beforeCall: function () {
             btn_save.setProgress(0.6);
         },
         errorCall: function () {
             btn_save.setProgress(1);
             btn_save.stop();
+        }
+    });
+}
+/**
+ * save taquilla
+ * @param {type} $form
+ * @returns {undefined}
+ */
+function saveTaquilla($form) {
+    ajaxValidarFormulario({
+        formId: $form,
+        beforeCall: function () {
+            btn_save_taquilla.setProgress(0.6);
+        },
+        errorCall: function () {
+            btn_save_taquilla.setProgress(1);
+            btn_save_taquilla.stop();
+        },
+        successCall: function (data) {
+            btn_save_taquilla.setProgress(1);
+            btn_save_taquilla.stop();
+            $("#Escenario_Taquilla_nombre").val('');
+            $("#escenario-taquilla-grid").yiiGridView('update', {
+                data: {EscenarioTaquilla: {escenario_id: data.attr.escenario_id}}
+            });
         }
     });
 }
