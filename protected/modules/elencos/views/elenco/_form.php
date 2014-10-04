@@ -7,6 +7,8 @@ Util::tsRegisterAssetJs('_form.js')
 <script type="text/javascript">
     var proyecto_id =<?php print $model->id ? $model->id : 0  ?>;
 </script>
+<!-- start contenedor-form -->
+
 <div class="row" id='contenedor-form'>
 
     <div class="col-lg-12">
@@ -36,11 +38,11 @@ Util::tsRegisterAssetJs('_form.js')
                     'enableClientValidation' => true,
                 ));
                 ?>
-
-
+                <input type="hidden" name="Elenco[logo]" id="logo" value=null />
                 <div class="form-group">
 
                     <label class="col-sm-3 control-label" for="Elenco_escenario_id">Elenco Representante <span class="required">*</span></label>
+
                     <div class="col-sm-7 col-sm-9">
                         <?php
                         $htmlOptions = array('class' => "form-control");
@@ -67,7 +69,6 @@ Util::tsRegisterAssetJs('_form.js')
 
                 <div class="form-group">
                     <div class="col-lg-7 col-lg-offset-2">
-                        <input type="hidden" name="Elenco[logo]" id="logo" value=null />
 
                         <button id="btn_save_elenco" class="btn btn-success ladda-button" form-id="#elenco-form" data-style="expand-right">
                             <span class="ladda-label">Registrar</span>
@@ -85,6 +86,9 @@ Util::tsRegisterAssetJs('_form.js')
         </div>
     </div>
 </div>
+<!-- end contenedor-form -->
+<!-- start contenedor-multimedia -->
+
 <div id="contenedor-multimedia" class="hidden">
     <div class="row">
 
@@ -95,15 +99,17 @@ Util::tsRegisterAssetJs('_form.js')
                 </div>
                 <div class="panel-body">
                     <?php
+                    $numItem = ElencoMultimedia::model()->de_elenco($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
-                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id" . ',function(){});" class="jumbotron">
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id" . ',function(){});" class="jumbotron">
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
+                        'template' => ($numItem > 0) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
-                        'dataProvider' => ElencoMultimedia::model()->search(),
+                        'dataProvider' => ElencoMultimedia::model()->de_elenco($model->id)->search(),
                     ));
                     ?>
                 </div>
