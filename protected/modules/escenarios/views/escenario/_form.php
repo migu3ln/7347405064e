@@ -4,13 +4,24 @@
 /** @var AweActiveForm $form */
 Util::tsRegisterAssetJs('_form.js');
 ?>
-<div class="col-lg-12">
+<div class="row-fluid hidden">
     <div class="panel panel-theme-secondary">
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Escenario::label(1); ?></h3>
         </div>
         <div class="panel-body">
             <div class="row-fluid">
+                <?php
+                $this->widget('ext.xupload.XUpload', array(
+                    'model' => $archivo,
+                    'url' => CController::createUrl('/proyectos/proyectoMultimedia/uploadTmp'),
+                    'htmlOptions' => array('id' => 'logo-proyecto-form', 'class' => 'form-horizontal'),
+                    'attribute' => 'file',
+                    'multiple' => false,
+                    'previewImages' => true,
+                    'autoUpload' => true,
+                ));
+                ?>
                 <?php
                 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                     'type' => 'horizontal',
@@ -20,6 +31,7 @@ Util::tsRegisterAssetJs('_form.js');
                     'enableClientValidation' => false,
                 ));
                 ?>
+                <input type="hidden" name="Escenario[logo]" id="logo" value=null />
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                 <div class="form-group">
                     <label class="col-sm-3 control-label required" for="Escenario_teatro_sucre">¿Pertenece al Teatro Sucre ? </label>
@@ -57,4 +69,6 @@ Util::tsRegisterAssetJs('_form.js');
         </div>
     </div>
 </div>
+<div class="row-fluid">
+    <?php $this->renderPartial('steps/_taquilla_seccion') ?>
 </div>

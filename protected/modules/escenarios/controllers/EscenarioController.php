@@ -29,17 +29,35 @@ class EscenarioController extends AweController {
     public function actionCreate() {
         $model = new Escenario;
         $result = array();
+        $archivo = new XUploadForm;
         $this->ajaxValidation($model);
         if (isset($_POST['Escenario'])) {
-            $model->attributes = $_POST['Escenario'];
             $result['success'] = $model->save();
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
+                if ($_POST['Escenario']['logo'] != null) {
+                    $modelpMultimedia = new EscenarioMultimedia;
+                    $modelpMultimedia->local = 1;
+                    $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
+                    $modelpMultimedia->escenario_id = $model->id;
+                    $src = $_POST['Escenario']['logo'];
+//                    die(var_dump($modelpMultimedia->attributes,$modelpMultimedia->validate(),$modelpMultimedia->errors));
+                    if (!file_exists("uploads/escenario/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {
+                        mkdir("uploads/escenario/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO, 0777, true);
+                    }
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/escenario/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/escenario/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO . '/';
+                    if (rename($pathorigen . $src, $path . $src)) {
+                        $modelpMultimedia->ubicacion = $publicPath . $src;
+                        $modelpMultimedia->save();
+                    }
+                }
             }
             echo CJSON::encode($result);
         } else {
             $this->render('create', array(
-                'model' => $model,
+                'model' => $model, 'archivo' => $archivo
             ));
         }
     }
@@ -157,8 +175,8 @@ class EscenarioController extends AweController {
             }
         }
     }
-    
-     public function actionAjaxlistEscenarios($search_value) {
+
+    public function actionAjaxlistEscenarios($search_value) {
         if (Yii::app()->request->isAjaxRequest) {
             echo CJSON::encode(Escenario::model()->getListSelect2($search_value));
         }
