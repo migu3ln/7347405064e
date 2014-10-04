@@ -74,7 +74,9 @@ Util::tsRegisterAssetJs('_form.js');
                 <div class="panel-body">
 
                     <?php
-                    $numItem = ProyectoMultimedia::model()->search()->itemCount;
+
+
+                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
@@ -84,7 +86,7 @@ Util::tsRegisterAssetJs('_form.js');
                                         </a>',
                         'template' => ($numItem > 0) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
-                        'dataProvider' => ProyectoMultimedia::model()->search(),
+                        'dataProvider' =>ProyectoMultimedia::model()->de_proyecto($model->id)->search(),
                     ));
                     ?>
 
