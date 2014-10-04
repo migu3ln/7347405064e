@@ -224,8 +224,6 @@ class ProyectoMultimediaController extends AweController {
             $result = array();
             if (isset($_POST['ProyectoMultimedia'])) {
                 $model->attributes = $_POST['ProyectoMultimedia'];
-                $model->menu = $_POST['ProyectoMultimedia']['menu'];
-                $model->encabezado = $_POST['ProyectoMultimedia']['encabezado'];
                 $result['success'] = $model->save();
                 if ($result['success'] && $tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
                     $result['attr'] = $model->attributes;

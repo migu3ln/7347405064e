@@ -18,7 +18,6 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
 
 <div id="container_img_modal" class="col-md-6">
     <?php
-    echo $model->tipo;
     $this->widget('ext.xupload.XUpload', array(
         'model' => $archivo_modal,
         'url' => CController::createUrl('/proyectos/proyectoMultimedia/uploadTmp'),
