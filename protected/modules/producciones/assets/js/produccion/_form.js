@@ -1,4 +1,6 @@
+var btn_save;
 $(function() {
+      init();
     $('#popover1').on('show.bs.popover', function() {
         abrirpopover($(this).attr('entidad'));
     });
@@ -81,11 +83,15 @@ $(function() {
 
 });
 
-function crearCategoria() {
-    console.log('crearCategoria');
-}
-function crearEscenario() {
-    console.log('crearEscenario');
+function init() {
+    $("#btn_save_produccion").click(function (e) {
+        e.preventDefault();
+        btn_save = Ladda.create(this);
+        var form_id = $(this).attr('form-id');
+        btn_save.start();
+        saveProduccion(form_id);
+        return false;
+    });
 }
 
 function abrirpopover(entidad_tipo) {
@@ -101,6 +107,7 @@ function cerrarpopover() {
 }
 
 function saveProyecto(form) {
+    
     ajaxValidarFormulario({
         formId: form,
         beforeCall: function() {
@@ -115,5 +122,43 @@ function saveProyecto(form) {
         errorCall: function(data) {
 
         }
+    });
+}
+function saveProduccion(form) {
+    if ($('img.imageslink').length > 0) {
+        $('#logo').val($('img.imageslink').attr('filename'));
+    } else {
+        $('#logo').val(null);
+    }
+    ajaxValidarFormulario({
+        formId: form,
+        beforeCall: function() {
+             btn_save.setProgress(0.6);
+        },
+        successCall: function(data) {
+            if (data.success) {
+                produccion_id = data.attr.id;
+                habilitarPaneles();
+            } else {
+                btn_save.setProgress(1);
+                btn_save.stop();
+            }
+        },
+        errorCall: function() {
+             btn_save.setProgress(1);
+            btn_save.stop();
+        }
+    });
+}
+
+function habilitarPaneles() {
+    $('#contenedor-form').animate({
+        'height': 'toggle'
+    }, 200, function () {
+        $('#contenedor-multimedia').animate({
+            'height': 'toggle'
+        }, 200, function () {
+            $('#contenedor-multimedia').removeClass('hidden');
+        });
     });
 }
