@@ -233,4 +233,83 @@ class ElencoMultimediaController extends AweController {
         }
     }
 
+    /**
+     * 
+     * @param type $elenco_id
+     */
+    public function actionAjaxCreate($elenco_id, $tipo) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new ElencoMultimedia;
+            $model->tipo = Constants::MULTIMEDIA_TIPO_IMAGEN;
+            $model->elenco_id = $elenco_id;
+            $this->ajaxValidation($model);
+            $result = array();
+            if (isset($_POST['ElencoMultimedia'])) {
+                $model->attributes = $_POST['ElencoMultimedia'];
+                $result['success'] = $model->save();
+                if ($result['success']) {
+                    $result['attr'] = $model->attributes;
+                    if (!file_exists("uploads/elenco/$model->elenco_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN)) {
+
+                        mkdir("uploads/elenco/$model->elenco_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN, 0777, true);
+                    }
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/elenco/$model->elenco_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/elenco/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN . '/';
+                    if (rename($pathorigen . $model->ubicacion, $path . $model->ubicacion)) {
+                        $model->ubicacion = $publicPath . $model->ubicacion;
+                        $model->save();
+                    }
+                } else {
+                    $result['message'] = 'No se pudo registrar la imagen, porfavor intenet nuevamente';
+                }
+                echo CJSON::encode($result);
+            } else {
+
+
+                //verifico que sea de tipo logo o imagen
+                if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
+                    $archivo = new XUploadForm;
+                    $this->renderPartial('_form_modal', array(
+                        'model' => $model,
+                        'archivo_modal' => $archivo,
+                            ), false, true);
+                } else { // si es de tipo video
+                    $this->renderPartial('_form_modal_video', array(
+                        'model' => $model,
+                            ), false, true);
+                }
+            }
+        }
+    }
+    public function actionAjaxLoadForm($elenco_id,$tipo) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new ElencoMultimedia;
+            $archivo = new XUploadForm;
+            $model->elenco_id = $elenco_id;
+            $model->tipo=$tipo;
+
+            $result = array();
+            $result['success'] = true;
+
+            $result['html'] = $this->renderPartial('_form_modal_partial', array('model' => $model, 'archivo_modal' => $archivo,
+                    ), true, true);
+            echo CJSON::encode($result);
+        }
+    }
+    protected function ajaxValidation($model, $form_id = "elenco-multimedia-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
+            }
+        }
+    }
+
 }
