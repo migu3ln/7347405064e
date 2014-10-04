@@ -114,6 +114,17 @@ Util::tsRegisterAssetJs('_form_modal.js');
                                         </a>',
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $model->de_proyecto($model->proyecto_id)->search(),
+                        'columns' => array(
+                            array(
+                                'class' => 'ext.booster.widgets.TbImageColumn',
+//                                 'name'=>'ubicacion',
+                                'imagePathExpression' => '$data->ubicacion',
+                                'imageOptions' => array(
+                                    'width' => 150,
+                                    'height' => 150
+                                )
+                            )
+                        )
                     ));
                     ?>
 

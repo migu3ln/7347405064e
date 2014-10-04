@@ -91,6 +91,17 @@ Util::tsRegisterAssetJs('_form.js');
                         'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $dataProvider,
+                         'columns'=>array(
+                             array(
+                                 'class'=>'ext.booster.widgets.TbImageColumn',
+//                                 'name'=>'ubicacion',
+                                 'imagePathExpression'=>'$data->ubicacion',
+                                 'imageOptions'=>array(
+                                     'width'=>150,
+                                     'height'=>150
+                                 )
+                                 )
+                             )
                     ));
                     ?>
 
