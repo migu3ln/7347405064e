@@ -214,25 +214,28 @@ class ProyectoMultimediaController extends AweController {
      * Save new model(ProyectoMultimedia) via ajax(modal) linked for Proyecto
      * @param type $proyecto_id
      */
-    public function actionAjaxCreate($proyecto_id) {
+    public function actionAjaxCreate($proyecto_id, $tipo) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProyectoMultimedia;
-            $model->tipo = Constants::MULTIMEDIA_TIPO_IMAGEN;
+            $model->tipo = $tipo;
+            $model->local = 1;
             $model->proyecto_id = $proyecto_id;
             $this->ajaxValidation($model);
             $result = array();
             if (isset($_POST['ProyectoMultimedia'])) {
                 $model->attributes = $_POST['ProyectoMultimedia'];
+                $model->menu = $_POST['ProyectoMultimedia']['menu'];
+                $model->encabezado = $_POST['ProyectoMultimedia']['encabezado'];
                 $result['success'] = $model->save();
-                if ($result['success']) {
+                if ($result['success'] && $tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
                     $result['attr'] = $model->attributes;
-                    if (!file_exists("uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN)) {
+                    if (!file_exists("uploads/proyecto/$model->proyecto_id/" . $tipo)) {
 
-                        mkdir("uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN, 0777, true);
+                        mkdir("uploads/proyecto/$model->proyecto_id/" . $tipo, 0777, true);
                     }
-                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN) . "/";
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/proyecto/$model->proyecto_id/" . $tipo) . "/";
                     $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
-                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/proyecto/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN . '/';
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/proyecto/$model->proyecto_id/" . $tipo . '/';
                     if (rename($pathorigen . $model->ubicacion, $path . $model->ubicacion)) {
                         $model->ubicacion = $publicPath . $model->ubicacion;
                         $model->save();
@@ -242,20 +245,28 @@ class ProyectoMultimediaController extends AweController {
                 }
                 echo CJSON::encode($result);
             } else {
-                $archivo = new XUploadForm;
-                $this->renderPartial('_form_modal', array(
-                    'model' => $model,
-                    'archivo_modal' => $archivo,
-                        ), false, true);
+                //verifico que sea de tipo logo o imagen
+                  if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
+                    $archivo = new XUploadForm;
+                    $this->renderPartial('_form_modal', array(
+                        'model' => $model,
+                        'archivo_modal' => $archivo,
+                            ), false, true);
+                } else { // si es de tipo video
+                    $this->renderPartial('_form_modal_video', array(
+                        'model' => $model,
+                            ), false, true);
+                }
             }
         }
     }
 
-    public function actionAjaxLoadForm($proyecto_id) {
+    public function actionAjaxLoadForm($proyecto_id,$tipo) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProyectoMultimedia;
             $archivo = new XUploadForm;
-            $model->proyecto_id=$proyecto_id;
+            $model->proyecto_id = $proyecto_id;
+            $model->tipo=$tipo;
 
             $result = array();
             $result['success'] = true;
