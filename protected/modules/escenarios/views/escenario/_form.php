@@ -4,7 +4,7 @@
 /** @var AweActiveForm $form */
 Util::tsRegisterAssetJs('_form.js');
 ?>
-<div class="row-fluid hidden">
+<div class="row-fluid ">
     <div class="panel panel-theme-secondary">
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Escenario::label(1); ?></h3>
@@ -70,5 +70,5 @@ Util::tsRegisterAssetJs('_form.js');
     </div>
 </div>
 <div class="row-fluid">
-    <?php $this->renderPartial('steps/_taquilla_seccion') ?>
+    <?php $this->renderPartial('steps/_taquilla_seccion', array('model_taquilla' => $model_taquilla)) ?>
 </div>

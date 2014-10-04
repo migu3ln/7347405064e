@@ -28,6 +28,11 @@ class EscenarioController extends AweController {
      */
     public function actionCreate() {
         $model = new Escenario;
+        $model_taquilla = new EscenarioTaquilla('search');
+        $model_taquilla->unsetAttributes();
+        if (isset($_GET['EscenarioTaquilla'])) {
+            $model_taquilla->attributes = $_GET['EscenarioTaquilla'];
+        }
         $result = array();
         $archivo = new XUploadForm;
         $this->ajaxValidation($model);
@@ -57,7 +62,7 @@ class EscenarioController extends AweController {
             echo CJSON::encode($result);
         } else {
             $this->render('create', array(
-                'model' => $model, 'archivo' => $archivo
+                'model' => $model, 'archivo' => $archivo, 'model_taquilla' => $model_taquilla
             ));
         }
     }
