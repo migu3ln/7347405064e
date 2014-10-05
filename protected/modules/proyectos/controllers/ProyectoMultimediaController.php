@@ -216,7 +216,11 @@ class ProyectoMultimediaController extends AweController {
      */
     public function actionAjaxCreate($proyecto_id, $tipo) {
         if (Yii::app()->request->isAjaxRequest) {
+
             $model = new ProyectoMultimedia;
+            if ($tipo == Constants::MULTIMEDIA_TIPO_VIDEO)
+                $model->setScenario('video');
+
             $model->tipo = $tipo;
             $model->local = 1;
             $model->proyecto_id = $proyecto_id;
@@ -244,7 +248,7 @@ class ProyectoMultimediaController extends AweController {
                 echo CJSON::encode($result);
             } else {
                 //verifico que sea de tipo logo o imagen
-                  if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
+                if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
                     $archivo = new XUploadForm;
                     $this->renderPartial('_form_modal', array(
                         'model' => $model,
@@ -259,12 +263,12 @@ class ProyectoMultimediaController extends AweController {
         }
     }
 
-    public function actionAjaxLoadForm($proyecto_id,$tipo) {
+    public function actionAjaxLoadForm($proyecto_id, $tipo) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProyectoMultimedia;
             $archivo = new XUploadForm;
             $model->proyecto_id = $proyecto_id;
-            $model->tipo=$tipo;
+            $model->tipo = $tipo;
 
             $result = array();
             $result['success'] = true;
