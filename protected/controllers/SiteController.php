@@ -103,5 +103,15 @@ class SiteController extends Controller {
 //                array('model' => $model)
                 );
     }
+    public function actionNuestrosTeatros() {
+        
+        $teatros=  Escenario::model()->findAll();
+        
+        
+        $this->render('teatros'
+//                , 
+//                array('model' => $model)
+                );
+    }
 
 }

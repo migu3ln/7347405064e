@@ -20,11 +20,11 @@
         <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>-->
         <!--<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/fonts/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <!--<link href="<?php // echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.min.css" rel="stylesheet">-->
+        <!--<link href="<?php // echo Yii::app()->theme->baseUrl;     ?>/css/font-awesome.min.css" rel="stylesheet">-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
-                <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/site.css" rel="stylesheet">
-                <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/isotope_style.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/site.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/isotope_style.css" rel="stylesheet">
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -65,7 +65,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">INICIO <i class="fa fa-home"></i></a></li>
-                                <li><a href="<?php echo Yii::app()->request->baseUrl;  ?>/site/quienesSomos">¿QUIÉNES SOMOS?</a></li>
+                                <li><a href="<?php echo Yii::app()->request->baseUrl; ?>/site/quienesSomos">¿QUIÉNES SOMOS?</a></li>
                                 <li><a href="#">PRESENTACIÓN PROPUESTA</a></li>
                                 <li><a href="#">SUSCRIPCIÓN AGENDA</a></li>
                                 <li><a href="#">AGENDA ELENCOS</a></li>
@@ -88,24 +88,66 @@
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>
-        </div>
-        <!-- Wrapper -->
-        <div class="wrapper">
             <div class="row-fluid">
-                <div class="col-md-12">
+
+                <div class="col-lg-9" >
+                    <!--<div class="row-fluid">-->
+                    <!--<div class="col-lg-9">-->
                     <?php echo $content; ?>
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                </div> <!-- / .wrapper -->
+
+                <!--<div class="row-fluid">-->
+                <div class="col-lg-3">
+                    <div id="calendario">
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Calendario</div>
+                            <div class="panel-body">
+                                <?php
+//        var_dump($model->id);
+                                $this->widget('application.extensions.fullcalendar.FullcalendarGraphWidget', array(
+                                    'id' => 'calendar',
+                                    'options' => array(
+                                        'monthNames' => Util::obtenerMeses(),
+                                        'monthNamesShort' => Util::obtenerMesesCortos(),
+                                        'dayNames' => Util::obtenerDias(),
+                                        'buttonText' => Util::obtenerBotonesCalendario(),
+                                        'dayNamesShort' => Util::obtenerDiasCortos(),
+                                        'columnFormat' => Util::obtenerColumnasCalendario(),
+                                        'titleFormat' => Util::obtenerTitulosCalendario(),
+//                                    'eventSources' => array(CController::createUrl('/eventos/calendario/ajaxCargaCalendarioCampania', array('campania_id' => $model->id))),
+//                'eventClick' => 'js:function(event, eventElement, view){
+//                        AjaxModalEntidad(event,"view");
+//                }',
+                                    ),
+                                    'htmlOptions' => array(
+                                        'class' => 'has-toolbar'
+                                    ),
+                                ));
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-        </div> <!-- / .wrapper -->
+        </div>
+        <!-- Wrapper -->
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.isotope.min.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/portfolio.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/scrolltopcontrol.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
-        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.isotope.min.js"></script>
-        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/portfolio.js"></script>
+
     </body>
 </html>

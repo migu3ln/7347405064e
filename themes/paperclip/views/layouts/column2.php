@@ -17,7 +17,7 @@
 </p>
 <?php endif; ?>
 
-<div>
+<div class="col-lg-12">
     
 
     <?php echo $content; ?>    
