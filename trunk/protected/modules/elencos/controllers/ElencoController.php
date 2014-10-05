@@ -30,29 +30,29 @@ class ElencoController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
-        $model = new Elenco;
-        $result = array();
-
+    public function actionCreate($id = null) {
+        $model = new Proyecto;
+        if ($id) {
+            $model->id = $id;
+        }
         $model->estado = Elenco::ESTADO_ACTIVO;
+        $result = array();
+        $modeloMultimedia = new ElencoMultimedia('search');
         $archivo = new XUploadForm;
         $this->ajaxValidation($model);
+
         if (isset($_POST['Elenco'])) {
             $model->attributes = $_POST['Elenco'];
-//            die(var_dump("·proyet"));
             $result['success'] = $model->save();
 
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
-
                 if ($_POST['Elenco']['logo'] != null) {
-//                    die(var_dump("logo entro"));
-                    $modelpMultimedia = new ElencoMultimedia;
-                    $modelpMultimedia->local = 0;
-                    $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
-                    $modelpMultimedia->menu = 0;
-                    $modelpMultimedia->encabezado = 0;
-                    $modelpMultimedia->elenco_id = $model->id;
+                    $modeloMultimedia->local = 0;
+                    $modeloMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
+                    $modeloMultimedia->menu = 0;
+                    $modeloMultimedia->encabezado = 0;
+                    $modeloMultimedia->proyecto_id = $model->id;
                     $src = $_POST['Elenco']['logo'];
 //                    die(var_dump($modelpMultimedia->attributes,$modelpMultimedia->validate(),$modelpMultimedia->errors));
                     if (!file_exists("uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {
@@ -62,17 +62,16 @@ class ElencoController extends AweController {
                     $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
                     $publicPath = Yii::app()->getBaseUrl() . "/uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO . '/';
                     if (rename($pathorigen . $src, $path . $src)) {
-                        $modelpMultimedia->ubicacion = $publicPath . $src;
+                        $modeloMultimedia->ubicacion = $publicPath . $src;
 //                        die(var_dump($modelpMultimedia->attributes, $modelpMultimedia->validate(), $modelpMultimedia->errors));
 
-                        $modelpMultimedia->save();
+                        $modeloMultimedia->save();
                     }
                 }
             }
             echo CJSON::encode($result);
         } else {
-
-            $this->render('create', array('model' => $model, 'archivo' => $archivo));
+            $this->render('create', array('model' => $model, 'modeloMultimedia' => $modeloMultimedia, 'archivo' => $archivo));
         }
     }
 

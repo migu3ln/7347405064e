@@ -5,7 +5,7 @@
 Util::tsRegisterAssetJs('_form.js')
 ?>
 <script type="text/javascript">
-    var proyecto_id =<?php print $model->id ? $model->id : 0  ?>;
+    var elenco_id =<?php print $model->id ? $model->id : 0  ?>;
 </script>
 <!-- start contenedor-form -->
 
@@ -22,7 +22,7 @@ Util::tsRegisterAssetJs('_form.js')
                 $this->widget('ext.xupload.XUpload', array(
                     'model' => $archivo,
                     'url' => CController::createUrl('/elencos/elencoMultimedia/uploadTmp'),
-                    'htmlOptions' => array('id' => 'logo-proyecto-form', 'class' => 'form-horizontal'),
+                    'htmlOptions' => array('id' => 'logo-elenco-form', 'class' => 'form-horizontal'),
                     'attribute' => 'file',
                     'multiple' => false,
                     'previewImages' => true,
@@ -91,102 +91,167 @@ Util::tsRegisterAssetJs('_form.js')
 
 <div id="contenedor-multimedia" class="hidden">
     <div class="row">
-
-        <div class="col-lg-6">
-            <div class="panel panel-info">
+        <div class="col-md-6">
+            <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Imagenes'; ?></h3>
+                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', 'Upload') . ' ' . 'Imagenes'; ?></h3>
                 </div>
                 <div class="panel-body">
+
                     <?php
-                    $numItem = ElencoMultimedia::model()->de_elenco($model->id)->search()->itemCount;
+//                    var_dump('id  '.$model->id);
+                    $modelImagen = new ElencoMultimedia('search');
+                    $modelImagen->unsetAttributes();
+                    $modelImagen->elenco_id = $model->id ? $model->id : 0;
+                    $dataProvider = $modelImagen->de_tipo(Constants::MULTIMEDIA_TIPO_IMAGEN)->de_elenco($model->id)->search();
+                    $fData = $dataProvider->getData();
+//                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
-                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id" . ',function(){});" class="jumbotron">
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/IMAGEN'" . ',function(){});" class="jumbotron">
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
-                        'template' => ($numItem > 0) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/'+proyecto_id,function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/IMAGEN',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
-                        'dataProvider' => ElencoMultimedia::model()->de_elenco($model->id)->search(),
+                        'dataProvider' => $dataProvider,
+                        'columns' => array(
+                            array(
+                                'class' => 'ext.booster.widgets.TbImageColumn',
+//                                 'name'=>'ubicacion',
+                                'imagePathExpression' => '$data->ubicacion',
+                                'imageOptions' => array(
+                                    'width' => 150,
+                                    'height' => 150
+                                )
+                            )
+                        )
                     ));
+                    unset($modelImagen);
+                    unset($dataProvider);
+                    unset($fData);
+                    ?>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', 'Upload') . ' ' . 'Videos'; ?></h3>
+                </div>
+                <div class="panel-body">
+
+                    <?php
+                    $modelVideo = new ElencoMultimedia('search');
+                    $modelVideo->unsetAttributes();
+                    $modelVideo->elenco_id = $model->id ? $model->id : 0;
+                    $dataProvideVideo = $modelVideo->de_tipo(Constants::MULTIMEDIA_TIPO_VIDEO)->de_elenco($model->id)->search();
+                    $fDataVideo = $dataProvideVideo->getData();
+                    $this->widget('ext.booster.widgets.TbGridView', array(
+                        'id' => 'video-grid',
+                        'showTableOnEmpty' => false,
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/VIDEO'" . ',function(){});" class="jumbotron">
+                                        <h1><span class="glyphicon glyphicon-open"></span></h1>
+                                        SUBIR VIDEO
+                                        </a>',
+                        'template' => (!empty($fDataVideo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/VIDEO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $dataProvideVideo,
+                        'columns' => array(
+                            'ubicacion'
+                        )
+                    ));
+                    unset($modelVideo);
+                    unset($dataProvideVideo);
+                    unset($fDataVideo);
                     ?>
                 </div>
             </div>
-
         </div>
-        <div class="col-lg-6">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Videos'; ?></h3>
+                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', 'Upload') . ' ' . 'Archivos'; ?></h3>
+
                 </div>
                 <div class="panel-body">
-                    <div class="row-fluid">
-
-                    </div>
+                    <?php
+                    $modelArchivo = new ElencoMultimedia('search');
+                    $modelArchivo->unsetAttributes();
+                    $modelArchivo->elenco_id = $model->id ? $model->id : 0;
+                    $dataProvideArchivo = $modelArchivo->de_tipo(Constants::MULTIMEDIA_TIPO_ARCHIVO)->de_elenco($model->id)->search();
+                    $fDataArchivo = $dataProvideArchivo->getData();
+                    $this->widget('ext.booster.widgets.TbGridView', array(
+                        'id' => 'file-grid',
+                        'showTableOnEmpty' => false,
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/ARCHIVO'" . ',function(){});" class="jumbotron">
+                                        <h1><span class="glyphicon glyphicon-open"></span></h1>
+                                        SUBIR ARCHIVOS
+                                        </a>',
+                        'template' => (!empty($fDataArchivo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/ARCHIVO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $dataProvideArchivo,
+                        'columns' => array(
+                            'ubicacion'
+                        )
+                    ));
+                    unset($modelArchivo);
+                    unset($dataProvideArchivo);
+                    unset($fDataArchivo);
+                    ?>
                 </div>
-            </div>
-
-        </div    <div class="row">
-
-            <div class="col-lg-6">
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Archivos'; ?></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row-fluid">
-
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-    <!-- end contenedor-multimedia -->
-    <div id="popover-head-ElencoRepresentante" class="hide popover-head">Nuevo Elenco Representante</div>
-    <div id="popover-content-ElencoRepresentante" class="hide popover-content">
-        <?php $modelElencoRepresentante = new ElencoRepresentante ?>
-        <?php
-        $formElencoRepresentate = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
-            'type' => 'inline',
-            'id' => 'elenco-representante-form',
-            'enableAjaxValidation' => true,
-            'action' => Yii::app()->createUrl('/elencos/elencoRepresentante/ajaxCreate'),
-            'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
-            'enableClientValidation' => false,
-        ));
-        ?>
-        <?php echo $formElencoRepresentate->textFieldGroup($modelElencoRepresentante, 'titulo', array('maxlength' => 45)) ?>
+</div>
 
-        <?php echo $formElencoRepresentate->textFieldGroup($modelElencoRepresentante, 'nombre', array('maxlength' => 150)) ?>
+<!-- end contenedor-multimedia -->
+<div id="popover-head-ElencoRepresentante" class="hide popover-head">Nuevo Elenco Representante</div>
+<div id="popover-content-ElencoRepresentante" class="hide popover-content">
+    <?php $modelElencoRepresentante = new ElencoRepresentante ?>
+    <?php
+    $formElencoRepresentate = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+        'type' => 'inline',
+        'id' => 'elenco-representante-form',
+        'enableAjaxValidation' => true,
+        'action' => Yii::app()->createUrl('/elencos/elencoRepresentante/ajaxCreate'),
+        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
+        'enableClientValidation' => false,
+    ));
+    ?>
+    <?php echo $formElencoRepresentate->textFieldGroup($modelElencoRepresentante, 'titulo', array('maxlength' => 45)) ?>
 
-        <br />
-        <!--    <div class="form-group">
-                <div class="col-xs-offset-2">-->
-        <?php
-        $this->widget('ext.booster.widgets.TbButton', array(
+    <?php echo $formElencoRepresentate->textFieldGroup($modelElencoRepresentante, 'nombre', array('maxlength' => 150)) ?>
+
+    <br />
+    <!--    <div class="form-group">
+            <div class="col-xs-offset-2">-->
+    <?php
+    $this->widget('ext.booster.widgets.TbButton', array(
 //                'buttonType' => 'submit',
-            'size' => 'mini',
-            'label' => $modelElencoRepresentante->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-            'htmlOptions' => array(
-                'onclick' => 'js:saveElencoRepresentante("#elenco-representante-form")',
-                'class' => 'btn-xs'
-            )
-        ));
-        ?>
-        <?php
-        $this->widget('booster.widgets.TbButton', array(
-            'label' => Yii::t('AweCrud.app', 'Cancel'),
-            'htmlOptions' => array('onclick' => 'js:cerrarpopover();',
-                'class' => 'btn-xs'
-            )
-        ));
-        ?>
-        <?php $this->endWidget(); ?>
-        <!--        </div>
-        
-            </div>-->
-    </div>
+        'size' => 'mini',
+        'label' => $modelElencoRepresentante->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+        'htmlOptions' => array(
+            'onclick' => 'js:saveElencoRepresentante("#elenco-representante-form")',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'label' => Yii::t('AweCrud.app', 'Cancel'),
+        'htmlOptions' => array('onclick' => 'js:cerrarpopover();',
+            'class' => 'btn-xs'
+        )
+    ));
+    ?>
+    <?php $this->endWidget(); ?>
+    <!--        </div>
+    
+        </div>-->
+</div>

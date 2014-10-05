@@ -27,4 +27,15 @@ class ElencoMultimedia extends BaseElencoMultimedia {
         return $this;
     }
 
+    public function de_tipo($tipo) {
+        $this->getDbCriteria()->mergeWith(
+                array(
+                    'condition' => 'tipo = :tipo',
+                    'params' => array(
+                        ':tipo' => $tipo
+                    ),
+                )
+        );
+        return $this;
+    }
 }
