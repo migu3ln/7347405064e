@@ -329,6 +329,9 @@
         <!--ckeditor-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/ckeditor.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/adapters/jquery.js"></script>
+        <!--mediaEmbedder-->
+        
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/mediaEmbedder/jquery.mb.mediaEmbedder.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/menu.js"></script>
     </body>

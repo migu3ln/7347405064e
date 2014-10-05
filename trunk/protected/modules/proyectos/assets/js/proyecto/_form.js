@@ -1,6 +1,9 @@
 var btn_save;
 $(function () {
     init();
+    $.mb_videoEmbedder.defaults.width = 500; //the with of players --> the height is automatically calculated
+    $('#example').mb_embedMovies()
+//    $('#example').mb_mb_embedAudio({})
 });
 
 function init() {
