@@ -2,7 +2,8 @@
 /** @var ElencoController $this */
 /** @var Elenco $model */
 /** @var AweActiveForm $form */
-Util::tsRegisterAssetJs('_form.js')
+Util::tsRegisterAssetJs('_form.js');
+"ISLSD";
 ?>
 <script type="text/javascript">
     var elenco_id =<?php print $model->id ? $model->id : 0  ?>;
