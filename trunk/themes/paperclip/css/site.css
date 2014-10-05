@@ -1,4 +1,52 @@
 div.wrapper{
-     padding-top: 10px; 
-     margin-left: 40px;
+    padding-top: 10px; 
+    margin-left: 40px;
+}
+.mask-imagen{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    background: #D4D7D8;
+    background: rgba(214, 221, 223, 0.5);
+    color: white;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 300ms;
+    -o-transition: opacity 300ms;
+    transition: opacity 300ms;
+    cursor: pointer;
+}
+.link-image-responsive{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    background: #D4D7D8;
+    background: rgba(214, 221, 223, 0.5);
+    color: white;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 300ms;
+    -o-transition: opacity 300ms;
+    transition: opacity 300ms;
+    cursor: pointer;
+}
+.portfolio-item > .portfolio-thumbnail:hover > .mask-imagen {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+#calendario{
+    margin-top: 20px;
+}
+.titulo-imagen{
+    text-align: center;
+    font-weight: bolder;
+    color: rgb(142, 144, 146);
+}
+.contenedor-imagenes{
+    margin-top: 20px;
 }
