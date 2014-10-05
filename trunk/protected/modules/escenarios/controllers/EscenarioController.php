@@ -28,11 +28,21 @@ class EscenarioController extends AweController {
      */
     public function actionCreate() {
         $model = new Escenario;
+        //gestion de taquilla
         $model_taquilla = new EscenarioTaquilla('search');
         $model_taquilla->unsetAttributes();
         if (isset($_GET['EscenarioTaquilla'])) {
             $model_taquilla->attributes = $_GET['EscenarioTaquilla'];
         }
+        //gestion de secciones
+        $model_taquilla_seccion = new EscenarioTaquillaSeccion('search');
+        $model_taquilla_seccion->unsetAttributes();
+        if (isset($_GET['EscenarioTaquillaSeccion'])) {
+            $model_taquilla_seccion->attributes = $_GET['EscenarioTaquillaSeccion'];
+        }
+        //TODO:eliminar 
+        $model_taquilla->escenario_id = 1;
+
         $result = array();
         $archivo = new XUploadForm;
         $this->ajaxValidation($model);
@@ -62,7 +72,9 @@ class EscenarioController extends AweController {
             echo CJSON::encode($result);
         } else {
             $this->render('create', array(
-                'model' => $model, 'archivo' => $archivo, 'model_taquilla' => $model_taquilla
+                'model' => $model, 'archivo' => $archivo,
+                'model_taquilla' => $model_taquilla,
+                'model_taquilla_seccion' => $model_taquilla_seccion
             ));
         }
     }

@@ -29,6 +29,15 @@ $(function () {
         saveTaquilla(form_id);
         return false;
     });
+    //save seccion
+    $("#btn_save_taquilla_seccion").click(function (e) {
+        e.preventDefault();
+        btn_save_taquilla = Ladda.create(this);
+        var form_id = $(this).attr('form-id');
+        btn_save_taquilla.start();
+        saveTaquillaSeccion(form_id);
+        return false;
+    });
     //bootstrapSwitch
     $("#Escenario_teatro_sucre").bootstrapSwitch({
         onColor: 'success',
@@ -66,6 +75,41 @@ function saveEscenario($form) {
  * @returns {undefined}
  */
 function saveTaquilla($form) {
+    ajaxValidarFormulario({
+        formId: $form,
+        beforeCall: function () {
+            btn_save_taquilla.setProgress(0.6);
+        },
+        errorCall: function () {
+            btn_save_taquilla.setProgress(1);
+            btn_save_taquilla.stop();
+        },
+        successCall: function (data) {
+            btn_save_taquilla.setProgress(1);
+            btn_save_taquilla.stop();
+            $("#Escenario_Taquilla_nombre").val('');
+            $("#escenario-taquilla-grid").yiiGridView('update', {
+                data: {EscenarioTaquilla: {escenario_id: data.attr.escenario_id}}
+            });
+        }
+    });
+}
+
+function selectTaquilla($id) {
+    $('#escenario-taquilla-seccion-form_em').fadeOut(100, function () {
+        $('#escenario-taquilla-seccion-form_panel').fadeIn(100);
+        $('#Escenario_Taquilla_Escenario_escenario_taquilla_id').val($id);
+        $("#escenario-taquilla-seccion-grid").yiiGridView('update', {
+            data: {EscenarioTaquillaSeccion: {escenario_taquilla_id: $id}}
+        });
+    });
+}
+/**
+ * save taquilla
+ * @param {type} $form
+ * @returns {undefined}
+ */
+function saveTaquillaSeccion($form) {
     ajaxValidarFormulario({
         formId: $form,
         beforeCall: function () {
