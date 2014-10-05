@@ -31,7 +31,7 @@ class ElencoController extends AweController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate($id = null) {
-        $model = new Proyecto;
+        $model = new Elenco;
         if ($id) {
             $model->id = $id;
         }
@@ -52,7 +52,7 @@ class ElencoController extends AweController {
                     $modeloMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
                     $modeloMultimedia->menu = 0;
                     $modeloMultimedia->encabezado = 0;
-                    $modeloMultimedia->proyecto_id = $model->id;
+                    $modeloMultimedia->elenco_id = $model->id;
                     $src = $_POST['Elenco']['logo'];
 //                    die(var_dump($modelpMultimedia->attributes,$modelpMultimedia->validate(),$modelpMultimedia->errors));
                     if (!file_exists("uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {

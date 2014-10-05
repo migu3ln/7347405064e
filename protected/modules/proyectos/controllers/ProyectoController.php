@@ -71,7 +71,7 @@ class ProyectoController extends AweController {
             }
             echo CJSON::encode($result);
         } else {
-            $this->render('create', array('model' => $model, 'modelpMultimedia' => $modeloMultimedia, 'archivo' => $archivo));
+            $this->render('create', array('model' => $model, 'modelpMultimedia' => $modelpMultimedia, 'archivo' => $archivo));
         }
     }
 

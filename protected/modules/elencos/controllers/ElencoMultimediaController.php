@@ -238,24 +238,26 @@ class ElencoMultimediaController extends AweController {
      * @param type $elenco_id
      */
     public function actionAjaxCreate($elenco_id, $tipo) {
+
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ElencoMultimedia;
-            $model->tipo = Constants::MULTIMEDIA_TIPO_IMAGEN;
+            $model->tipo = $tipo;
+            $model->local = 1;
             $model->elenco_id = $elenco_id;
             $this->ajaxValidation($model);
             $result = array();
             if (isset($_POST['ElencoMultimedia'])) {
                 $model->attributes = $_POST['ElencoMultimedia'];
                 $result['success'] = $model->save();
-                if ($result['success']) {
+                if ($result['success'] && $tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
                     $result['attr'] = $model->attributes;
-                    if (!file_exists("uploads/elenco/$model->elenco_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN)) {
+                    if (!file_exists("uploads/elenco/$model->elenco_id/" . $tipo)) {
 
-                        mkdir("uploads/elenco/$model->elenco_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN, 0777, true);
+                        mkdir("uploads/elenco/$model->elenco_id/" . $tipo, 0777, true);
                     }
-                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/elenco/$model->elenco_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN) . "/";
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/elenco/$model->elenco_id/" . $tipo) . "/";
                     $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
-                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/elenco/$model->proyecto_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN . '/';
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/elenco/$model->elenco_id/" . $tipo . '/';
                     if (rename($pathorigen . $model->ubicacion, $path . $model->ubicacion)) {
                         $model->ubicacion = $publicPath . $model->ubicacion;
                         $model->save();
@@ -265,8 +267,6 @@ class ElencoMultimediaController extends AweController {
                 }
                 echo CJSON::encode($result);
             } else {
-
-
                 //verifico que sea de tipo logo o imagen
                 if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
                     $archivo = new XUploadForm;
@@ -282,12 +282,13 @@ class ElencoMultimediaController extends AweController {
             }
         }
     }
-    public function actionAjaxLoadForm($elenco_id,$tipo) {
+
+    public function actionAjaxLoadForm($elenco_id, $tipo) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ElencoMultimedia;
             $archivo = new XUploadForm;
             $model->elenco_id = $elenco_id;
-            $model->tipo=$tipo;
+            $model->tipo = $tipo;
 
             $result = array();
             $result['success'] = true;
@@ -297,6 +298,7 @@ class ElencoMultimediaController extends AweController {
             echo CJSON::encode($result);
         }
     }
+
     protected function ajaxValidation($model, $form_id = "elenco-multimedia-form") {
         $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
         $portAtt = ucwords(strtolower($portAtt));

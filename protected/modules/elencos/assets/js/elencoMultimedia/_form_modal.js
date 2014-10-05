@@ -121,7 +121,7 @@ function initconpoment() {
     });
     $('.btn_cerrar_modal').on('click', function() {
         $('#mainModal').modal('hide');
-        $($(this).attr('id-grid')).yiiGridView('update', {url: baseUrl + 'elencos/elenco/create/id/' + proyecto_id});
+        $($(this).attr('id-grid')).yiiGridView('update', {url: baseUrl + 'elencos/elenco/create/id/' + elenco_id});
     });
 
 }
