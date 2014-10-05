@@ -4,8 +4,8 @@
 <div class="col-lg-12">
     <div class="contenedor-imagenes">
 
-    <div class="row isotope" id="isotope-container" style="position: relative; overflow: hidden; ">
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(0px, 0px, 0px);">
+    <div class="row isotope" id="isotope-container" style=" ">
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism" style="">
             <div class="portfolio-item">
                 <div class="titulo-imagen">Nuestros Teatros</div>
                 <div class="portfolio-thumbnail">
@@ -21,7 +21,7 @@
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item impressionism photorealism" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(257px, 0px, 0px);">
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item impressionism photorealism" style="">
             <div class="portfolio-item">
                 <div class="titulo-imagen">Nuestros Elencos</div>
                 <div class="portfolio-thumbnail">
@@ -35,7 +35,7 @@
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item photorealism surrealism" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(514px, 0px, 0px);">
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item photorealism surrealism" style="">
             <div class="portfolio-item">
                 <div class="titulo-imagen">Proyectos</div>
                 <div class="portfolio-thumbnail">
@@ -49,7 +49,7 @@
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism surrealism impressionism" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(514px, 20px, 0px);">
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism surrealism impressionism" style="">
             <div class="portfolio-item">
                 <div class="titulo-imagen">Producciones Propias</div>
                 <div class="portfolio-thumbnail">
