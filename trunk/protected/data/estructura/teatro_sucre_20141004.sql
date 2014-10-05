@@ -262,7 +262,7 @@ CREATE TABLE `escenario_taquilla` (
 --
 
 CREATE TABLE `escenario_taquilla_seccion` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `escenario_taquilla_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),

@@ -1,5 +1,6 @@
 var btn_save;
 var btn_save_taquilla;
+var btn_save_taquilla_seccion;
 var sc_teatro_sucre;
 $(function () {
     //ckeditor 
@@ -32,9 +33,9 @@ $(function () {
     //save seccion
     $("#btn_save_taquilla_seccion").click(function (e) {
         e.preventDefault();
-        btn_save_taquilla = Ladda.create(this);
+        btn_save_taquilla_seccion = Ladda.create(this);
         var form_id = $(this).attr('form-id');
-        btn_save_taquilla.start();
+        btn_save_taquilla_seccion.start();
         saveTaquillaSeccion(form_id);
         return false;
     });
@@ -96,11 +97,13 @@ function saveTaquilla($form) {
 }
 
 function selectTaquilla($id) {
+    var info = $id.split('-');
     $('#escenario-taquilla-seccion-form_em').fadeOut(100, function () {
         $('#escenario-taquilla-seccion-form_panel').fadeIn(100);
-        $('#Escenario_Taquilla_Escenario_escenario_taquilla_id').val($id);
+        $('#Escenario_Taquilla_Seccion_escenario_taquilla_id').val(info[0]);
+        $('#taquilla_nombre').val(info[1]);
         $("#escenario-taquilla-seccion-grid").yiiGridView('update', {
-            data: {EscenarioTaquillaSeccion: {escenario_taquilla_id: $id}}
+            data: {EscenarioTaquillaSeccion: {escenario_taquilla_id: info[0]}}
         });
     });
 }
@@ -113,17 +116,17 @@ function saveTaquillaSeccion($form) {
     ajaxValidarFormulario({
         formId: $form,
         beforeCall: function () {
-            btn_save_taquilla.setProgress(0.6);
+            btn_save_taquilla_seccion.setProgress(0.6);
         },
         errorCall: function () {
-            btn_save_taquilla.setProgress(1);
-            btn_save_taquilla.stop();
+            btn_save_taquilla_seccion.setProgress(1);
+            btn_save_taquilla_seccion.stop();
         },
         successCall: function (data) {
-            btn_save_taquilla.setProgress(1);
-            btn_save_taquilla.stop();
-            $("#Escenario_Taquilla_nombre").val('');
-            $("#escenario-taquilla-grid").yiiGridView('update', {
+            btn_save_taquilla_seccion.setProgress(1);
+            btn_save_taquilla_seccion.stop();
+            $("#Escenario_Taquilla_Seccion_nombre").val('');
+            $("#escenario-taquilla-seccion-grid").yiiGridView('update', {
                 data: {EscenarioTaquilla: {escenario_id: data.attr.escenario_id}}
             });
         }

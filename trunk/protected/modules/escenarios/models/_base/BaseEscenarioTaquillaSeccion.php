@@ -32,8 +32,8 @@ abstract class BaseEscenarioTaquillaSeccion extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('id, nombre, escenario_taquilla_id', 'required'),
-            array('id, escenario_taquilla_id', 'numerical', 'integerOnly'=>true),
+            array('nombre, escenario_taquilla_id', 'required'),
+            array('escenario_taquilla_id', 'numerical', 'integerOnly'=>true),
             array('nombre', 'length', 'max'=>45),
             array('id, nombre, escenario_taquilla_id', 'safe', 'on'=>'search'),
         );

@@ -84,8 +84,8 @@ function reloadControlGroup(formId)
     //remover clases de validacion de los div.control-group
     $('form' + formId + ' div.form-group').removeClass('has-success').removeClass('has-error');
     //remover mensajes de error style
-    $('form' + formId + ' span.help-inline').html('');
-    $('form' + formId + ' span.help-inline').attr('style', 'display: none');
+    $('form' + formId + ' .help-block').html('');
+    $('form' + formId + ' .help-block').attr('style', 'display: none');
 }
 function addClassSuccess(formId) {
     $('form' + formId + ' div.form-group').each(function () {
