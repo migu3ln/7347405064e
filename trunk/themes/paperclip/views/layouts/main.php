@@ -20,11 +20,13 @@
         <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>-->
         <!--<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/fonts/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <!--<link href="<?php // echo Yii::app()->theme->baseUrl;                 ?>/css/font-awesome.min.css" rel="stylesheet">-->
+        <!--<link href="<?php // echo Yii::app()->theme->baseUrl;                  ?>/css/font-awesome.min.css" rel="stylesheet">-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/site.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/isotope_style.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/custom.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/slicebox.css" rel="stylesheet">
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -130,9 +132,13 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
+         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/modernizr.custom.46884.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/scrolltopcontrol.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.slicebox.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
+
+       
 
     </body>
 </html>

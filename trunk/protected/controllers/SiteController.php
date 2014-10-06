@@ -121,5 +121,14 @@ class SiteController extends Controller {
                 , array('elencos' => $elencos)
         );
     }
+    public function actionGaleria() {
+
+//        $elencos = Elenco::model()->findAll();
+
+
+        $this->render('_galeria'
+//                , array('elencos' => $elencos)
+        );
+    }
 
 }
