@@ -4,8 +4,8 @@
 <div class="col-lg-12">
     <div class="contenedor-imagenes">
 
-    <div class="row isotope" id="isotope-container" style=" ">
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism" style="">
+    <div class="row-fluid isotope" id="isotope-container" >
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism" >
             <div class="portfolio-item">
                 <div class="titulo-imagen">Nuestros Teatros</div>
                 <div class="portfolio-thumbnail">
@@ -21,7 +21,7 @@
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item impressionism photorealism" style="">
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item impressionism photorealism" >
             <div class="portfolio-item">
                 <div class="titulo-imagen">Nuestros Elencos</div>
                 <div class="portfolio-thumbnail">
@@ -35,7 +35,7 @@
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item photorealism surrealism" style="">
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item photorealism surrealism" >
             <div class="portfolio-item">
                 <div class="titulo-imagen">Proyectos</div>
                 <div class="portfolio-thumbnail">
@@ -49,7 +49,7 @@
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism surrealism impressionism" style="">
+        <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism surrealism impressionism" >
             <div class="portfolio-item">
                 <div class="titulo-imagen">Producciones Propias</div>
                 <div class="portfolio-thumbnail">

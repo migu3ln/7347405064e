@@ -17,5 +17,7 @@ class Elenco extends BaseElenco {
     public static function label($n = 1) {
         return Yii::t('app', 'Elenco|Elencos', $n);
     }
+    
+    
 
 }
