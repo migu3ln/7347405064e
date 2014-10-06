@@ -6,7 +6,7 @@
 
         <?php foreach ($teatros as $value) : ?>
 
-     <?php   var_dump($value->escenarioMultimedias); ?>
+     <?php //   var_dump($value->escenarioMultimedias); ?>
 
 
         <?php endforeach;?>
