@@ -20,7 +20,7 @@
         <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>-->
         <!--<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/fonts/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <!--<link href="<?php // echo Yii::app()->theme->baseUrl;        ?>/css/font-awesome.min.css" rel="stylesheet">-->
+        <!--<link href="<?php // echo Yii::app()->theme->baseUrl;                 ?>/css/font-awesome.min.css" rel="stylesheet">-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/site.css" rel="stylesheet">
@@ -40,15 +40,10 @@
 
     <body>
         <div class="wrapper">
-
-
             <div class="container-fluid">
                 <br/>
                 <div class="row">
                     <div class="col-xs-6 col-md-3 art-fundacionTeatroNacionalSucre_img"></div>
-                    <!--                <div class="col-xs-6 col-md-3">
-                                        <img src="<?php echo Yii::app()->theme->baseUrl ?>/img/fundacionTeatroNacionalSucre_img.png">
-                                    </div>-->
                 </div>
                 <br/>
                 <div class="row">
@@ -91,23 +86,12 @@
                         </div><!-- /.container-fluid -->
                     </nav>
                 </div>
-                <div class="row-fluid">
-
+                <div class="row">
                     <div class="col-lg-9" >
-                        <!--<div class="row-fluid">-->
-                        <!--<div class="col-lg-9">-->
                         <?php echo $content; ?>
-                        <!--</div>-->
-                        <!--</div>-->
-
-
                     </div> <!-- / .wrapper -->
-
-                    <!--<div class="row-fluid">-->
                     <div class="col-lg-3">
                         <div id="calendario">
-
-
                             <div class="panel panel-default">
                                 <div class="panel-heading">Calendario</div>
                                 <div class="panel-body">
@@ -147,13 +131,9 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/scrolltopcontrol.js"></script>
-
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
-        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.isotope.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
-        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/portfolio.js"></script>
 
     </body>
 </html>

@@ -97,31 +97,37 @@ class SiteController extends Controller {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
+
     public function actionQuienesSomos() {
         $this->render('quienes_somos'
 //                , 
 //                array('model' => $model)
-                );
+        );
     }
+
+    public function actionPrueba() {
+        $this->render('prueba1'
+        );
+    }
+
     public function actionNuestrosTeatros() {
-        
-        $teatros=  Escenario::model()->findAll();
-        
-        
+
+        $teatros = Escenario::model()->findAll();
+
+
         $this->render('teatros'
-                , 
-                array('teatros' => $teatros)
-                );
+                , array('teatros' => $teatros)
+        );
     }
+
     public function actionNuestrosElencos() {
-        
-        $elencos= Elenco::model()->findAll();
-        
-        
+
+        $elencos = Elenco::model()->findAll();
+
+
         $this->render('elencos'
-                , 
-                array('elencos' => $elencos)
-                );
+                , array('elencos' => $elencos)
+        );
     }
 
 }
