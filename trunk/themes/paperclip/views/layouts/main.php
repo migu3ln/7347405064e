@@ -96,7 +96,6 @@
                                 <div class="panel-heading">Calendario</div>
                                 <div class="panel-body">
                                     <?php
-//        var_dump($model->id);
                                     $this->widget('application.extensions.fullcalendar.FullcalendarGraphWidget', array(
                                         'id' => 'calendar',
                                         'options' => array(

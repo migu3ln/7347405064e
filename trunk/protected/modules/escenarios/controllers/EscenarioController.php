@@ -40,9 +40,6 @@ class EscenarioController extends AweController {
         if (isset($_GET['EscenarioTaquillaSeccion'])) {
             $model_taquilla_seccion->attributes = $_GET['EscenarioTaquillaSeccion'];
         }
-        //TODO:eliminar 
-        $model_taquilla->escenario_id = 1;
-
         $result = array();
         $archivo = new XUploadForm;
         $this->ajaxValidation($model);

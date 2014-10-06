@@ -17,7 +17,7 @@ $dp_model_taquilla_seccion = $model_taquilla_seccion->search();
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', 'Agregar Taquilla') ?></h3>
         </div>
         <div class="panel-body">
-            <div class="row-fluid">
+            <div class="row">
                 <form id="escenario-taquilla-form"  role="form" action="<?php echo Yii::app()->createUrl('escenarios/escenarioTaquilla/ajaxCreate') ?>">
                     <div class="form-group">
                         <label class="col-sm-3 control-label required" for="Escenario_Taquilla_nombre">Nombre <span class="required">*</span></label>
@@ -26,11 +26,13 @@ $dp_model_taquilla_seccion = $model_taquilla_seccion->search();
                             <div class="help-block error" id="EscenarioTaquilla_nombre_em_" style="display:none"></div>
                         </div>
                     </div>
-                    <input type="hidden" id="Escenario_Taquilla_escenario_id" value="1" name="EscenarioTaquilla[escenario_id]">
+                    <input type="hidden" id="Escenario_Taquilla_escenario_id" name="EscenarioTaquilla[escenario_id]">
                     <div class="form-group">
-                        <button id="btn_save_taquilla" class="btn btn-success ladda-button" form-id="#escenario-taquilla-form" data-style="expand-right">
-                            <span class="ladda-label">Registrar</span>
-                        </button>
+                        <div class="col-md-6">
+                            <button id="btn_save_taquilla" class="btn btn-success ladda-button" form-id="#escenario-taquilla-form" data-style="expand-right">
+                                <span class="ladda-label">Registrar</span>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
