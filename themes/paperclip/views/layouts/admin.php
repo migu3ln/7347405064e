@@ -24,7 +24,7 @@
 
         <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>-->
         <!--<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>-->
-        <!--<link href="<?php // echo Yii::app()->theme->baseUrl; ?>/css/font-awesome.min.css" rel="stylesheet">-->
+        <!--<link href="<?php // echo Yii::app()->theme->baseUrl;    ?>/css/font-awesome.min.css" rel="stylesheet">-->
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/fonts/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/animate.css" rel="stylesheet">
         <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox.css" rel="stylesheet">
@@ -199,93 +199,95 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <div class="col-sm-3">
-                    <!-- Categories -->
-                    <div class="panel-group" id="help-nav">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-one" class="collapsed">
-                                    Eventos
-                                </a>
-                            </div>
-                            <div id="help-nav-one" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "evento" ? "in" : "" ?>" >
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="#">Nuevo</a></li>
-                                        <li><a href="#">Administración</a></li>
-                                        <li><a href="#">Vistas</a></li>
-                                    </ul>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <!-- Categories -->
+                        <div class="panel-group" id="help-nav">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-one" class="collapsed">
+                                        Eventos
+                                    </a>
+                                </div>
+                                <div id="help-nav-one" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "evento" ? "in" : "" ?>" >
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="#">Nuevo</a></li>
+                                            <li><a href="#">Administración</a></li>
+                                            <li><a href="#">Vistas</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-two" class="collapsed">
-                                    Escenarios
-                                </a>
-                            </div>
-                            <div id="help-nav-two" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "escenario" ? "in" : "" ?>">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="<?php echo Yii::app()->createUrl('escenarios/escenario/create') ?>">Nuevo</a></li>
-                                        <li><a href="<?php echo Yii::app()->createUrl('escenarios/escenario/') ?>">Administración</a></li>
-                                        <li><a href="#">Vistas</a></li>
-                                    </ul>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-two" class="collapsed">
+                                        Escenarios
+                                    </a>
+                                </div>
+                                <div id="help-nav-two" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "escenario" ? "in" : "" ?>">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="<?php echo Yii::app()->createUrl('escenarios/escenario/create') ?>">Nuevo</a></li>
+                                            <li><a href="<?php echo Yii::app()->createUrl('escenarios/escenario/') ?>">Administración</a></li>
+                                            <li><a href="#">Vistas</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-three" class="collapsed">
-                                    Elencos
-                                </a>
-                            </div>
-                            <div id="help-nav-three" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "elenco" ? "in" : "" ?>">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="<?php echo Yii::app()->createUrl('elencos/elenco/create') ?>">Nuevo</a></li>
-                                        <li><a href="<?php echo Yii::app()->createUrl('elencos/elenco/') ?>">Administración</a></li>
-                                        <li><a href="#">Vistas</a></li>
-                                    </ul>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-three" class="collapsed">
+                                        Elencos
+                                    </a>
+                                </div>
+                                <div id="help-nav-three" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "elenco" ? "in" : "" ?>">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="<?php echo Yii::app()->createUrl('elencos/elenco/create') ?>">Nuevo</a></li>
+                                            <li><a href="<?php echo Yii::app()->createUrl('elencos/elenco/') ?>">Administración</a></li>
+                                            <li><a href="#">Vistas</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-four" class="collapsed">
-                                    Proyectos
-                                </a>
-                            </div>
-                            <div id="help-nav-four" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "proyecto" ? "in" : "" ?>">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="<?php echo Yii::app()->createUrl('proyectos/proyecto/create') ?>">Nuevo</a></li>
-                                        <li><a href="<?php echo Yii::app()->createUrl('proyectos/proyecto/create') ?>">Administración</a></li>
-                                        <li><a href="#">Vistas</a></li>
-                                    </ul>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-four" class="collapsed">
+                                        Proyectos
+                                    </a>
+                                </div>
+                                <div id="help-nav-four" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "proyecto" ? "in" : "" ?>">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="<?php echo Yii::app()->createUrl('proyectos/proyecto/create') ?>">Nuevo</a></li>
+                                            <li><a href="<?php echo Yii::app()->createUrl('proyectos/proyecto/create') ?>">Administración</a></li>
+                                            <li><a href="#">Vistas</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-five" class="collapsed">
-                                    Producciones
-                                </a>
-                            </div>
-                            <div id="help-nav-five" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "produccion" ? "in" : "" ?>">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="<?php echo Yii::app()->createUrl('producciones/produccion/create') ?>">Nuevo</a></li>
-                                        <li><a href="<?php echo Yii::app()->createUrl('producciones/produccion/admin') ?>">Administración</a></li>
-                                        <li><a href="#">Vistas</a></li>
-                                    </ul>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#help-nav" href="#help-nav-five" class="collapsed">
+                                        Producciones
+                                    </a>
+                                </div>
+                                <div id="help-nav-five" class="panel-collapse collapse <?php echo YiiBase::app()->getController()->getId() == "produccion" ? "in" : "" ?>">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="<?php echo Yii::app()->createUrl('producciones/produccion/create') ?>">Nuevo</a></li>
+                                            <li><a href="<?php echo Yii::app()->createUrl('producciones/produccion/admin') ?>">Administración</a></li>
+                                            <li><a href="#">Vistas</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-9">
-                    <?php echo $content; ?>
+                    <div class="col-lg-9">
+                        <?php echo $content; ?>
+                    </div>
                 </div>
             </div>
 
@@ -330,7 +332,7 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/ckeditor.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/ckeditor/adapters/jquery.js"></script>
         <!--mediaEmbedder-->
-        
+
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/plugins/mediaEmbedder/jquery.mb.mediaEmbedder.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/menu.js"></script>

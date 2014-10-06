@@ -3,8 +3,8 @@
 
     <div class="row-fluid isotope" id="isotope-container" >
         <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism" >
+            <div class="titulo-imagen">Nuestros Teatros</div>
             <div class="portfolio-item">
-                <div class="titulo-imagen">Nuestros Teatros</div>
                 <div class="portfolio-thumbnail">
 
 <!--<img class="img-responsive" src="< ?php echo  Yii::app()->baseUrl."/images/somosteatros.jpg"?>" alt="...">-->
@@ -19,8 +19,8 @@
             </div> <!-- / .portfolio-item -->
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6 isotope-item impressionism photorealism" >
+            <div class="titulo-imagen">Nuestros Elencos</div>
             <div class="portfolio-item">
-                <div class="titulo-imagen">Nuestros Elencos</div>
                 <div class="portfolio-thumbnail">
                     <!--<img class="img-responsive" src="< ?php echo  Yii::app()->baseUrl."/images/nuestroselencos.jpg"?>" alt="...">-->
                     <img class="img-responsive" src="<?php echo Yii::app()->baseUrl . "/images/elencos.png" ?>" alt="...">
@@ -33,8 +33,8 @@
             </div> <!-- / .portfolio-item -->
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6 isotope-item photorealism surrealism" >
+            <div class="titulo-imagen">Proyectos</div>
             <div class="portfolio-item">
-                <div class="titulo-imagen">Proyectos</div>
                 <div class="portfolio-thumbnail">
                     <!--<img class="img-responsive" src="< ?php echo  Yii::app()->baseUrl."/images/somosproyectos.jpg"?>" alt="...">-->
                     <img class="img-responsive" src="<?php echo Yii::app()->baseUrl . "/images/proyectos.png" ?>" alt="...">
@@ -47,8 +47,8 @@
             </div> <!-- / .portfolio-item -->
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism surrealism impressionism" >
+            <div class="titulo-imagen">Producciones Propias</div>
             <div class="portfolio-item">
-                <div class="titulo-imagen">Producciones Propias</div>
                 <div class="portfolio-thumbnail">
                     <!--<img class="img-responsive" src="< ?php echo  Yii::app()->baseUrl."/images/somosproduccion.jpg"?>" alt="...">-->
                     <img class="img-responsive" src="<?php echo Yii::app()->baseUrl . "/images/producciones.png" ?>" alt="...">

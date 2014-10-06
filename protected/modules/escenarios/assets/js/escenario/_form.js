@@ -2,6 +2,8 @@ var btn_save;
 var btn_save_taquilla;
 var btn_save_taquilla_seccion;
 var sc_teatro_sucre;
+
+var escenario_id = 0;
 $(function () {
     //ckeditor 
     $("#Escenario_descripcion").ckeditor(function () {
@@ -67,6 +69,14 @@ function saveEscenario($form) {
         errorCall: function () {
             btn_save.setProgress(1);
             btn_save.stop();
+        },
+        successCall: function (data) {
+            escenario_id = data.attr.id;
+            $('#panel_escenario').fadeOut(200, function () {
+                $('[for="btn_multimedia"]').fadeIn(200);
+                $('#panel_taquilla_secciones').fadeIn(200);
+                $('#Escenario_Taquilla_escenario_id').val(escenario_id);
+            });
         }
     });
 }

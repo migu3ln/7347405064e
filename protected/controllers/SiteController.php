@@ -99,15 +99,7 @@ class SiteController extends Controller {
     }
 
     public function actionQuienesSomos() {
-        $this->render('quienes_somos'
-//                , 
-//                array('model' => $model)
-        );
-    }
-
-    public function actionPrueba() {
-        $this->render('prueba1'
-        );
+        $this->render('quienes_somos');
     }
 
     public function actionNuestrosTeatros() {

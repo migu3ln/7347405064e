@@ -4,7 +4,7 @@
 /** @var AweActiveForm $form */
 Util::tsRegisterAssetJs('_form.js');
 ?>
-<div class="row-fluid" hidden>
+<div id="panel_escenario">
     <div class="panel panel-theme-secondary">
         <div class="panel-heading">
             <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Escenario::label(1); ?></h3>
@@ -69,9 +69,15 @@ Util::tsRegisterAssetJs('_form.js');
         </div>
     </div>
 </div>
-<div class="row-fluid" hidden>
+<div class="row" for="btn_multimedia" hidden>
+    <div class="col-md-3">
+        <a id="btn_multimedia" class="btn btn-theme-secondary">Agregar multimendia</a>
+    </div>
+</div>
+<br/>
+<div id="panel_taquilla_secciones" class="row" hidden>
     <?php $this->renderPartial('steps/_taquilla_seccion', array('model_taquilla' => $model_taquilla, 'model_taquilla_seccion' => $model_taquilla_seccion)) ?>
 </div>
-<div class="row-fluid">
-    <?php $this->renderPartial('steps/_taquilla_seccion', array('model_taquilla' => $model_taquilla, 'model_taquilla_seccion' => $model_taquilla_seccion)) ?>
+<div id="panel_multimedia">
+    <?php $this->renderPartial('steps/_multimedia', array('model' => $model)) ?>
 </div>
