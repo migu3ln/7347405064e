@@ -1,5 +1,6 @@
 <!--elencoMultimedias-->
-<h3>Nuestros Teatros</h3>
+<h3>Nuestros Elencos</h3>
+<?php // var_dump($elencos); ?>
 
 <div class="col-lg-12">
     <div class="contenedor-imagenes">
