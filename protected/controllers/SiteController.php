@@ -109,8 +109,18 @@ class SiteController extends Controller {
         
         
         $this->render('teatros'
-//                , 
-//                array('model' => $model)
+                , 
+                array('teatros' => $teatros)
+                );
+    }
+    public function actionNuestrosElencos() {
+        
+        $elencos= Elenco::model()->findAll();
+        
+        
+        $this->render('elencos'
+                , 
+                array('elencos' => $elencos)
                 );
     }
 
