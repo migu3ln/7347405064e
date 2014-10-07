@@ -55,14 +55,14 @@ Util::tsRegisterAssetJs('_form_modal.js');
                     ));
                     ?>
 
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <label class="col-sm-3 control-label required" for="ElencoMultimedia_local">Local <span class="required">*</span></label>
                         <div class="col-sm-9">
                             <input class="form-control" type="checkbox"  data-switch-left="NO" data-switch-right="SI" name="ElencoMultimedia[local]" id="ElencoMultimedia_local">
                             <div class="help-block error" id="ElencoMultimedia_local_em_" style="display:none">
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <label class="col-sm-3 control-label required" for="ElencoMultimedia_menu">Menu </label>
                         <div class="col-sm-9">
