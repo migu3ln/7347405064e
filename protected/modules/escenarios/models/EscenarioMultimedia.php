@@ -37,4 +37,11 @@ class EscenarioMultimedia extends BaseEscenarioMultimedia {
         return $this;
     }
 
+    public function logo_de_escenario($escenario_id) {
+//        die(var_dump($elenco_id));
+        $logo = EscenarioMultimedia::model()->findByAttributes(array("tipo" => 'LOGO', 'escenario_id' => $escenario_id));
+
+        return $logo;
+    }
+
 }

@@ -32,6 +32,7 @@
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>
+ 
         <div class="col-sm-6 col-md-6 col-lg-6 isotope-item photorealism surrealism" >
             <div class="titulo-imagen">Proyectos</div>
             <div class="portfolio-item">

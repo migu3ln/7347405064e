@@ -163,6 +163,21 @@ class SiteController extends Controller {
         );
     }
 
+    public function actionTeatro($id) {
+
+        $teatro = Escenario::model()->findByPk($id);
+
+        $header = EscenarioMultimedia::model()->findByAttributes(array("tipo" => 'LOGO', 'escenario_id' => $id));
+        if (!$header) {
+            $header = EscenarioMultimedia::model()->findByAttributes(array("tipo" => 'IMAGEN', 'escenario_id' => $id));
+        }
+
+
+        $this->render('view_teatros'
+                , array('teatro' => $teatro, 'header' => $header)
+        );
+    }
+
     public function actionGaleria() {
 
 //        $elencos = Elenco::model()->findAll();
