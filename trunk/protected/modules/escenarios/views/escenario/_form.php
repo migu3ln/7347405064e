@@ -45,14 +45,7 @@ Util::tsRegisterAssetJs('_form.js');
                     </div>
                 </div>
                 <?php echo $form->textFieldGroup($model, 'ubicacion', array('maxlength' => 100)) ?>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label" for="Escenario_descripcion">Descripcion</label>
-                    <div class="col-sm-9">
-                        <textarea class="form-control" placeholder="Descripcion" name="Escenario[descripcion]" id="Escenario_descripcion"></textarea>
-                        <div class="help-block error" id="Escenario_descripcion_em_" style="display:none"></div>
-                    </div>
-
-                </div>
+                 
                 <?php // echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
             </div>                       
             <div class="form-group">

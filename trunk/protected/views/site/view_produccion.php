@@ -11,6 +11,23 @@
             </div>
         </div>
         <div class="col-lg-6">
+            <h4 class="headline"><span>Información</span></h4>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Escenario</td><td>
+                  </td><td><?php echo $produccion->escenario->nombre ?></td>
+                </tr>
+                <tr>
+                  <td>Ubicación</td><td>
+                  </td><td><?php echo $produccion->escenario->ubicacion ?></td>
+                </tr>
+                <tr>
+                  <td>License</td><td>
+                  </td><td>All Rights Reserved</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
     </div>
     <div class="col-lg-12">
