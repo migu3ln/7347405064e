@@ -78,45 +78,45 @@ function saveVideoMultimedia(form) {
 function initconpoment() {
 
     //bootstrapSwitch
-//    $("input[type='checkbox']#ProyectoMultimedia_local").bootstrapSwitch({
-//        onColor: 'success',
-//        onText: 'Si',
-//        offText: 'No',
-//        onSwitchChange: function (event, state) {
-//            if (state) {
-//                $(this).val(1);
-//            } else {
-//                $(this).val(0);
-//            }
-//        },
-//
-//    });
-//    $("input[type='checkbox']#ProyectoMultimedia_menu").bootstrapSwitch({
-//        onColor: 'success',
-//        onText: 'Si',
-//        offText: 'No',
-//        onSwitchChange: function (event, state) {
-//            if (state) {
-//                $(this).val(1);
-//            } else {
-//                $(this).val(0);
-//            }
-//        },
-//  
-//    });
-//    $("input[type='checkbox']#ProyectoMultimedia_encabezado").bootstrapSwitch({
-//        onColor: 'success',
-//        onText: 'Si',
-//        offText: 'No',
-//        onSwitchChange: function (event, state) {
-//            if (state) {
-//                $(this).val(1);
-//            } else {
-//                $(this).val(0);
-//            }
-//        },
-//     
-//    });
+    $("input[type='checkbox']#ProyectoMultimedia_local").bootstrapSwitch({
+        onColor: 'success',
+        onText: 'Si',
+        offText: 'No',
+        onSwitchChange: function (event, state) {
+            if (state) {
+                $(this).val(1);
+            } else {
+                $(this).val(0);
+            }
+        },
+
+    });
+    $("input[type='checkbox']#ProyectoMultimedia_menu").bootstrapSwitch({
+        onColor: 'success',
+        onText: 'Si',
+        offText: 'No',
+        onSwitchChange: function (event, state) {
+            if (state) {
+                $(this).val(1);
+            } else {
+                $(this).val(0);
+            }
+        },
+  
+    });
+    $("input[type='checkbox']#ProyectoMultimedia_encabezado").bootstrapSwitch({
+        onColor: 'success',
+        onText: 'Si',
+        offText: 'No',
+        onSwitchChange: function (event, state) {
+            if (state) {
+                $(this).val(1);
+            } else {
+                $(this).val(0);
+            }
+        },
+     
+    });
     $("#btn_save_proyecto_multimedia").click(function (e) {
         e.preventDefault();
         btn_save_modal = Ladda.create(this);
