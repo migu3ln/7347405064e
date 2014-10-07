@@ -76,6 +76,7 @@ class XUpload extends CJuiInputWidget {
      */
     public $showForm = true;
     public $add = null;
+    public $modal = false;
 
     /**
      * Publishes the required assets

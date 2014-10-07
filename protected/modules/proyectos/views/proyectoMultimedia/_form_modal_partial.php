@@ -26,6 +26,7 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
         'multiple' => false,
         'previewImages' => $model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN ? true : false,
         'autoUpload' => true,
+        'modal' => true
     ));
     ?>
     <div class="help-block error" id="ProyectoMultimedia_ubicacion_em_" style="display:none">
