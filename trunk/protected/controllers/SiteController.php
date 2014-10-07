@@ -122,6 +122,7 @@ class SiteController extends Controller {
                 , array('elencos' => $elencos)
         );
     }
+
     public function actionProduccionesPropias() {
 
         $producciones = Produccion::model()->findAll();
@@ -131,20 +132,37 @@ class SiteController extends Controller {
                 , array('producciones' => $producciones)
         );
     }
+
     public function actionProduccion($id) {
 
         $produccion = Produccion::model()->findByPk($id);
-        
-        $header= ProduccionMultimedia::model()->findByAttributes(array("tipo"=>'IMAGEN','produccion_id'=>$id,'menu'=>1));
-        if(!$header){
-            $header=ProduccionMultimedia::model()->findByAttributes(array("tipo"=>'IMAGEN','produccion_id'=>$id));
+
+        $header = ProduccionMultimedia::model()->findByAttributes(array("tipo" => 'IMAGEN', 'produccion_id' => $id, 'menu' => 1));
+        if (!$header) {
+            $header = ProduccionMultimedia::model()->findByAttributes(array("tipo" => 'IMAGEN', 'produccion_id' => $id));
         }
 
 
         $this->render('view_produccion'
-                , array('produccion' => $produccion,'header'=>$header)
+                , array('produccion' => $produccion, 'header' => $header)
         );
     }
+
+    public function actionElenco($id) {
+
+        $elenco = Elenco::model()->findByPk($id);
+
+        $header = ElencoMultimedia::model()->findByAttributes(array("tipo" => 'IMAGEN', 'elenco_id' => $id, 'menu' => 1));
+        if (!$header) {
+            $header = ElencoMultimedia::model()->findByAttributes(array("tipo" => 'IMAGEN', 'elenco_id' => $id));
+        }
+
+
+        $this->render('view_elenco'
+                , array('elenco' => $elenco, 'header' => $header)
+        );
+    }
+
     public function actionGaleria() {
 
 //        $elencos = Elenco::model()->findAll();
