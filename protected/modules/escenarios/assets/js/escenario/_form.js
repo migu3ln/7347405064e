@@ -2,9 +2,10 @@ var btn_save;
 var btn_save_taquilla;
 var btn_save_taquilla_seccion;
 var sc_teatro_sucre;
-
-var escenario_id = 0;
 $(function () {
+    $("#logo-proyecto-form").bind('fileuploaddone', function (e, data) {
+        data.result[0].filename ? $('#logo').val(data.result[0].filename) : $('#logo').val(null);
+    });
     //ckeditor 
     $("#Escenario_descripcion").ckeditor(function () {
     }, {
@@ -41,6 +42,13 @@ $(function () {
         saveTaquillaSeccion(form_id);
         return false;
     });
+    //btn agregar multimedia
+    $("#btn_multimedia").click(function () {
+        $('#panel_taquilla_secciones').fadeOut(200, function () {
+            $('#panel_multimedia').fadeIn(200, function () {
+            });
+        });
+    });
     //bootstrapSwitch
     $("#Escenario_teatro_sucre").bootstrapSwitch({
         onColor: 'success',
@@ -56,9 +64,7 @@ $(function () {
     });
 });
 function saveEscenario($form) {
-    if ($('img.imageslink').length > 0) {
-        $('#logo').val($('img.imageslink').attr('filename'));
-    } else {
+    if ($('#logo-proyecto-form .delete').length <= 0) {
         $('#logo').val(null);
     }
     ajaxValidarFormulario({

@@ -44,6 +44,68 @@ class EscenarioMultimediaController extends AweController {
     }
 
     /**
+     * Save new model(ProyectoMultimedia) via ajax(modal) linked for Proyecto
+     * @param type $proyecto_id
+     */
+    public function actionAjaxCreate($escenario_id, $tipo) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new EscenarioMultimedia;
+            $model->tipo = $tipo;
+            $model->local = $tipo == Constants::MULTIMEDIA_TIPO_VIDEO ? 0 : 1;
+            $model->scenario = $tipo == Constants::MULTIMEDIA_TIPO_VIDEO ? 'video' : 'insert';
+            $model->escenario_id = $escenario_id;
+            $this->ajaxValidation($model);
+            $result = array();
+            if (isset($_POST['EscenarioMultimedia'])) {
+                $result['success'] = $model->save();
+                if ($result['success'] && $tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
+                    $result['attr'] = $model->attributes;
+                    if (!file_exists("uploads/escenario/$model->escenario_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN)) {
+
+                        mkdir("uploads/escenario/$model->escenario_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN, 0777, true);
+                    }
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/escenario/$model->escenario_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/escenario/$model->escenario_id/" . Constants::MULTIMEDIA_TIPO_IMAGEN . '/';
+                    if (rename($pathorigen . $model->ubicacion, $path . $model->ubicacion)) {
+                        $model->ubicacion = $publicPath . $model->ubicacion;
+                        $model->save();
+                    }
+                } else {
+                    $result['message'] = 'No se pudo registrar la imagen, porfavor intenet nuevamente';
+                }
+                echo CJSON::encode($result);
+            } else {
+                if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
+                    $archivo = new XUploadForm;
+                    $this->renderPartial('_form_modal', array(
+                        'model' => $model,
+                        'archivo_modal' => $archivo,
+                            ), false, true);
+                } else { // si es de tipo video
+                    $this->renderPartial('_form_modal_video', array(
+                        'model' => $model,
+                            ), false, true);
+                }
+            }
+        }
+    }
+
+    public function actionAjaxLoadForm($escenario_id, $tipo) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = new EscenarioMultimedia;
+            $archivo = new XUploadForm;
+            $model->escenario_id = $escenario_id;
+            $model->tipo = $tipo;
+            $result = array();
+            $result['success'] = true;
+            $result['html'] = $this->renderPartial('_form_modal_partial', array('model' => $model, 'archivo_modal' => $archivo,
+                    ), true, true);
+            echo CJSON::encode($result);
+        }
+    }
+
+    /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
@@ -219,8 +281,28 @@ class EscenarioMultimediaController extends AweController {
     }
 
     /**
+     * funcion para validaciones en jquery.ajaxValidate.js
+     * @param type $model
+     */
+    protected function ajaxValidation($model, $form_id = "escenario-multimedia-form") {
+        $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
+        $portAtt = ucwords(strtolower($portAtt));
+        $portAtt = str_replace(' ', '', $portAtt);
+        if (isset($_POST['ajax']) && $_POST['ajax'] === '#' . $form_id) {
+            $model->attributes = $_POST[$portAtt];
+            $result['success'] = $model->validate();
+            if (!$result['success']) {
+                $result['errors'] = $model->errors;
+                echo json_encode($result);
+                Yii::app()->end();
+            }
+        }
+    }
+
+    /**
      * Performs the AJAX validation.
      * @param CModel the model to be validated
+     * 
      */
     protected function performAjaxValidation($model, $form = null) {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'escenario-multimedia-form') {

@@ -26,8 +26,11 @@ class EscenarioController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id = null) {
         $model = new Escenario;
+        if ($id) {
+            $model->id = $id;
+        }
         //gestion de taquilla
         $model_taquilla = new EscenarioTaquilla('search');
         $model_taquilla->unsetAttributes();
@@ -47,7 +50,7 @@ class EscenarioController extends AweController {
             $result['success'] = $model->save();
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
-                if ($_POST['Escenario']['logo'] != null) {
+                if ($_POST['Escenario']['logo'] != '' && $_POST['Escenario']['logo'] != 'null') {
                     $modelpMultimedia = new EscenarioMultimedia;
                     $modelpMultimedia->local = 1;
                     $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
