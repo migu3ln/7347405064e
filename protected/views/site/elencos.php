@@ -16,11 +16,10 @@
                         <div class="titulo-imagen"><?php echo $value->nombre ?></div>
                         <div class="portfolio-thumbnail">
                             <img class="img-responsive" src="<?php echo $logo->ubicacion ?>" alt="...">
-                            <div class="mask-imagen">
-                                <!--<div class="">-->
-                                <p>
-                                </p>
-                            </div>
+                            <a class="link-image-responsive" href="<?php echo Yii::app()->createUrl('/site/elenco/id/' . $value->id) ?>" ></a>
+
+                            <p>
+                            </p>
                         </div>
                     </div> <!-- / .portfolio-item -->
                 </div>
