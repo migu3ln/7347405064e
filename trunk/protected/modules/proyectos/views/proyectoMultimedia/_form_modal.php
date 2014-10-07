@@ -39,6 +39,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                         'multiple' => false,
                         'previewImages' => $model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN ? true : false,
                         'autoUpload' => true,
+                        'modal' => true,
                     ));
                     ?>
                     <div class="help-block error" id="ProyectoMultimedia_ubicacion_em_" style="display:none">
@@ -114,8 +115,6 @@ Util::tsRegisterAssetJs('_form_modal.js');
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="row">
                 <div class="col-md-12">
