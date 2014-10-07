@@ -24,7 +24,10 @@ Util::tsRegisterAssetJs('_form_modal.js');
                 'enableClientValidation' => false,
             ));
             ?>
-            <?php $model->local = 0;
+            <?php
+            $model->local = 0;
+            $model->menu = 0;
+            $model->encabezado = 0;
             ?>
             <?php
             echo $form->textFieldGroup($model, 'ubicacion', array(
@@ -33,31 +36,19 @@ Util::tsRegisterAssetJs('_form_modal.js');
                 ),
             ));
             ?>
-            <div class="form-group">
-                <label class="col-sm-3 control-label required" for="ProyectoMultimedia_menu">Menu </label>
-                <div class="col-sm-9">
-                    <input class="form-control" type="checkbox"  data-switch-left="NO" data-switch-right="SI" name="ProyectoMultimedia[menu]" id="ProyectoMultimedia_menu">
-                    <div class="help-block error" id="ProyectoMultimedia_menu_em_" style="display:none">
-                    </div>
-                </div>
+            <hr />
+            <div id="video">
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label required" for="ProyectoMultimedia_encabezado">Encabezado </label>
-                <div class="col-sm-9">
-                    <input class="form-control" type="checkbox" data-switch-left="NO" data-switch-right="SI" name="ProyectoMultimedia[encabezado]" id="ProyectoMultimedia_encabezado">
-                    <div class="help-block error" id="ProyectoMultimedia_encabezado_em_" style="display:none">
-                    </div>
-                </div>
-            </div>
-            <!--<input type="hidden" name="ProyectoMultimedia[ubicacion]" id="ProyectoMultimedia_ubicacion" value=""/>-->
-
             <?php echo $form->hiddenField($model, 'local') ?>
-
+            <?php echo $form->hiddenField($model, 'menu') ?>
+            <?php echo $form->hiddenField($model, 'encabezado') ?>
+            <br />
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button id="btn_save_multimedia" class="btn btn-success ladda-button" form-id="#proyecto-multimedia-form" data-style="expand-right">
                         <span class="ladda-label">Registrar</span>
                     </button>
+
                     <?php
                     $this->widget('booster.widgets.TbButton', array(
                         'label' => Yii::t('AweCrud.app', 'Cancel'),

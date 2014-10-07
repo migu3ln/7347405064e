@@ -185,9 +185,3 @@ Util::tsRegisterAssetJs('_form.js');
     </div>
 </div>
 <!-- end contenedor-multimedia -->
-<div id="example">
-    <div class="embed-responsive embed-responsive-4by3">
-        <!-- [youtube=https://www.youtube.com/watch?v=ihQQSB-R18o&list=RDaN8IiYilntE&index=9] -->
-    </div>
-   
-</div>

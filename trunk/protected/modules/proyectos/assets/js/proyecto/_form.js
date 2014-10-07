@@ -1,7 +1,7 @@
 var btn_save;
 $(function () {
     init();
-    $('#example').mb_embedMovies();
+//    $('#example').mb_embedMovies();
 });
 
 function init() {
