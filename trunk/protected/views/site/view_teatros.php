@@ -12,9 +12,9 @@
         </div>
     </div>
     <div class="col-lg-6">
-        <h3 class="headline second-child"><span><?php echo $elenco->nombre; ?></span></h3>
+        <h3 class="headline second-child"><span><?php echo $teatro->nombre; ?></span></h3>
         <p>
-            <?php echo $elenco->descripcion ?>
+            <?php echo $teatro->descripcion ?>
         </p>
     </div>
     <div class="">
@@ -32,7 +32,7 @@
                                             <h3>Creative Lifesaver</h3>
                                         </div>
                                     </li>-->
-                    <?php $multimedia = $elenco->elencoMultimedias ?>
+                    <?php $multimedia = $teatro->escenarioMultimedias ?>
                     <?php foreach ($multimedia as $value) : ?>
                         <?php if ($value->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN): ?>
                             <li>
