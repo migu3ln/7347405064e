@@ -23,8 +23,8 @@
                   </td><td><?php echo $produccion->escenario->ubicacion ?></td>
                 </tr>
                 <tr>
-                  <td>License</td><td>
-                  </td><td>All Rights Reserved</td>
+                  <td>Género</td><td>
+                  </td><td><?php echo $produccion->produccionCategoria->nombre ?></td>
                 </tr>
               </tbody>
             </table>

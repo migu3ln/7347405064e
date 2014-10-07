@@ -5,9 +5,13 @@ $(function () {
 });
 function saveProduccionMultimedia(form) {
 //    console.log($('#container_img_modal').find('img.imageslink'));
-    if ($('#container_img_modal').find('img.imageslink').length > 0) {
-        $('#ProduccionMultimedia_ubicacion').val($('#container_img_modal').find('img.imageslink').attr('filename'));
-    } else {
+//    if ($('#container_img_modal').find('img.imageslink').length > 0) {
+//        $('#ProduccionMultimedia_ubicacion').val($('#container_img_modal').find('img.imageslink').attr('filename'));
+//    } else {
+//        $('#ProduccionMultimedia_ubicacion').val(null);
+//    }
+    
+     if ($('#container_img_modal .delete').length <= 0) {
         $('#ProduccionMultimedia_ubicacion').val(null);
     }
     ajaxValidarFormulario({
@@ -66,7 +70,9 @@ function saveVideoMultimedia(form) {
     });
 }
 function initconpoment () {
-
+ $("#container_img_modal").bind('fileuploaddone', function (e, data) {
+        data.result[0].filename ? $('#ProduccionMultimedia_ubicacion').val(data.result[0].filename) : $('#ProduccionMultimedia_ubicacion').val(null);
+    });  
        //bootstrapSwitch
     $("input[type='checkbox']#ProduccionMultimedia_local").bootstrapSwitch({
         onColor: 'success',
