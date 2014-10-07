@@ -39,7 +39,7 @@ class ElencoMultimedia extends BaseElencoMultimedia {
         return $this;
     }
     public function logo_de_elenco($elenco_id) {
-        
+        die(var_dump($elenco_id));
         $logo=  ElencoMultimedia::model()->findByAttributes(array("tipo"=>'LOGO','elenco_id'=>$elenco_id));
         
         return $logo;
