@@ -99,7 +99,7 @@ Util::tsRegisterAssetJs('_form.js')
 
                 <div class="form-group">
                     <div class="col-lg-7 col-lg-offset-5">
-                       <button id="btn_save_produccion" class="btn btn-success ladda-button" form-id="#produccion-form" data-style="expand-right">
+                        <button id="btn_save_produccion" class="btn btn-success ladda-button" form-id="#produccion-form" data-style="expand-right">
                             <span class="ladda-label">Registrar</span>
                         </button>
                         <?php
@@ -123,15 +123,15 @@ Util::tsRegisterAssetJs('_form.js')
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Imagenes'; ?></h3>
+                    <h3 class="panel-title"><?php echo 'Imagenes'; ?></h3>
                 </div>
                 <div class="panel-body">
-                           <?php
+                    <?php
 //                    var_dump('id  '.$model->id);
                     $modelImagen = new ProduccionMultimedia('search');
                     $modelImagen->unsetAttributes();
                     $modelImagen->produccion_id = $model->id ? $model->id : 0;
-                    $dataProvider =$modelImagen->de_produccion($model->id)->search();
+                    $dataProvider = $modelImagen->de_tipo(Constants::MULTIMEDIA_TIPO_IMAGEN)->de_produccion($model->id)->search();
                     $fData = $dataProvider->getData();
 //                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
@@ -144,17 +144,17 @@ Util::tsRegisterAssetJs('_form.js')
                         'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('producciones/produccionMultimedia/ajaxCreate/produccion_id/'+produccion_id+'/tipo/IMAGEN',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $dataProvider,
-                         'columns'=>array(
-                             array(
-                                 'class'=>'ext.booster.widgets.TbImageColumn',
+                        'columns' => array(
+                            array(
+                                'class' => 'ext.booster.widgets.TbImageColumn',
 //                                 'name'=>'ubicacion',
-                                 'imagePathExpression'=>'$data->ubicacion',
-                                 'imageOptions'=>array(
-                                     'width'=>150,
-                                     'height'=>150
-                                 )
-                                 )
-                             )
+                                'imagePathExpression' => '$data->ubicacion',
+                                'imageOptions' => array(
+                                    'width' => 150,
+                                    'height' => 150
+                                )
+                            )
+                        )
                     ));
                     ?>
                 </div>
@@ -164,13 +164,35 @@ Util::tsRegisterAssetJs('_form.js')
         <div class="col-lg-6">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Videos'; ?></h3>
+                    <h3 class="panel-title"><?php echo 'Videos'; ?></h3>
                 </div>
                 <div class="panel-body">
-                    <a onclick="js:formModalSmsMotivo()" class="empty-portlet btn" id="add-motivo-sms"><span class="glyphicon glyphicon-open"></span> <br>Subir Videos</a>
-                    <div class="row-fluid">
-
-                    </div>
+                    <?php
+//                    var_dump('id  '.$model->id);
+                    $modelVideo = new ProduccionMultimedia('search');
+                    $modelVideo->unsetAttributes();
+                    $modelVideo->produccion_id = $model->id ? $model->id : 0;
+                    $dataProvideVideo = $modelVideo->de_tipo(Constants::MULTIMEDIA_TIPO_VIDEO)->de_produccion($model->id)->search();
+                    $fDataVideo = $dataProvideVideo->getData();
+//                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
+                    $this->widget('ext.booster.widgets.TbGridView', array(
+                        'id' => 'video-grid',
+                        'showTableOnEmpty' => false,
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'producciones/produccionMultimedia/ajaxCreate/produccion_id/'+produccion_id+'/tipo/VIDEO'" . ',function(){});" class="jumbotron">
+                                        <h1><span class="glyphicon glyphicon-open"></span></h1>
+                                        SUBIR VIDEO
+                                        </a>',
+                        'template' => (!empty($fDataVideo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('producciones/produccionMultimedia/ajaxCreate/produccion_id/'+produccion_id+'/tipo/VIDEO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $dataProvideVideo,
+                        'columns' => array(
+                            'ubicacion'
+                        )
+                    ));
+                    unset($modelVideo);
+                    unset($dataProvideVideo);
+                    unset($fDataVideo);
+                    ?>
                 </div>
             </div>
 
@@ -180,14 +202,33 @@ Util::tsRegisterAssetJs('_form.js')
         <div class="col-lg-6">
             <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . 'Archivos'; ?></h3>
+                    <h3 class="panel-title"><?php echo 'Archivos'; ?></h3>
                 </div>
                 <div class="panel-body">
-                    <a onclick="js:formModalSmsMotivo()" class="empty-portlet btn" id="add-motivo-sms"><span class="glyphicon glyphicon-open"></span> <br>Subir Archivos</a>
-
-                    <div class="row-fluid">
-
-                    </div>
+                    <?php
+                    $modelArchivo = new ProduccionMultimedia('search');
+                    $modelArchivo->unsetAttributes();
+                    $modelArchivo->produccion_id = $model->id ? $model->id : 0;
+                    $dataProvideArchivo = $modelArchivo->de_tipo(Constants::MULTIMEDIA_TIPO_ARCHIVO)->de_produccion($model->id)->search();
+                    $fDataArchivo = $dataProvideArchivo->getData();
+                    $this->widget('ext.booster.widgets.TbGridView', array(
+                        'id' => 'file-grid',
+                        'showTableOnEmpty' => false,
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'producciones/produccionMultimedia/ajaxCreate/produccion_id/'+produccion_id+'/tipo/ARCHIVO'" . ',function(){});" class="jumbotron">
+                                        <h1><span class="glyphicon glyphicon-open"></span></h1>
+                                        SUBIR ARCHIVOS
+                                        </a>',
+                        'template' => (!empty($fDataArchivo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('producciones/produccionMultimedia/ajaxCreate/produccion_id/'+produccion_id+'/tipo/ARCHIVO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'type' => 'striped bordered hover advance',
+                        'dataProvider' => $dataProvideArchivo,
+                        'columns' => array(
+                            'ubicacion'
+                        )
+                    ));
+                    unset($modelArchivo);
+                    unset($dataProvideArchivo);
+                    unset($fDataArchivo);
+                    ?>
                 </div>
             </div>
 

@@ -54,7 +54,12 @@ class ProduccionMultimediaController extends AweController {
     public function actionAjaxCreate($produccion_id, $tipo) {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProduccionMultimedia;
+//              var_dump($_POST);
+//            var_dump($tipo);
+            if ($tipo == Constants::MULTIMEDIA_TIPO_VIDEO)
+                $model->setScenario('video');
             $model->tipo = $tipo;
+            $model->local = 1;
             $model->produccion_id = $produccion_id;
             $this->ajaxValidation($model);
             $result = array();
