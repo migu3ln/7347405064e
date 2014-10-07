@@ -42,10 +42,10 @@ Util::tsRegisterAssetJs('_form.js')
 
 
 
-                    <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150, 'wrapperHtmlOptions' => array('class' => 'col-sm-7'))) ?>
+                    <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150, 'wrapperHtmlOptions' => array('class' => 'col-sm-9'))) ?>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="Produccion_escenario_id">Escenario <span class="required">*</span></label>
-                        <div class="col-sm-7 col-sm-9">
+                        <div class="col-sm-9">
                             <?php
                             $htmlOptions = array('class' => "form-control");
                             if ($model->escenario_id) {
@@ -65,7 +65,7 @@ Util::tsRegisterAssetJs('_form.js')
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="Produccion_produccion_categoria_id">Categoria <span class="required">*</span></label>
-                        <div class="col-sm-7 col-sm-9">
+                        <div class=" col-sm-9">
                             <?php
                             $htmlOptions = array('class' => "form-control");
                             if ($model->escenario_id) {
@@ -82,6 +82,15 @@ Util::tsRegisterAssetJs('_form.js')
                         </div>
 
                     </div>
+                    
+                    <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Produccion_descripcion">Descripcion</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" placeholder="Descripcion" name="Produccion[descripcion]" id="Produccion_descripcion"></textarea>
+                        <div class="help-block error" id="Produccion_descripcion_em_" style="display:none"></div>
+                    </div>
+
+                </div>
 
                     <?php
 //                echo $form->select2Group($model, 'escenario_id', array('wrapperHtmlOptions' =>
@@ -90,7 +99,7 @@ Util::tsRegisterAssetJs('_form.js')
                     ?>  
 
 
-                    <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
+                    <?php // echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
 
                     <?php // echo $form->dropDownListGroup($model, 'estado', array('wrapperHtmlOptions' => array('class' => 'col-sm-7',), 'widgetOptions' => array('data' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',), 'htmlOptions' => array(),)))    ?>
 

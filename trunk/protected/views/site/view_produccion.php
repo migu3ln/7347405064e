@@ -10,9 +10,11 @@
                 <img src="<?php echo $header->ubicacion ?>" class="img-responsive" alt="...">
             </div>
         </div>
+        <div class="col-lg-6">
+        </div>
     </div>
-    <div class="col-lg-6">
-        <h3 class="headline second-child"><span><?php echo $produccion->nombre; ?></span></h3>
+    <div class="col-lg-12">
+        <h3 class="headline "><span><?php echo $produccion->nombre; ?></span></h3>
         <p>
             <?php echo $produccion->descripcion ?>
         </p>
@@ -37,11 +39,11 @@
                         <?php if ($value->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN): ?>
                             <li>
                                 <!--<a href="#" target="_blank">-->
-                                    <img src="<?php echo $value->ubicacion ?>" alt="image1"/>
+                                <img src="<?php echo $value->ubicacion ?>" alt="image1"/>
                                 <!--</a>-->
-<!--                                <div class="sb-description">
-                                    <h3></h3>
-                                </div>-->
+                                <!--                                <div class="sb-description">
+                                                                    <h3></h3>
+                                                                </div>-->
                             </li>
 
                         <?php endif; ?>

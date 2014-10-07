@@ -27,6 +27,16 @@ $(function() {
             return $("#popover-content-ProduccionCategoria").html();
         }
     });
+    
+    
+    //ckeditor 
+    $("#Produccion_descripcion").ckeditor(function () {
+    }, {
+        toolbarGroups: [
+            {name: 'mode', groups: ['mode', 'basicstyles', 'colors', 'list', 'indent', 'blocks']},
+            {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'styles']}
+        ]
+    });
 
     $("#Produccion_escenario_id").select2({
         enable: true,

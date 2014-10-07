@@ -1,9 +1,7 @@
 var btn_save_modal;
 $(function () {
     initconpoment();
-    $("#container_img_modal").bind('fileuploaddone', function (e, data) {
-        data.result[0].filename ? $('#EscenarioMultimedia_ubicacion').val(data.result[0].filename) : $('#EscenarioMultimedia_ubicacion').val(null);
-    });
+    
 });
 function saveEscenarioMultimedia(form) {
 //    console.log($('#container_img_modal').find('img.imageslink'));
@@ -66,6 +64,10 @@ function saveVideoMultimedia(form) {
     });
 }
 function initconpoment() {
+    
+    $("#container_img_modal").bind('fileuploaddone', function (e, data) {
+        data.result[0].filename ? $('#EscenarioMultimedia_ubicacion').val(data.result[0].filename) : $('#EscenarioMultimedia_ubicacion').val(null);
+    });     
 
     //bootstrapSwitch
     $("input[type='checkbox']#EscenarioMultimedia_local").bootstrapSwitch({
