@@ -52,11 +52,10 @@
                 <div class="portfolio-thumbnail">
                     <!--<img class="img-responsive" src="< ?php echo  Yii::app()->baseUrl."/images/somosproduccion.jpg"?>" alt="...">-->
                     <img class="img-responsive" src="<?php echo Yii::app()->baseUrl . "/images/producciones.png" ?>" alt="...">
-                    <div class="mask-imagen">
-                        <p>
+                    <!--<div class="mask-imagen">-->
+                        <a class="link-image-responsive" href="<?php echo Yii::app()->createUrl('/site/produccionesPropias') ?>" ></a>
 
-                        </p>
-                    </div>
+                    <!--</div>-->
                 </div>
             </div> <!-- / .portfolio-item -->
         </div>

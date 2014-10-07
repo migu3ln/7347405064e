@@ -80,13 +80,25 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
             <button id="btn_save_produccion_multimedia" class="btn btn-success ladda-button" form-id="#produccion-multimedia-form" data-style="expand-right">
                 <span class="ladda-label">Registrar</span>
             </button>
-            <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'label' => Yii::t('AweCrud.app', 'Cancel'),
-                'htmlOptions' => array(
-                    'class' => "btn_cerrar_modal",
-                )
-            ));
+           <?php
+            if ($model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN) {
+                $this->widget('booster.widgets.TbButton', array(
+                    'label' => Yii::t('AweCrud.app', 'Cancel'),
+                    'htmlOptions' => array(
+                        'class' => "btn_cerrar_modal",
+                        'id-grid' => "#images-grid",
+                    )
+                ));
+            } else {
+
+                $this->widget('booster.widgets.TbButton', array(
+                    'label' => Yii::t('AweCrud.app', 'Cancel'),
+                    'htmlOptions' => array(
+                        'class' => "btn_cerrar_modal",
+                        'id-grid' => "#file-grid",
+                    )
+                ));
+            }
             ?>
             <?php $this->endWidget(); ?>
         </div>

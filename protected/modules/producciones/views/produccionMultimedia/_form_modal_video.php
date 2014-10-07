@@ -17,7 +17,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
             <?php
             $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                 'type' => 'horizontal',
-                'id' => 'proyecto-multimedia-form',
+                'id' => 'produccion-multimedia-form',
                 'action' => Yii::app()->createUrl('/producciones/produccionMultimedia/ajaxCreate/produccion_id/' . $model->produccion_id . '/tipo/' . Constants::MULTIMEDIA_TIPO_VIDEO),
                 'enableAjaxValidation' => true,
                 'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
@@ -55,7 +55,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
 
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button id="btn_save_multimedia" class="btn btn-success ladda-button" form-id="#proyecto-multimedia-form" data-style="expand-right">
+                    <button id="btn_save_multimedia" class="btn btn-success ladda-button" form-id="#produccion-multimedia-form" data-style="expand-right">
                         <span class="ladda-label">Registrar</span>
                     </button>
                     <?php

@@ -121,6 +121,29 @@ class SiteController extends Controller {
                 , array('elencos' => $elencos)
         );
     }
+    public function actionProduccionesPropias() {
+
+        $producciones = Produccion::model()->findAll();
+
+
+        $this->render('producciones'
+                , array('producciones' => $producciones)
+        );
+    }
+    public function actionProduccion($id) {
+
+        $produccion = Produccion::model()->findByPk($id);
+        
+        $header= ProduccionMultimedia::model()->findByAttributes(array("tipo"=>'IMAGEN','produccion_id'=>$id,'menu'=>1));
+        if(!$header){
+            $header=ProduccionMultimedia::model()->findByAttributes(array("tipo"=>'IMAGEN','produccion_id'=>$id));
+        }
+
+
+        $this->render('view_produccion'
+                , array('produccion' => $produccion,'header'=>$header)
+        );
+    }
     public function actionGaleria() {
 
 //        $elencos = Elenco::model()->findAll();

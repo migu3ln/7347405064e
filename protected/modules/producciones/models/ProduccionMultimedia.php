@@ -17,6 +17,17 @@ class ProduccionMultimedia extends BaseProduccionMultimedia
         return Yii::t('app', 'ProduccionMultimedia|ProduccionMultimedias', $n);
     }
     
+     public function rules() {
+        return array_merge(parent::rules(), array(
+            array('ubicacion, local, tipo, produccion_id', 'required', 'on' => 'video'),
+            array('local, menu, encabezado, produccion_id', 'numerical', 'integerOnly' => true, 'on' => 'video'),
+            array('tipo', 'length', 'max' => 45, 'on' => 'video'),
+            array('menu, encabezado', 'default', 'setOnEmpty' => true, 'value' => null, 'on' => 'video'),
+            array('ubicacion', 'ext.Validators.UrlValidator', 'on' => 'video'),
+                )
+        );
+    }
+    
       public function de_produccion($produccion_id) {
         $this->getDbCriteria()->mergeWith(
                 array(
@@ -39,6 +50,13 @@ class ProduccionMultimedia extends BaseProduccionMultimedia
                 )
         );
         return $this;
+    }
+    
+     public function logo_de_produccion($id) {
+        
+        $logo= ProduccionMultimedia::model()->findByAttributes(array("tipo"=>'LOGO','produccion_id'=>$id));
+        
+        return $logo;
     }
 
 }
