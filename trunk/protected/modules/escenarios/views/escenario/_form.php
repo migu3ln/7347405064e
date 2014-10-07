@@ -4,6 +4,9 @@
 /** @var AweActiveForm $form */
 Util::tsRegisterAssetJs('_form.js');
 ?>
+<script type="text/javascript">
+    var escenario_id =<?php print $model->id ? $model->id : 0 ; ?>;
+</script>
 <div id="panel_escenario">
     <div class="panel panel-theme-secondary">
         <div class="panel-heading">
@@ -78,6 +81,6 @@ Util::tsRegisterAssetJs('_form.js');
 <div id="panel_taquilla_secciones" class="row" hidden>
     <?php $this->renderPartial('steps/_taquilla_seccion', array('model_taquilla' => $model_taquilla, 'model_taquilla_seccion' => $model_taquilla_seccion)) ?>
 </div>
-<div id="panel_multimedia">
+<div id="panel_multimedia" hidden>
     <?php $this->renderPartial('steps/_multimedia', array('model' => $model)) ?>
 </div>
