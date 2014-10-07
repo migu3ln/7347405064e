@@ -13,6 +13,13 @@ function init()
         saveElenco(form_id);
         return false;
     });
+    $("#Elenco_descripcion").ckeditor(function() {
+    }, {
+        toolbarGroups: [
+            {name: 'mode', groups: ['mode', 'basicstyles', 'colors', 'list', 'indent', 'blocks']},
+            {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'styles']}
+        ]
+    });
 
     $('#popover2').on('show.bs.popover', function() {
         abrirpopover($(this).attr('entidad'));

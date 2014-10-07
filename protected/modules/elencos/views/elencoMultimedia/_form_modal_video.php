@@ -75,6 +75,18 @@ Util::tsRegisterAssetJs('_form_modal.js');
             <div class="row">
                 <div class="col-md-12">
                     <?php
+                    $this->widget('ext.Yiippod.Yiippod', array(
+                        'video' => "http://www.youtube.com/watch?v=qD2olIdUGd8", //if you don't use playlist
+                        //'video'=>"http://www.youtube.com/watch?v=qD2olIdUGd8", //if you use playlist
+                        'id' => 'yiippodplayer',
+                        'autoplay' => false,
+                        'width' => 200,
+//                        'view' => 6,
+                        'height' => 200,
+                        'bgcolor' => '#000'
+                    ));
+                    ?>
+                    <?php
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'video-modal-grid',
                         'showTableOnEmpty' => false,
