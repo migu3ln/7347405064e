@@ -5,7 +5,7 @@ $(function () {
         var urlyoutube = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
         if (urlyoutube.test($(this).val())) {
             $('#video').empty();
-            html = "<div id = 'centenedorvideo' class = \"embed-responsive embed-responsive-4by3\" >";
+            html = "<div  class = \"embed-responsive embed-responsive-4by3\" >";
             html = html + "[youtube = " + $(this).val() + "]";
             html = html + " </div>";
             $('#video').append(html);
