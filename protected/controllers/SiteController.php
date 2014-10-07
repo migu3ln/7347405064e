@@ -115,7 +115,8 @@ class SiteController extends Controller {
     public function actionNuestrosElencos() {
 
         $elencos = Elenco::model()->findAll();
-
+//        var_dump($elencos);
+//        die();
 
         $this->render('elencos'
                 , array('elencos' => $elencos)
