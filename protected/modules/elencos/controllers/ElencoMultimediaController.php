@@ -240,7 +240,10 @@ class ElencoMultimediaController extends AweController {
     public function actionAjaxCreate($elenco_id, $tipo) {
 
         if (Yii::app()->request->isAjaxRequest) {
+
             $model = new ElencoMultimedia;
+            if ($tipo == Constants::MULTIMEDIA_TIPO_VIDEO)
+                $model->setScenario('video');
             $model->tipo = $tipo;
             $model->local = 1;
             $model->elenco_id = $elenco_id;
