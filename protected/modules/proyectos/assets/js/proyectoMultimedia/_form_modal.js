@@ -1,6 +1,17 @@
 var btn_save_modal;
 $(function () {
     initconpoment();
+    $("#ProyectoMultimedia_ubicacion").on('change', function () {
+        var urlyoutube = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+        if (urlyoutube.test($(this).val())) {
+            $('#video').empty();
+            html = "<div id = 'centenedorvideo' class = \"embed-responsive embed-responsive-4by3\" >";
+            html = html + "[youtube = " + $(this).val() + "]";
+            html = html + " </div>";
+            $('#video').append(html);
+            $('#video').mb_embedMovies();
+        }
+    });
 
 });
 function saveProyectoMultimedia(form) {
@@ -16,12 +27,12 @@ function saveProyectoMultimedia(form) {
         },
         successCall: function (data) {
             if (data.success) {
-                console.log(data);
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
                 $('#images-modal-grid').yiiGridView('update');
                 ajaxUpdateElement(baseUrl + 'proyectos/proyectoMultimedia/ajaxLoadForm/proyecto_id/' + proyecto_id + '/tipo/' + data.attr.tipo, "#contenedor-form-modal", function () {
                     initconpoment();
+                    $('#video').html("");
                 });
             } else {
                 btn_save_modal.setProgress(1);
@@ -67,45 +78,45 @@ function saveVideoMultimedia(form) {
 function initconpoment() {
 
     //bootstrapSwitch
-    $("input[type='checkbox']#ProyectoMultimedia_local").bootstrapSwitch({
-        onColor: 'success',
-        onText: 'Si',
-        offText: 'No',
-        onSwitchChange: function (event, state) {
-            if (state) {
-                $(this).val(1);
-            } else {
-                $(this).val(0);
-            }
-        },
-
-    });
-    $("input[type='checkbox']#ProyectoMultimedia_menu").bootstrapSwitch({
-        onColor: 'success',
-        onText: 'Si',
-        offText: 'No',
-        onSwitchChange: function (event, state) {
-            if (state) {
-                $(this).val(1);
-            } else {
-                $(this).val(0);
-            }
-        },
-  
-    });
-    $("input[type='checkbox']#ProyectoMultimedia_encabezado").bootstrapSwitch({
-        onColor: 'success',
-        onText: 'Si',
-        offText: 'No',
-        onSwitchChange: function (event, state) {
-            if (state) {
-                $(this).val(1);
-            } else {
-                $(this).val(0);
-            }
-        },
-     
-    });
+//    $("input[type='checkbox']#ProyectoMultimedia_local").bootstrapSwitch({
+//        onColor: 'success',
+//        onText: 'Si',
+//        offText: 'No',
+//        onSwitchChange: function (event, state) {
+//            if (state) {
+//                $(this).val(1);
+//            } else {
+//                $(this).val(0);
+//            }
+//        },
+//
+//    });
+//    $("input[type='checkbox']#ProyectoMultimedia_menu").bootstrapSwitch({
+//        onColor: 'success',
+//        onText: 'Si',
+//        offText: 'No',
+//        onSwitchChange: function (event, state) {
+//            if (state) {
+//                $(this).val(1);
+//            } else {
+//                $(this).val(0);
+//            }
+//        },
+//  
+//    });
+//    $("input[type='checkbox']#ProyectoMultimedia_encabezado").bootstrapSwitch({
+//        onColor: 'success',
+//        onText: 'Si',
+//        offText: 'No',
+//        onSwitchChange: function (event, state) {
+//            if (state) {
+//                $(this).val(1);
+//            } else {
+//                $(this).val(0);
+//            }
+//        },
+//     
+//    });
     $("#btn_save_proyecto_multimedia").click(function (e) {
         e.preventDefault();
         btn_save_modal = Ladda.create(this);
