@@ -54,12 +54,11 @@ div.wrapper{
     margin-top: 10px;
 }
 body{
-    background-color: rgb(224, 222, 219)!important;
+    /*background-color: rgb(224, 222, 219)!important;*/
 }
-.container{
+/*.container{
       background-color: white!important;
-   width: 1150px ;
-}
+}*/
 .wrapper {
 min-height: 100%;
 height: auto !important;
@@ -68,3 +67,8 @@ padding-top: 95px;
 margin-bottom: 100px;
 padding-bottom: 0px !important;
 }
+
+
+/*.nav-arrows a {
+z-index: 3;
+}*/

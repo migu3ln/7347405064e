@@ -41,6 +41,8 @@
     </head>
 
     <body>
+        <div class="fondo">
+
         <div class="container">
             <div class="wrapper">
                 <div class="container-fluid">
@@ -128,6 +130,7 @@
 
                 </div>
             </div>   <!-- Wrapper -->
+        </div>
         </div>
 
 
