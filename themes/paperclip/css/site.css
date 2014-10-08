@@ -53,3 +53,18 @@ div.wrapper{
 .imagenMenu{
     margin-top: 10px;
 }
+body{
+    background-color: rgb(224, 222, 219)!important;
+}
+.container{
+      background-color: white!important;
+   width: 1150px ;
+}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+padding-top: 95px;
+margin-bottom: 100px;
+padding-bottom: 0px !important;
+}
