@@ -85,7 +85,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="#">CONTÁCTANOS</a></li>
-                                        <li><form action="<?php echo Yii::app()->baseUrl ?>/cruge/ui/login"><button class="navbar-btn btn btn-theme-primary" >Sign In</button></form></li>
+                                        <li><form action="<?php echo Yii::app()->baseUrl ?>/cruge/ui/login"><button class=" loginSucre navbar-btn btn btn-theme-primary" >Sign In</button></form></li>
                                     </ul>
                                 </div><!-- /.navbar-collapse -->
                             </div><!-- /.container-fluid -->

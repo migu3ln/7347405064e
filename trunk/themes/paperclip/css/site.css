@@ -56,17 +56,31 @@ div.wrapper{
 body{
     /*background-color: rgb(224, 222, 219)!important;*/
 }
-/*.container{
-      background-color: white!important;
-}*/
-.wrapper {
-min-height: 100%;
-height: auto !important;
-height: 100%;
-padding-top: 95px;
-margin-bottom: 100px;
-padding-bottom: 0px !important;
+.container{
+    /*background-color: white!important;*/
+    box-shadow:         2px 14px 19px 0px rgba(50, 50, 50, 0.67);
 }
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    padding-top: 95px;
+    margin-bottom: 100px;
+    padding-bottom: 0px !important;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li {
+        font-size: smaller;
+    }
+
+}
+.loginSucre{
+    font-size: x-small;
+    padding-right: 5px;
+    padding-left: 3px;
+}
+
 
 
 /*.nav-arrows a {
