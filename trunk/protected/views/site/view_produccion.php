@@ -42,7 +42,7 @@
     <div class="col-sm-12">
         <h3 class="headline"><span>GALERIA</span></h3>
         <div class="col-lg-offset-2 col-sm-8 ">
-            <div class="wrapper">
+            <!--<div class="wrapper">-->
 
                 <ul id="sb-slider" class="sb-slider">
                     <!--                <li>
@@ -77,7 +77,7 @@
                     <a href="#">Previous</a>
                 </div>
 
-            </div>
+            <!--</div>-->
         </div>
 
     </div>
