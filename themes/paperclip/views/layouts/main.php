@@ -41,7 +41,6 @@
     </head>
 
     <body>
-        <div class="fondo">
 
         <div class="container">
             <div class="wrapper">
@@ -130,7 +129,6 @@
 
                 </div>
             </div>   <!-- Wrapper -->
-        </div>
         </div>
 
 
