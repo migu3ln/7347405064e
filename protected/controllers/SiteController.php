@@ -187,5 +187,14 @@ class SiteController extends Controller {
 //                , array('elencos' => $elencos)
         );
     }
+    public function actionSlider() {
+
+//        $elencos = Elenco::model()->findAll();
+
+
+        $this->render('demo_slider'
+//                , array('elencos' => $elencos)
+        );
+    }
 
 }
