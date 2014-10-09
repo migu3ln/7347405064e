@@ -35,57 +35,57 @@
     </div>
     <div class="row">
 
-    <div class="col-lg-12">
-        <h3 class="headline "><span><?php echo $produccion->nombre; ?></span></h3>
-        <p>
-            <?php echo $produccion->descripcion ?>
-        </p>
-    </div>
+        <div class="col-lg-12">
+            <h3 class="headline "><span><?php echo $produccion->nombre; ?></span></h3>
+            <p>
+                <?php echo $produccion->descripcion ?>
+            </p>
+        </div>
     </div>
     <div class="row">
 
-    <div class="col-sm-12">
-        <h3 class="headline"><span>GALERIA</span></h3>
-        <div class="col-lg-offset-2 col-sm-8 ">
-            <!--<div class="wrapper">-->
+        <div class="col-sm-12">
+            <h3 class="headline"><span>GALERIA</span></h3>
+            <div class="col-lg-offset-2 col-sm-8 ">
+                <!--<div class="wrapper">-->
 
-            <ul id="sb-slider" class="sb-slider">
-                <!--                <li>
-                                    <a href="http://www.flickr.com/photos/strupler/2969141180" target="_blank"><img src="<?php echo Yii::app()->baseUrl ?>/site/images/1.jpg" alt="image1"/></a>
-                                    <div class="sb-description">
-                                        <h3>Creative Lifesaver</h3>
-                                    </div>
-                                </li>-->
-                <?php $multimedia = $produccion->produccionMultimedias ?>
-                <?php foreach ($multimedia as $value) : ?>
-                    <?php if ($value->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN): ?>
-                        <li>
-                            <!--<a href="#" target="_blank">-->
-                            <img src="<?php echo $value->ubicacion ?>" alt="image1"/>
-                            <!--</a>-->
-                            <!--                                <div class="sb-description">
-                                                                <h3></h3>
-                                                            </div>-->
-                        </li>
+                <ul id="sb-slider" class="sb-slider">
+                    <!--                <li>
+                                        <a href="http://www.flickr.com/photos/strupler/2969141180" target="_blank"><img src="<?php echo Yii::app()->baseUrl ?>/site/images/1.jpg" alt="image1"/></a>
+                                        <div class="sb-description">
+                                            <h3>Creative Lifesaver</h3>
+                                        </div>
+                                    </li>-->
+                    <?php $multimedia = $produccion->produccionMultimedias ?>
+                    <?php foreach ($multimedia as $value) : ?>
+                        <?php if ($value->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN): ?>
+                            <li>
+                                <!--<a href="#" target="_blank">-->
+                                <img src="<?php echo $value->ubicacion ?>" alt="image1"/>
+                                <!--</a>-->
+                                <!--                                <div class="sb-description">
+                                                                    <h3></h3>
+                                                                </div>-->
+                            </li>
 
-                    <?php endif; ?>
+                        <?php endif; ?>
 
 
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
 
-            </ul>
+                </ul>
 
-            <div id="shadow" class="shadow"></div>
+                <div id="shadow" class="shadow"></div>
 
-            <div id="nav-arrows" class="nav-arrows">
-                <a href="#">Next</a>
-                <a href="#">Previous</a>
+                <div id="nav-arrows" class="nav-arrows">
+                    <a href="#">Next</a>
+                    <a href="#">Previous</a>
+                </div>
+
+                <!--</div>-->
             </div>
 
-            <!--</div>-->
         </div>
-
-    </div>
     </div>
 </div>
 
@@ -102,11 +102,13 @@
 
                     $navArrows.show();
                     $shadow.show();
+                    slicebox.play();
 
                 },
                 orientation: 'r',
                 cuboidsRandom: true,
-                disperseFactor: 30
+                disperseFactor: 30,
+                interval:4000,
             }),
             init = function() {
 
@@ -126,6 +128,19 @@
                         $navArrows.children(':last').on('click', function() {
 
                             slicebox.previous();
+                            return false;
+
+                        });
+
+                        $('#sb-slider').mouseover(function() {
+
+                            slicebox.pause();
+                            return false;
+
+                        });
+                        $('#sb-slider').mouseleave(function() {
+
+                            slicebox.play();
                             return false;
 
                         });
