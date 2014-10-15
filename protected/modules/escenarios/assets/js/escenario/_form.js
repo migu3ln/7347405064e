@@ -2,7 +2,18 @@ var btn_save;
 var btn_save_taquilla;
 var btn_save_taquilla_seccion;
 var sc_teatro_sucre;
+var file;
 $(function () {
+    //imagen
+    $("#logo_imagen").change(function () {
+        file = $("#logo_imagen")[0].files[0];
+        if (file) {
+            mostrarImagen(this, "#img_prev");
+            //$("#img_prev").attr('src', $("#logo_imagen").val());
+            $("#img_prev").removeAttr('hidden');
+        }
+    });
+    //other
     $("#logo-proyecto-form").bind('fileuploaddone', function (e, data) {
         data.result[0].filename ? $('#logo').val(data.result[0].filename) : $('#logo').val(null);
     });
@@ -85,6 +96,21 @@ function saveEscenario($form) {
             });
         }
     });
+}
+/**
+ * previsualización de la imagen
+ * @autor Alex Yépez <alex.Yepez@outlook.com>
+ * @param input
+ */
+function mostrarImagen(input, prev_id) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(prev_id).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        console.log(input.files[0]);
+    }
 }
 /**
  * save taquilla

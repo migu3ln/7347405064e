@@ -133,8 +133,19 @@ class EscenarioController extends AweController
     {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
-
+            $model = $this->loadModel($id);
+            $elementos = EscenarioMultimedia::model()->count(array(
+                    'condition' => 't.escenario_id = :escenario_id',
+                    'params' => array(':escenario_id' => $model->id))) +
+                EscenarioTaquilla::model()->count(array(
+                    'condition' => 't.escenario_id = :escenario_id',
+                    'params' => array(':escenario_id' => $model->id)));
+            if ($elementos > 0) {
+                throw new CHttpException(400, 'No se puede eliminar el elemento, ya que hay dependencias asociadas al mismo');
+            } else {
+                $model->estado = Escenario::ESTADO_INACTIVO;
+                $model->save();
+            }
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));

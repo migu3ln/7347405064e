@@ -50,4 +50,25 @@ class Escenario extends BaseEscenario
         return $command->queryAll();
     }
 
+    /**
+     * dataprovider de escenarios
+     * @autor Alex Yépez <alex.Yepez@outlook.com>
+     * @return CActiveDataProvider
+     */
+    public function search()
+    {
+        $criteria = new CDbCriteria;
+        //condicion de estado activo
+        $criteria->addCondition('t.estado = :estado', 'AND');
+        $criteria->params = array_merge($criteria->params, array(':estado' => self::ESTADO_ACTIVO));
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+            //paginación
+            'pagination' => array(
+                'pageSize' => 5
+            )
+        ));
+
+    }
+
 }
