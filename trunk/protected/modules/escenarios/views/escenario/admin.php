@@ -17,49 +17,48 @@
             </h3>
         </div>
         <div class="panel-body">
-            <?php
-            $this->widget('booster.widgets.TbGridView', array(
-                'id' => 'escenario-grid',
-                'type' => 'striped bordered hover advance',
-                'dataProvider' => $model->search(),
-                'columns' => array(
-                    'nombre',
-                    'teatro_sucre',
-                    'ubicacion',
-                    array(
-                        'name' => 'estado',
-                        'filter' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',),
-                    ),
-                    array(
-                        'class' => 'CButtonColumn',
-                        'template' => '{update} {delete}',
-                        'afterDelete' => 'function(link,success,data){
-                    if(success) {
-                         $("#flashMsg").empty();
-                         $("#flashMsg").css("display","");
-                         $("#flashMsg").html(data).animate({opacity: 1.0}, 5500).fadeOut("slow");
-                    }
-                    }',
-                        'buttons' => array(
-                            'update' => array(
-                                'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
-                                'options' => array('title' => 'Actualizar'),
-                                'imageUrl' => false,
-                                //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
-                            ),
-                            'delete' => array(
-                                'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
-                                'options' => array('title' => 'Eliminar'),
-                                'imageUrl' => false,
-                                //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
-                            ),
+            <div class="well">
+                <?php
+                $this->widget('booster.widgets.TbGridView', array(
+                    'id' => 'escenario-grid',
+                    'type' => 'striped hover advance',
+                    'dataProvider' => $model->search(),
+                    'columns' => array(
+                        'nombre',
+                        array(
+                            'name' => 'teatro_sucre',
+                            'value' => '$data->teatro_sucre==1? "<span class=\'label label-success\'> Pertenece </span>": "<span class=\'label label-warning\'> No Pertenece</span>"',
+                            'type' => 'raw'
                         ),
-                        'htmlOptions' => array(
-                            'width' => '80px'
-                        )
+                        array(
+                            'class' => 'CButtonColumn',
+                            'template' => '{update} {delete}',
+                            'afterDelete' => 'function(link,success,data){
+                                            if(success) {
+                                                 $("#flashMsg").empty();
+                                                 $("#flashMsg").css("display","");
+                                                 $("#flashMsg").html(data).animate({opacity: 1.0}, 5500).fadeOut("slow");
+                                            }
+                                }',
+                            'buttons' => array(
+                                'update' => array(
+                                    'label' => '<button class="btn btn-primary"><i class="fa fa-pencil"></i></button>',
+                                    'options' => array('title' => 'Actualizar'),
+                                    'imageUrl' => false,
+                                ),
+                                'delete' => array(
+                                    'label' => '<button class="btn btn-danger"><i class="fa fa-trash"></i></button>',
+                                    'options' => array('title' => 'Eliminar'),
+                                    'imageUrl' => false,
+                                ),
+                            ),
+                            'htmlOptions' => array(
+                                'width' => '120px'
+                            )
+                        ),
                     ),
-                ),
-            )); ?>
+                )); ?>
+            </div>
         </div>
     </div>
 </div>

@@ -14,6 +14,12 @@ Util::tsRegisterAssetJs('_form.js');
         </div>
         <div class="panel-body">
             <div class="row-fluid">
+                <form id="logo-form">
+                    <img id="img_prev" src="" hidden>
+                    Subir Imagen: <input id="logo_imagen" type="file">
+                </form>
+            </div>
+            <div class="row-fluid">
                 <?php
                 $this->widget('ext.xupload.XUpload', array(
                     'model' => $archivo,
@@ -34,12 +40,16 @@ Util::tsRegisterAssetJs('_form.js');
                     'enableClientValidation' => false,
                 ));
                 ?>
-                <input type="hidden" name="Escenario[logo]" id="logo" value=null />
+                <input type="hidden" name="Escenario[logo]" id="logo" value=null/>
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label required" for="Escenario_teatro_sucre">¿Pertenece al Teatro Sucre ? </label>
+                    <label class="col-sm-3 control-label required" for="Escenario_teatro_sucre">¿Pertenece al Teatro
+                        Sucre ? </label>
+
                     <div class="col-sm-9">
-                        <input class="form-control" type="checkbox"  data-switch-left="NO" data-switch-right="SI" name="Escenario[teatro_sucre]" id="Escenario_teatro_sucre">
+                        <input class="form-control" type="checkbox" data-switch-left="NO" data-switch-right="SI"
+                               name="Escenario[teatro_sucre]" id="Escenario_teatro_sucre">
+
                         <div class="help-block error" id="Escenario_teatro_sucre_em_" style="display:none">
                         </div>
                     </div>
@@ -47,17 +57,21 @@ Util::tsRegisterAssetJs('_form.js');
                 <?php echo $form->textFieldGroup($model, 'ubicacion', array('maxlength' => 100)) ?>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="Escenario_descripcion">Descripcion</label>
+
                     <div class="col-sm-9">
-                        <textarea class="form-control" placeholder="Descripcion" name="Escenario[descripcion]" id="Escenario_descripcion"></textarea>
+                        <textarea class="form-control" placeholder="Descripcion" name="Escenario[descripcion]"
+                                  id="Escenario_descripcion"></textarea>
+
                         <div class="help-block error" id="Escenario_descripcion_em_" style="display:none"></div>
                     </div>
 
                 </div>
                 <?php // echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
-            </div>                       
+            </div>
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button id="btn_save_escenario" class="btn btn-success ladda-button" form-id="#escenario-form" data-style="expand-right">
+                    <button id="btn_save_escenario" class="btn btn-success ladda-button" form-id="#escenario-form"
+                            data-style="expand-right">
                         <span class="ladda-label">Registrar</span>
                     </button>
                     <?php
