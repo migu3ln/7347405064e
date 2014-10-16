@@ -138,8 +138,10 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/modernizr.custom.46884.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/scrolltopcontrol.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/index.js"></script>
+         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox-2.6.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.slicebox.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/custom.js"></script>
+       
 
 
 
