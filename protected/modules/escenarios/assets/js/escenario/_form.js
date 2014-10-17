@@ -2,24 +2,46 @@ var btn_save;
 var btn_save_taquilla;
 var btn_save_taquilla_seccion;
 var sc_teatro_sucre;
-var file;
+var dataFile = {success: false};
 $(function () {
     /****imagen****/
         //btn_actions
     $('#btn_upload_action,#btn_upload_change').click(function () {
-        $('#logo_imagen').click();
+        if (dataFile.success) {
+            $('#logo_imagen').click();
+        }
+        else {
+            $('#logo_imagen').click();
+        }
+
         return false;
     });
     //ation load
     $("#logo_imagen").change(function () {
-        file = $("#logo_imagen")[0].files[0];
+        var file = $("#logo_imagen")[0].files[0];
+
         if (file) {
-            mostrarImagen(this, "#img_prev");
-            if ($("#content_prev").attr('hidden')) {
-                $("#content_prev").toggle(200, function () {
-                    $("#content_action").toggle(200);
-                    $("#content_prev").removeAttr('hidden');
+            var fileName = file.name;
+            var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+            if (file && isImage(fileExtension)) {
+                mostrarImagen(this, "#img_prev");
+                upload({
+                    successCall: function (data) {
+                        if (dataFile.success) {
+                            deleted({delete_url: dataFile.data.delete_url});
+                        }
+                        if ($("#content_prev").attr('hidden')) {
+                            $("#content_prev").toggle(200, function () {
+                                $("#content_action").toggle(200);
+                                $("#content_prev").removeAttr('hidden');
+                            });
+                        }
+                    }
                 });
+            }
+            else {
+                $("#logo_imagen").val(null);
+                bootbox.alert('El archivo seleccionado no es una imagen')
             }
         }
     });
@@ -114,36 +136,69 @@ function mostrarImagen(input, prev_id) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(prev_id).attr('src', e.target.result);
-            upload();
         }
         reader.readAsDataURL(input.files[0]);
-        console.log(input.files[0]);
     }
 }
-function upload() {
-    //información del formulario
-    var inputFileImage = document.getElementById('logo_imagen');
-    var file = inputFileImage.files[0];
-    var formData = new FormData();
-    formData.append('file', file);
-    //hacemos la petición ajax
+function isImage(extension) {
+    switch (extension.toLowerCase()) {
+        case 'jpg':
+        case 'gif':
+        case 'png':
+        case 'jpeg':
+            return true;
+            break;
+        default:
+            return false;
+            break;
+    }
+}
+function deleted(options) {
     $.ajax({
-        url: baseUrl + 'escenarios/escenario/ajaxUploadTemp',
-        type: 'POST',
-        // Form data
-        //datos del formulario
-        data: formData,
-        //necesario para subir archivos via ajax
-        cache: false,
-        contentType: false,
-        processData: false,
-        //una vez finalizado correctamente
+        url: options.delete_url,
         success: function (data) {
-        },
-        //si ha ocurrido un error
-        error: function () {
+            if (data.success) {
+                if (options.successCall)
+                    options.successCall(data);
+            }
+            else {
+                if (options.successCall)
+                    options.errorCall(data);
+            }
         }
     });
+}
+function upload(options) {
+    //información del formulario
+    var inputFileImage = document.getElementById('logo_imagen');
+    if (inputFileImage.files[0]) {
+        var file = inputFileImage.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        //hacemos la petición ajax
+        $.ajax({
+            url: baseUrl + 'escenarios/escenario/ajaxUploadTemp',
+            type: 'POST',
+            // Form data
+            //datos del formulario
+            data: formData,
+            //necesario para subir archivos via ajax
+            cache: false,
+            contentType: false,
+            processData: false,
+            //una vez finalizado correctamente
+            success: function (data) {
+                var json = JSON.parse(data);
+                if (options.successCall)
+                    options.successCall(json);
+
+                dataFile = json;
+            },
+            //si ha ocurrido un error
+            error: function () {
+            }
+        });
+    }
 }
 /************* end Upload archivo****************/
 /**
