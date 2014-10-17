@@ -226,24 +226,60 @@ class EscenarioController extends AweController
         if (Yii::app()->request->isAjaxRequest) {
             //nombre de la carpeta
             $carpeta = 'tmp';
+            $path = realpath(Yii::app()->getBasePath() . "/../uploads/" . $carpeta . "/") . "\\";
+            $publicPath = Yii::app()->getBaseUrl() . "/uploads/" . $carpeta . "/";
+
+            if (isset($_GET['_method'])) {
+                var_dump($_GET);
+                if ($_GET['_method'] == 'delete') {
+                    $file = $path . $_GET["file"];
+                    if (is_file($file)) {
+                        // borrar el archivo del path correspondiente
+                        unlink($file);
+                        echo CJSON::encode(array("success" => true));
+                    } else {
+                        echo CJSON::encode(array("success" => false));
+                    }
+                }
+                Yii::app()->end();
+            }
+
+
             //obtenemos el archivo a subir
-
-            $file = $_FILES['file']['name'];
-
+            $file = $_FILES['file'];
             //comprobamos si existe un directorio para subir el archivo
             //si no es así, lo creamos
-            if (!is_dir("files/"))
-                mkdir("files/", 0777);
-
+            if (!file_exists('uploads/')) {
+                if (mkdir('uploads/', 0777, true)) {
+                    chmod("uploads/", 0777);
+                    chdir(getcwd() . '/uploads/');
+                    if (!file_exists($carpeta . '/')) {
+                        mkdir($carpeta . '/', 0777, true);
+                        chmod("$carpeta/", 0777);
+                    }
+                }
+            }
+            // creacion de los path para el guardado de los multiples archivos con el $id y $carpeta correspondiente
+            $filename = time('U') . rand(0, time('U')) . '.' . Util::getExtensionName($file['name']);
             //comprobamos si el archivo ha subido
-            if ($file && move_uploaded_file($_FILES['file']['tmp_name'], "files/" . $file)) {
-                var_dump($file);die();
-                sleep(3);//retrasamos la petición 3 segundos
-                echo $file;//devolvemos el nombre del archivo para pintar la imagen
+            if ($file && move_uploaded_file($_FILES['file']['tmp_name'], $path . $filename)) {
+                echo CJSON::encode(array(
+                    "success" => true,
+                    "data" => array(
+                        'name' => $filename,
+                        'size' => $file['size'],
+                        'url' => $path . $filename,
+                        'src' => $publicPath . $filename,
+                        'delete_url' => $this->createUrl('ajaxUploadTemp', array(
+                            '_method' => "delete",
+                            'file' => $filename,
+                            "carpeta" => $carpeta
+                        ))
+                    )));
             }
 
         } else {
-            throw new Exception("Error Processing Request", 1);
+            echo CJSON::encode(array("success" => false));
         }
     }
 

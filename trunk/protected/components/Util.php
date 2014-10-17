@@ -7,6 +7,18 @@
  */
 class Util
 {
+    /**
+     * retorna la extencion de un archivo
+     * @author Alex Yepez <ayepez@tradesystem.com.ec>
+     * @return string
+     */
+    public static function  getExtensionName($name)
+    {
+        if (($pos = strrpos($name, '.')) !== false)
+            return (string)substr($name, $pos + 1);
+        else
+            return '';
+    }
 
     /**
      * Register a specific css file in the asset's css folder
