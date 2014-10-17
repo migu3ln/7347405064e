@@ -224,10 +224,11 @@ class EscenarioController extends AweController
     public function actionAjaxUploadTemp()
     {
         if (Yii::app()->request->isAjaxRequest) {
-            var_dump($_FILES);
-            die();
+            //nombre de la carpeta
+            $carpeta = 'tmp';
             //obtenemos el archivo a subir
-            $file = $_FILES['logo']['logo_imagen'];
+
+            $file = $_FILES['file']['name'];
 
             //comprobamos si existe un directorio para subir el archivo
             //si no es así, lo creamos
@@ -235,7 +236,8 @@ class EscenarioController extends AweController
                 mkdir("files/", 0777);
 
             //comprobamos si el archivo ha subido
-            if ($file && move_uploaded_file($_FILES['archivo']['tmp_name'], "files/" . $file)) {
+            if ($file && move_uploaded_file($_FILES['file']['tmp_name'], "files/" . $file)) {
+                var_dump($file);die();
                 sleep(3);//retrasamos la petición 3 segundos
                 echo $file;//devolvemos el nombre del archivo para pintar la imagen
             }
