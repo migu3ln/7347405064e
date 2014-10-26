@@ -75,7 +75,6 @@ abstract class BaseElencoMultimedia extends AweActiveRecord {
         $criteria->compare('menu', $this->menu);
         $criteria->compare('encabezado', $this->encabezado);
         $criteria->compare('elenco_id', $this->elenco_id);
-
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));

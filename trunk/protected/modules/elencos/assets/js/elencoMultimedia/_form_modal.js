@@ -1,14 +1,11 @@
 var btn_save_modal;
+var dataFile = {success: false};
 $(function() {
-    initconpoment();
+    initcomponents();
 
 });
 function saveElencoMultimedia(form) {
-    if ($('#container_img_modal').find('.file').length > 0) {
-        $('#ElencoMultimedia_ubicacion').val($('#container_img_modal').find('.file').attr('filename'));
-    } else {
-        $('#ElencoMultimedia_ubicacion').val(null);
-    }
+
     ajaxValidarFormulario({
         formId: form,
         beforeCall: function() {
@@ -16,13 +13,19 @@ function saveElencoMultimedia(form) {
         },
         successCall: function(data) {
             if (data.success) {
-                console.log(data);
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
-                $('#images-modal-grid').yiiGridView('update');
-                ajaxUpdateElement(baseUrl + 'elencos/elencoMultimedia/ajaxLoadForm/elenco_id/' + elenco_id + '/tipo/' + data.attr.tipo, "#contenedor-form-modal", function() {
-                    initconpoment();
-                });
+//                $('#images-modal-grid').yiiGridView('update');
+//                ajaxUpdateElement(baseUrl + 'elencos/elencoMultimedia/ajaxLoadForm/elenco_id/' + elenco_id + '/tipo/' + data.attr.tipo, "#contenedor-form-modal", function() {
+//                    initconpoment();
+//                });
+//                var url = baseUrl + "oportunidades/oportunidadProducto/ajaxCargarForm/oportunidad_id/" + oportunidad_id;
+
+                url = 'elencos/elencoMultimedia/ajaxCreate/elenco_id/' + elenco_id + '/tipo/IMAGEN';
+
+                $.fn.yiiGridView.update('images-modal-grid', {url: baseUrl + url});
+//                formUnset();
+//                initcomponents();
             } else {
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
@@ -64,9 +67,10 @@ function saveVideoMultimedia(form) {
         }
     });
 }
-function initconpoment() {
+function initcomponents() {
 
     //bootstrapSwitch
+    console.log("");
     $("input[type='checkbox']#ElencoMultimedia_local").bootstrapSwitch({
         onColor: 'success',
         onText: 'Si',
@@ -123,5 +127,149 @@ function initconpoment() {
         $('#mainModal').modal('hide');
         $($(this).attr('id-grid')).yiiGridView('update', {url: baseUrl + 'elencos/elenco/create/id/' + elenco_id});
     });
+    /****imagen****/
+    //btn_actions
+    $('#btn_upload_action,#btn_upload_change').click(function() {
+        if (dataFile.success) {
+            $('#logo_imagen_tipo').click();
+        }
+        else {
+            $('#logo_imagen_tipo').click();
+        }
 
+        return false;
+    });
+    //ation load
+    $("#logo_imagen_tipo").change(function() {
+        var file = $("#logo_imagen_tipo")[0].files[0];
+        console.log(file);
+        if (file) {
+            var fileName = file.name;
+            var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+            if (file && isImage(fileExtension)) {
+                mostrarImagen(this, "#img_prev_tipo");
+                upload({
+                    successCall: function(data) {
+                        if (dataFile.success) {
+                            deleted({delete_url: dataFile.data.delete_url});
+//                            $("#url_archivo").val('');
+                        }
+                        $("#ElencoMultimedia_ubicacion").val(data.data.name);
+                        console.log(data.data.name);
+                        console.log("valor");
+//                        $("#url_archivo").val();
+                        if ($("#content_prev_tipo").attr('hidden')) {
+                            $("#content_prev_tipo").toggle(200, function() {
+                                $("#content_action_tipo").toggle(200);
+                                $("#content_prev_tipo").removeAttr('hidden');
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                $("#ElencoMultimedia_ubicacion").val(null);
+                bootbox.alert('El archivo seleccionado no es una imagen');
+            }
+        }
+    });
+}
+/************* Upload archivo ****************/
+/**
+ * previsualización de la imagen
+ * @autor Alex Yépez <alex.Yepez@outlook.com>
+ * @param input
+ */
+function mostrarImagen(input, prev_id) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $(prev_id).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+function isImage(extension) {
+    switch (extension.toLowerCase()) {
+        case 'jpg':
+        case 'gif':
+        case 'png':
+        case 'jpeg':
+            return true;
+            break;
+        default:
+            return false;
+            break;
+    }
+}
+function isDocument(extension) {
+    switch (extension.toLowerCase()) {
+        case 'pdf':
+        case 'docx':
+            return true;
+            break;
+        default:
+            return false;
+            break;
+    }
+}
+function deleted(options) {
+    $.ajax({
+        url: options.delete_url,
+        success: function(data) {
+            if (data.success) {
+                if (options.successCall)
+                    options.successCall(data);
+            }
+            else {
+                if (options.successCall)
+                    options.errorCall(data);
+            }
+        }
+    });
+}
+function upload(options) {
+    //información del formulario
+    var inputFileImage = document.getElementById('logo_imagen_tipo');
+    if (inputFileImage.files[0]) {
+        var file = inputFileImage.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        //hacemos la petición ajax
+        $.ajax({
+            url: baseUrl + 'elencos/elencoMultimedia/ajaxUploadTemp',
+            type: 'POST',
+            // Form data
+            //datos del formulario
+            data: formData,
+            //necesario para subir archivos via ajax
+            cache: false,
+            contentType: false,
+            processData: false,
+            //una vez finalizado correctamente
+            success: function(data) {
+                var json = JSON.parse(data);
+                if (options.successCall)
+                    options.successCall(json);
+
+                dataFile = json;
+            },
+            //si ha ocurrido un error
+            error: function() {
+            }
+        });
+    }
+}
+/************* end Upload archivo****************/
+/************* end Upload archivo****************/
+function formUnset() {
+    dataFile = {success: false};
+    $("#ElencoMultimedia_ubicacion").val('');
+//    if ($("#prev_row_tipo").hasClass('view-on')) {
+//        $("#ElencoMultimedia_ubicacion").val('');
+//        $("#prev_row_tipo").toggle(100, function() {
+////            $("#select_row_tipo").toggle(50);
+//            $("#prev_row_tipo").removeClass('view-on');
+//        });
+//    }
 }
