@@ -1,14 +1,12 @@
 <?php
 
-class EscenarioController extends AweController
-{
+class EscenarioController extends AweController {
 
     public $layout = '//layouts/column1';
     public $admin = false;
     public $defaultAction = 'admin';
 
-    public function filters()
-    {
+    public function filters() {
         return array(
             array('CrugeAccessControlFilter'),
         );
@@ -18,8 +16,7 @@ class EscenarioController extends AweController
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -30,8 +27,7 @@ class EscenarioController extends AweController
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id = null)
-    {
+    public function actionCreate($id = null) {
         $model = new Escenario;
         if ($id) {
             $model->id = $id;
@@ -55,6 +51,9 @@ class EscenarioController extends AweController
             $result['success'] = $model->save();
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
+//                var_dump($model->attributes);
+//                var_dump($_POST['Escenario']['logo']);
+//                die("entro");
                 if ($_POST['Escenario']['logo'] != '' && $_POST['Escenario']['logo'] != 'null') {
                     $modelpMultimedia = new EscenarioMultimedia;
                     $modelpMultimedia->local = 1;
@@ -72,6 +71,7 @@ class EscenarioController extends AweController
                         $modelpMultimedia->ubicacion = $publicPath . $src;
                         $modelpMultimedia->save();
                     }
+                    var_dump("entro");
                 }
             }
             echo CJSON::encode($result);
@@ -88,8 +88,7 @@ class EscenarioController extends AweController
      * Crear proyecto mediante un popover
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionAjaxCreate()
-    {
+    public function actionAjaxCreate() {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new Escenario;
             $model->estado = Escenario::ESTADO_ACTIVO;
@@ -108,8 +107,7 @@ class EscenarioController extends AweController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->loadModel($id);
         $this->performAjaxValidation($model, 'escenario-form');
         if (isset($_POST['Escenario'])) {
@@ -129,17 +127,16 @@ class EscenarioController extends AweController
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $model = $this->loadModel($id);
             $elementos = EscenarioMultimedia::model()->count(array(
-                    'condition' => 't.escenario_id = :escenario_id',
-                    'params' => array(':escenario_id' => $model->id))) +
-                EscenarioTaquilla::model()->count(array(
-                    'condition' => 't.escenario_id = :escenario_id',
-                    'params' => array(':escenario_id' => $model->id)));
+                        'condition' => 't.escenario_id = :escenario_id',
+                        'params' => array(':escenario_id' => $model->id))) +
+                    EscenarioTaquilla::model()->count(array(
+                        'condition' => 't.escenario_id = :escenario_id',
+                        'params' => array(':escenario_id' => $model->id)));
             if ($elementos > 0) {
                 throw new CHttpException(400, 'No se puede eliminar el elemento, ya que hay dependencias asociadas al mismo');
             } else {
@@ -156,8 +153,7 @@ class EscenarioController extends AweController
     /**
      * Manages all models.
      */
-    public function actionAdmin()
-    {
+    public function actionAdmin() {
         $model = new Escenario('search');
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['Escenario']))
@@ -173,8 +169,7 @@ class EscenarioController extends AweController
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer the ID of the model to be loaded
      */
-    public function loadModel($id, $modelClass = __CLASS__)
-    {
+    public function loadModel($id, $modelClass = __CLASS__) {
         $model = Escenario::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -185,8 +180,7 @@ class EscenarioController extends AweController
      * Performs the AJAX validation.
      * @param CModel the model to be validated
      */
-    protected function performAjaxValidation($model, $form = null)
-    {
+    protected function performAjaxValidation($model, $form = null) {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'escenario-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
@@ -198,8 +192,7 @@ class EscenarioController extends AweController
      * @param type $model
      * @param type $form_id
      */
-    protected function ajaxValidation($model, $form_id = "escenario-form")
-    {
+    protected function ajaxValidation($model, $form_id = "escenario-form") {
         $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
         $portAtt = ucwords(strtolower($portAtt));
         $portAtt = str_replace(' ', '', $portAtt);
@@ -214,15 +207,13 @@ class EscenarioController extends AweController
         }
     }
 
-    public function actionAjaxlistEscenarios($search_value)
-    {
+    public function actionAjaxlistEscenarios($search_value) {
         if (Yii::app()->request->isAjaxRequest) {
             echo CJSON::encode(Escenario::model()->getListSelect2($search_value));
         }
     }
 
-    public function actionAjaxUploadTemp()
-    {
+    public function actionAjaxUploadTemp() {
         if (Yii::app()->request->isAjaxRequest) {
             //nombre de la carpeta
             $carpeta = 'tmp';
@@ -275,9 +266,8 @@ class EscenarioController extends AweController
                             'file' => $filename,
                             "carpeta" => $carpeta
                         ))
-                    )));
+                )));
             }
-
         } else {
             echo CJSON::encode(array("success" => false));
         }
