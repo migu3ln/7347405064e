@@ -3,10 +3,10 @@
 /** @var Elenco $model */
 /** @var AweActiveForm $form */
 Util::tsRegisterAssetJs('_form.js');
-"ISLSD";
 ?>
 <script type="text/javascript">
     var elenco_id =<?php print $model->id ? $model->id : 0  ?>;
+
 </script>
 <!-- start contenedor-form -->
 
@@ -18,18 +18,45 @@ Util::tsRegisterAssetJs('_form.js');
                 <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Elenco::label(1); ?></h3>
             </div>
             <div class="panel-body">
-                <?php
-//            die(var_dump("d",$archivo));
-                $this->widget('ext.xupload.XUpload', array(
-                    'model' => $archivo,
-                    'url' => CController::createUrl('/elencos/elencoMultimedia/uploadTmp'),
-                    'htmlOptions' => array('id' => 'logo-elenco-form', 'class' => 'form-horizontal'),
-                    'attribute' => 'file',
-                    'multiple' => false,
-                    'previewImages' => true,
-                    'autoUpload' => true,
-                ));
-                ?>  
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="content_prev" class="row" hidden>
+                            <div class="col-md-offset-3 col-md-3 col-xs-4">
+                                <div class="thumbnail">
+                                    <img id="img_prev" data-src="holder.js/100%x200" alt="100%x300" src="#">
+
+                                    <div class="caption">
+                                        <h4><strong>Logo</strong></h4>
+
+                                        <p>
+                                            <a id="btn_upload_change" href="#" class="btn btn-info" role="button">
+                                                <i class="fa fa-arrows-h"></i>
+                                                Cambiar</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content_action" class="row">
+                            <div class="col-lg-12">
+                                <form id="logo-form" class="form-horizontal" role="form">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-3 control-label" for="formGroupInputSmall">Logo</label>
+
+                                        <div class="col-sm-9">
+                                            <button id="btn_upload_action" class="btn btn-default btn-xs"><i
+                                                    class="fa fa-plus"></i> Seleccione
+                                            </button>
+                                            <input name="logo_imagen" id="logo_imagen" type="file" style="display: none">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <?php
                 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                     'type' => 'horizontal',
@@ -39,8 +66,9 @@ Util::tsRegisterAssetJs('_form.js');
                     'enableClientValidation' => true,
                 ));
                 ?>
-                <input type="hidden" name="Elenco[logo]" id="logo" value=null />
                 <div class="form-group">
+
+                    <input type="hidden" name="Elenco[url_archivo]" id="url_archivo" value />
 
                     <label class="col-sm-3 control-label" for="Elenco_escenario_id">Elenco Representante <span class="required">*</span></label>
 
@@ -110,11 +138,11 @@ Util::tsRegisterAssetJs('_form.js');
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
-                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/IMAGEN'" . ',function(){});" class="jumbotron">
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:getModal(1);" class="jumbotron">
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR IMAGEN
                                         </a>',
-                        'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/IMAGEN',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'template' => (!empty($fData)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:getModal(1);\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $dataProvider,
                         'columns' => array(
@@ -154,11 +182,11 @@ Util::tsRegisterAssetJs('_form.js');
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'video-grid',
                         'showTableOnEmpty' => false,
-                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/VIDEO'" . ',function(){});" class="jumbotron">
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:getModal(2);" class="jumbotron">
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR VIDEO
                                         </a>',
-                        'template' => (!empty($fDataVideo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/VIDEO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'template' => (!empty($fDataVideo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:getModal(2);\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $dataProvideVideo,
                         'columns' => array(
@@ -190,11 +218,11 @@ Util::tsRegisterAssetJs('_form.js');
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'file-grid',
                         'showTableOnEmpty' => false,
-                        'emptyText' => '<a class="empty-portlet btn" onclick="js:viewModal(' . "'elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/ARCHIVO'" . ',function(){});" class="jumbotron">
+                        'emptyText' => '<a class="empty-portlet btn" onclick="js:getModal(3);" class="jumbotron">
                                         <h1><span class="glyphicon glyphicon-open"></span></h1>
                                         SUBIR ARCHIVOS
                                         </a>',
-                        'template' => (!empty($fDataArchivo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:viewModal('elencos/elencoMultimedia/ajaxCreate/elenco_id/'+elenco_id+'/tipo/ARCHIVO',function(){});\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
+                        'template' => (!empty($fDataArchivo)) ? "{summary}\n{items}\n{pager}\n<br><button  onclick=\"js:getModal(3);\" class=\"btn btn-info\">Añadir</button>" : "{summary}\n{items}\n{pager}",
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $dataProvideArchivo,
                         'columns' => array(
