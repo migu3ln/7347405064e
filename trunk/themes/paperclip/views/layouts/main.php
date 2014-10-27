@@ -91,13 +91,14 @@
                         </nav>
                     </div>
                     <div class="row">
-                        <div class="col-lg-9" >
+                        <div class="col-lg-9 col-md-9 col-sm-9" >
                             <?php echo $content; ?>
                         </div> <!-- / .wrapper -->
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
                             <div id="calendario">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Calendario</div>
+                                   
                                     <div class="panel-body">
                                         <?php
                                         $this->widget('application.extensions.fullcalendar.FullcalendarGraphWidget', array(
