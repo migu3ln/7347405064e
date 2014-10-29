@@ -1,70 +1,71 @@
-<?php
-/** @var ElencoController $this */
-/** @var Elenco $model */
-$this->menu = array(
-    array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'), 
-    //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
-    ),
-);
-?>
-<div id="flashMsg"  class="flash-messages">
+<div id="flashMsg" class="flash-messages"></div>
+<div class="row">
+    <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('elencos/elenco/create') ?>"><i
+            class="fa fa-plus"></i> Crear
+    </a>
+</div>
+<br> 
+<div class="row">
 
-</div> 
-<div class="widget blue">
-    <div class="widget-title">
-        <h4> <i class="icon-fire-extinguisher"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo Elenco::label(2) ?> </h4>
-        <span class="tools">
-            <a href="javascript:;" class="icon-chevron-down"></a>
-            <!--a href="javascript:;" class="icon-remove"></a-->
-        </span>
-    </div>
-    <div class="widget-body">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i
+                    class="fa fa-university"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo Elenco::label(2) ?>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="well">
 
-            <?php 
-        $this->widget('booster.widgets.TbGridView',array(
-        'id' => 'elenco-grid',
-        'type' => 'striped bordered hover advance',
-        'dataProvider' => $model->search(),
-        'columns' => array(
-                    'nombre',
+
+                <?php
+                $this->widget('booster.widgets.TbGridView', array(
+                    'id' => 'elenco-grid',
+                    'type' => 'striped hover advance',
+                    'dataProvider' => $model->search(),
+                    'columns' => array(
+                        'nombre',
                         array(
-                    'name' => 'estado',
-                    'filter' => array('ACTIVO'=>'ACTIVO','INACTIVO'=>'INACTIVO',),
-                ),
+                            'name' => 'estado',
+                            'filter' => array('ACTIVO' => 'ACTIVO', 'INACTIVO' => 'INACTIVO',),
+                        ),
                         array(
-                    'name' => 'elenco_representante_id',
-                    'value' => 'isset($data->elencoRepresentante) ? $data->elencoRepresentante : null',
-                    'filter' => CHtml::listData(ElencoRepresentante::model()->findAll(), 'id', ElencoRepresentante::representingColumn()),
-                ),
-                    array(
-                    'class' => 'CButtonColumn',
-                    'template' => '{update} {delete}',
-                    'afterDelete' => 'function(link,success,data){ 
+                            'name' => 'elenco_representante_id',
+                            'value' => 'isset($data->elencoRepresentante) ? $data->elencoRepresentante : null',
+                            'filter' => CHtml::listData(ElencoRepresentante::model()->findAll(), 'id', ElencoRepresentante::representingColumn()),
+                        ),
+                        array(
+                            'class' => 'CButtonColumn',
+                            'template' => '{update} {delete}',
+                            'afterDelete' => 'function(link,success,data){ 
                     if(success) {
                          $("#flashMsg").empty();
                          $("#flashMsg").css("display","");
                          $("#flashMsg").html(data).animate({opacity: 1.0}, 5500).fadeOut("slow");
                     }
                     }',
-                    'buttons' => array(
-                        'update' => array(
-                            'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
-                            'options' => array('title' => 'Actualizar'),
-                            'imageUrl' => false,
-                             //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
-                        ),
-                        'delete' => array(
-                            'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
-                            'options' => array('title' => 'Eliminar'),
-                            'imageUrl' => false,
-                            //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
+                            'buttons' => array(
+                                'update' => array(
+                                    'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
+                                    'options' => array('title' => 'Actualizar'),
+                                    'imageUrl' => false,
+                                //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
+                                ),
+                                'delete' => array(
+                                    'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
+                                    'options' => array('title' => 'Eliminar'),
+                                    'imageUrl' => false,
+                                //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
+                                ),
+                            ),
+                            'htmlOptions' => array(
+                                'width' => '80px'
+                            )
                         ),
                     ),
-                    'htmlOptions' => array(
-                        'width' => '80px'
-                    )
-                ),
-        ),
-        )); ?>
+                ));
+                ?>
+            </div>
+        </div>
     </div>
 </div>
+

@@ -33,24 +33,6 @@ Util::tsRegisterAssetJs('_form_modal.js');
                 ),
             ));
             ?>
-<!--            <div class="form-group">
-                <label class="col-sm-3 control-label required" for="ElencoMultimedia_menu">Menu </label>
-                <div class="col-sm-9">
-                    <input class="form-control" type="checkbox"  data-switch-left="NO" data-switch-right="SI" name="ElencoMultimedia[menu]" id="ElencoMultimedia_menu">
-                    <div class="help-block error" id="ElencoMultimedia_menu_em_" style="display:none">
-                    </div>
-                </div>
-            </div>-->
-<!--            <div class="form-group">
-                <label class="col-sm-3 control-label required" for="ElencoMultimedia_encabezado">Encabezado </label>
-                <div class="col-sm-9">
-                    <input class="form-control" type="checkbox" data-switch-left="NO" data-switch-right="SI" name="ElencoMultimedia[encabezado]" id="ElencoMultimedia_encabezado">
-                    <div class="help-block error" id="ElencoMultimedia_encabezado_em_" style="display:none">
-                    </div>
-                </div>
-            </div>-->
-            <!--<input type="hidden" name="ProyectoMultimedia[ubicacion]" id="ProyectoMultimedia_ubicacion" value=""/>-->
-
             <?php echo $form->hiddenField($model, 'local') ?>
 
             <div class="form-group">
@@ -74,7 +56,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
 
             <div class="row">
                 <div class="col-md-12">
-                  
+                  eNTRO
                     <?php
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'video-modal-grid',
