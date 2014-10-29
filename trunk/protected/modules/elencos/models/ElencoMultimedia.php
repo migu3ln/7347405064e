@@ -46,6 +46,25 @@ class ElencoMultimedia extends BaseElencoMultimedia {
         return $logo;
     }
 
+    public function imagenes_de_elenco($elenco_id, $tipo, $menu = null, $encabezado = null) {
+        $command = Yii::app()->db->createCommand()
+                ->select('*')
+                ->from('elenco_multimedia em')
+//                ->where('em.elenco_id=:elenco_id AND em.tipo=:tipo');
+                ->where('em.elenco_id=:elenco_id AND em.tipo=:tipo',array(':elenco_id' => $elenco_id, ':tipo' => $tipo));
+//        $command->params(array(':elenco_id' => $elenco_id, ':tipo' => $tipo));
+        if($menu){
+            $command->andWhere('em.menu=1');
+        }
+        if($encabezado){
+            $command->andWhere('em.encabezado=1');
+        }
+
+//        var_dump($command->queryRow());
+//        die();
+        return $command->queryRow();
+    }
+
     public function rules() {
         return array_merge(parent::rules(), array(
 //            array('ubicacion, local, tipo, proyecto_id', 'required', 'on' => 'video'),
