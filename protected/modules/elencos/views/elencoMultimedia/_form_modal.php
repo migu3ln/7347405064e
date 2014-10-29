@@ -12,6 +12,11 @@ Yii::app()->clientScript->scriptMap['jquery.yiigridview.js'] = false;
 
 Util::tsRegisterAssetJs('_form_modal.js');
 ?>
+<script type="text/javascript">
+    var elenco_id =<?php print $model->id ? $model->id : 0  ?>;
+    var elenco_tipo =<?php echo json_encode($tipo ? $tipo : 0); ?>;
+
+</script>
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">

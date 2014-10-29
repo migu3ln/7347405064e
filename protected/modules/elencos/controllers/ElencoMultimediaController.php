@@ -332,10 +332,8 @@ class ElencoMultimediaController extends AweController {
             } else {
                 //verifico que sea de tipo logo o imagen
                 if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
-                    $archivo = new XUploadForm;
                     $this->renderPartial('_form_modal', array(
-                        'model' => $model,
-                        'archivo_modal' => $archivo,
+                        'model' => $model, 'tipo' => $tipo,
                             ), false, true);
                 } else { // si es de tipo video
                     $this->renderPartial('_form_modal_video', array(

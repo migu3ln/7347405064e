@@ -6,6 +6,7 @@ Util::tsRegisterAssetJs('_form.js');
 ?>
 <script type="text/javascript">
     var elenco_id =<?php print $model->id ? $model->id : 0  ?>;
+    var informacion_entidades_tipos =<?php echo json_encode(!$model->isNewRecord ? $multimedia_info_tipo: 0); ?>;
 
 </script>
 <!-- start contenedor-form -->

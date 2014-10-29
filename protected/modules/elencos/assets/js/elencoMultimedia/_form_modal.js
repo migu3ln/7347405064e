@@ -15,17 +15,10 @@ function saveElencoMultimedia(form) {
             if (data.success) {
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
-//                $('#images-modal-grid').yiiGridView('update');
-//                ajaxUpdateElement(baseUrl + 'elencos/elencoMultimedia/ajaxLoadForm/elenco_id/' + elenco_id + '/tipo/' + data.attr.tipo, "#contenedor-form-modal", function() {
-//                    initconpoment();
-//                });
-//                var url = baseUrl + "oportunidades/oportunidadProducto/ajaxCargarForm/oportunidad_id/" + oportunidad_id;
 
                 url = 'elencos/elencoMultimedia/ajaxCreate/elenco_id/' + elenco_id + '/tipo/IMAGEN';
 
                 $.fn.yiiGridView.update('images-modal-grid', {url: baseUrl + url});
-//                formUnset();
-//                initcomponents();
             } else {
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
@@ -146,8 +139,17 @@ function initcomponents() {
         if (file) {
             var fileName = file.name;
             var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
-            if (file && isImage(fileExtension)) {
-                mostrarImagen(this, "#img_prev_tipo");
+            $msj = (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") ? "El archivo seleccionado no es una imagen." : "El archivo seleccionado no es un archivo.";
+            $validacion = (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") ? isImage(fileExtension) : isDocument(fileExtension);
+            if (file && $validacion) {
+                if (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO")
+                {
+                    mostrarImagen(this, "#img_prev_tipo");
+                }
+//                else {
+//                    $("#img_prev_tipo").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
+//
+//                }
                 upload({
                     successCall: function(data) {
                         if (dataFile.success) {
@@ -155,7 +157,9 @@ function initcomponents() {
 //                            $("#url_archivo").val('');
                         }
                         $("#ElencoMultimedia_ubicacion").val(data.data.name);
-                        console.log(data.data.name);
+                        console.log(data);
+                        $("#img_prev_tipo").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
+
                         console.log("valor");
 //                        $("#url_archivo").val();
                         if ($("#content_prev_tipo").attr('hidden')) {
@@ -169,7 +173,7 @@ function initcomponents() {
             }
             else {
                 $("#ElencoMultimedia_ubicacion").val(null);
-                bootbox.alert('El archivo seleccionado no es una imagen');
+                bootbox.alert($msj);
             }
         }
     });

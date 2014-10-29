@@ -84,18 +84,64 @@ class ElencoController extends AweController {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
+        if ($id) {
+            $model->id = $id;
+        }
+//
+//        if (isset($_POST['Elenco'])) {
+////            die(var_dump("s"));
+//            $model->attributes = $_POST['Elenco'];
+//            if ($model->save()) {
+//                $this->redirect(array('admin'));
+//            }
+//        }
+//        $this->render('update', array(
+//            'model' => $model,
+//        ));
+        $multimedia_info_tipo = array();
+        $model->estado = Elenco::ESTADO_ACTIVO;
+        $result = array();
+        $modeloMultimedia = new ElencoMultimedia('search');
+        $logo_elenco = $modeloMultimedia->logo_de_elenco($id);
+        $multimedia_info_tipo['ubicacion'] = $logo_elenco->ubicacion;
+        $multimedia_info_tipo['tipo'] = $logo_elenco->tipo;
+//        die(var_dump( $info_tipo));
+//        $archivo = new XUploadForm;
+        $this->ajaxValidation($model);
 
         if (isset($_POST['Elenco'])) {
-            die(var_dump("s"));
             $model->attributes = $_POST['Elenco'];
-            if ($model->save()) {
-                $this->redirect(array('admin'));
-            }
-        }
+//            var_dump($model->attributes);
+//            var_dump($_POST['Elenco']['logo']);
+//            die("entro");
+            $result['success'] = $model->save();
 
-        $this->render('update', array(
-            'model' => $model,
-        ));
+            if ($result['success']) {
+                $result['attr'] = $model->attributes;
+                if ($_POST['Elenco']['url_archivo'] != null) {
+                    $name_archivo_temporal = $_POST['Elenco']['url_archivo'];
+                    $modeloMultimedia->local = 0;
+                    $modeloMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
+                    $modeloMultimedia->menu = 0;
+                    $modeloMultimedia->encabezado = 0;
+                    $modeloMultimedia->elenco_id = $model->id;
+                    if (!file_exists("uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {
+                        mkdir("uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO, 0777, true);
+                    }
+                    $path = realpath(Yii::app()->getBasePath() . "/../uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO) . "/";
+                    $pathorigen = realpath(Yii::app()->getBasePath() . "/../uploads/tmp/") . "/";
+                    $publicPath = Yii::app()->getBaseUrl() . "/uploads/elenco/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO . '/';
+                    if (rename($pathorigen . $name_archivo_temporal, $path . $name_archivo_temporal)) {
+                        $modeloMultimedia->ubicacion = $publicPath . $name_archivo_temporal;
+//                        die(var_dump($modelpMultimedia->attributes, $modelpMultimedia->validate(), $modelpMultimedia->errors));
+                        $modeloMultimedia->save();
+                    }
+                }
+            }
+            echo CJSON::encode($result);
+        } else {
+            $this->render('update', array('model' => $model, 'modeloMultimedia' => $modeloMultimedia,'multimedia_info_tipo'=>$multimedia_info_tipo));
+        }
     }
 
     /**
