@@ -1,12 +1,15 @@
 var btn_save;
 var btn_save_taquilla;
 var btn_save_taquilla_seccion;
+var btn_upload_file;
 var sc_teatro_sucre;
 var dataFile = {success: false};
 $(function () {
     /****imagen****/
         //btn_actions
+    $()
     $('#btn_upload_action,#btn_upload_change').click(function () {
+        btn_upload_file = Ladda.create(this);
         if (dataFile.success) {
             $('#logo_imagen').click();
         }
@@ -19,17 +22,25 @@ $(function () {
     //ation load
     $("#logo_imagen").change(function () {
         var file = $("#logo_imagen")[0].files[0];
-
         if (file) {
             var fileName = file.name;
             var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
             if (file && isImage(fileExtension)) {
+                btn_upload_file.start();
+                btn_upload_file.setProgress(0.6);
                 mostrarImagen(this, "#img_prev");
                 upload({
                     successCall: function (data) {
+                        btn_upload_file.setProgress(1);
+                        btn_upload_file.stop();
                         if (dataFile.success) {
-                            deleted({delete_url: dataFile.data.delete_url});
+                            deleted({
+                                delete_url: dataFile.data.delete_url, successCall: function (data) {
+                                    $('#Escenario_logo').val(null);
+                                }
+                            });
                         }
+                        $('#Escenario_logo').val(data.data.name);
                         if ($("#content_prev").attr('hidden')) {
                             $("#content_prev").toggle(200, function () {
                                 $("#content_action").toggle(200);
@@ -103,9 +114,6 @@ $(function () {
     });
 });
 function saveEscenario($form) {
-    if ($('#logo-proyecto-form .delete').length <= 0) {
-        $('#logo').val(null);
-    }
     ajaxValidarFormulario({
         formId: $form,
         beforeCall: function () {
@@ -162,7 +170,8 @@ function deleted(options) {
                     options.successCall(data);
             }
             else {
-                if (options.successCall)
+                console.log(data);
+                if (options.errorCall)
                     options.errorCall(data);
             }
         }

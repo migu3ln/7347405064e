@@ -14,46 +14,6 @@ Util::tsRegisterAssetJs('_form.js');
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-lg-12">
-                    <div id="content_prev" class="row" hidden>
-                        <div class="col-md-offset-3 col-md-3 col-xs-4">
-                            <div class="thumbnail">
-                                <img id="img_prev" data-src="holder.js/100%x200" alt="100%x300" src="#">
-
-                                <div class="caption">
-                                    <h4><strong>Logo</strong></h4>
-
-                                    <p>
-                                        <a id="btn_upload_change" href="#" class="btn btn-info" role="button">
-                                            <i class="fa fa-arrows-h"></i>
-                                            Cambiar</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="content_action" class="row">
-                        <div class="col-lg-12">
-                            <form id="logo-form" class="form-horizontal" role="form">
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-3 control-label" for="formGroupInputSmall">Logo</label>
-
-                                    <div class="col-sm-9">
-                                        <button id="btn_upload_action" class="btn btn-default btn-xs"><i
-                                                class="fa fa-plus"></i> Seleccione
-                                        </button>
-                                        <input name="logo_imagen" id="logo_imagen" type="file" style="display: none">
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-
-            <div class="row">
                 <?php
                 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                     'type' => 'horizontal',
@@ -65,7 +25,50 @@ Util::tsRegisterAssetJs('_form.js');
                 ?>
                 <div class="col-xs-12">
                     <div class="row-fluid">
-                        <input type="hidden" name="Escenario[logo]" id="logo" value=null/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="content_prev" class="row" hidden>
+                                    <div class="col-md-offset-3 col-md-3 col-xs-4">
+                                        <div class="thumbnail">
+                                            <img id="img_prev" data-src="holder.js/100%x200" alt="100%x300" src="#">
+
+                                            <div class="caption">
+                                                <h4><strong>Logo</strong></h4>
+
+                                                <p>
+                                                    <a id="btn_upload_change" href="#" class="btn btn-info ladda-button"
+                                                       role="button" data-style="expand-right">
+                                                        <i class="fa fa-arrows-h"></i>
+                                                        Cambiar</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="content_action" class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group form-group-sm">
+                                            <label class="col-sm-3 control-label" for="formGroupInputSmall">Logo <span
+                                                    class="required">*</span></label>
+
+                                            <div class="col-sm-9">
+                                                <button id="btn_upload_action"
+                                                        class="btn btn-default btn-xs ladda-button"
+                                                        data-style="expand-right"><i
+                                                        class="fa fa-plus"></i> Seleccione
+                                                </button>
+                                                <input name="logo_imagen" id="logo_imagen" type="file"
+                                                       style="display: none">
+                                                <?php echo $form->hiddenField($model, 'logo') ?>
+                                                <?php echo $form->error($model, 'logo') ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        <input type="hidden" name="Escenario[logo]" id="logo" value=null/>-->
+
                         <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                         <div class="form-group">
                             <label class="col-sm-3 control-label required" for="Escenario_teatro_sucre">¿Pertenece al
