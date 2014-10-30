@@ -67,7 +67,7 @@ Util::tsRegisterAssetJs('_form.js');
                 ?>
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
-                <input type="hidden" name="Proyecto[logo]" id="Proyecto_logo" value=null/>
+                <input type="hidden" name="Proyecto[logo]" value=null id="Proyecto_logo"/>
 
 
                 <div class="form-group">
