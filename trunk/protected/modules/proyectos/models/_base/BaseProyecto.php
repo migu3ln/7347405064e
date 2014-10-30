@@ -16,33 +16,39 @@
  *
  * @property ProyectoMultimedia[] $proyectoMultimedias
  */
-abstract class BaseProyecto extends AweActiveRecord {
+abstract class BaseProyecto extends AweActiveRecord
+{
 
-    public static function model($className=__CLASS__) {
+    public static function model($className = __CLASS__)
+    {
         return parent::model($className);
     }
 
-    public function tableName() {
+    public function tableName()
+    {
         return 'proyecto';
     }
 
-    public static function representingColumn() {
+    public static function representingColumn()
+    {
         return 'nombre';
     }
 
-    public function rules() {
+    public function rules()
+    {
         return array(
             array('nombre', 'required'),
-            array('nombre', 'length', 'max'=>150),
-            array('estado', 'length', 'max'=>8),
+            array('nombre', 'length', 'max' => 150),
+            array('estado', 'length', 'max' => 8),
             array('descripcion', 'safe'),
-            array('estado', 'in', 'range' => array('ACTIVO','INACTIVO')), // enum,
+            array('estado', 'in', 'range' => array('ACTIVO', 'INACTIVO')), // enum,
             array('descripcion, estado', 'default', 'setOnEmpty' => true, 'value' => null),
-            array('id, nombre, descripcion, estado', 'safe', 'on'=>'search'),
+            array('id, nombre, descripcion, estado', 'safe', 'on' => 'search'),
         );
     }
 
-    public function relations() {
+    public function relations()
+    {
         return array(
             'proyectoMultimedias' => array(self::HAS_MANY, 'ProyectoMultimedia', 'proyecto_id'),
         );
@@ -51,17 +57,19 @@ abstract class BaseProyecto extends AweActiveRecord {
     /**
      * @return array customized attribute labels (name=>label)
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return array(
-                'id' => Yii::t('app', 'ID'),
-                'nombre' => Yii::t('app', 'Nombre'),
-                'descripcion' => Yii::t('app', 'Descripcion'),
-                'estado' => Yii::t('app', 'Estado'),
-                'proyectoMultimedias' => null,
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'estado' => Yii::t('app', 'Estado'),
+            'proyectoMultimedias' => null,
         );
     }
 
-    public function search() {
+    public function search()
+    {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
@@ -74,8 +82,8 @@ abstract class BaseProyecto extends AweActiveRecord {
         ));
     }
 
-    public function behaviors() {
-        return array_merge(array(
-        ), parent::behaviors());
+    public function behaviors()
+    {
+        return array_merge(array(), parent::behaviors());
     }
 }
