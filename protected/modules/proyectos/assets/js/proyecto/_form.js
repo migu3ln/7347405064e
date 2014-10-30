@@ -27,14 +27,7 @@ function init() {
     /****imagen****/
         //btn_actions
     $('#btn_upload_action,#btn_upload_change').click(function () {
-        //console.log("entroo");
-        if (dataFile.success) {
-            $('#logo_imagen').click();
-        }
-        else {
-            $('#logo_imagen').click();
-        }
-
+        $('#logo_imagen').click();
         return false;
     });
     //ation load
