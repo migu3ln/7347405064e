@@ -7,11 +7,18 @@ Util::tsRegisterAssetJs('_form_modal.js');
 /** @var ProyectoMultimedia $model */
 /** @var AweActiveForm $form */
 ?>
+<script type="text/javascript">
+    var elenco_id =<?php print $model->id ? $model->id : 0  ?>;
+    var proyecto_tipo =<?php echo json_encode($tipo ? $tipo : 0); ?>;
+
+</script>
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" id-grid="#video-grid" class="close btn_cerrar_modal" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . ProyectoMultimedia::label(1); ?></h4>
+            <button type="button" id-grid="#video-grid" class="close btn_cerrar_modal" data-dismiss="modal"><span
+                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title"
+                id="myModalLabel"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . ProyectoMultimedia::label(1); ?></h4>
         </div>
         <div class="modal-body">
             <?php
@@ -36,16 +43,18 @@ Util::tsRegisterAssetJs('_form_modal.js');
                 ),
             ));
             ?>
-            <hr />
+            <hr/>
             <div id="video">
             </div>
             <?php echo $form->hiddenField($model, 'local') ?>
             <?php echo $form->hiddenField($model, 'menu') ?>
             <?php echo $form->hiddenField($model, 'encabezado') ?>
-            <br />
+            <br/>
+
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button id="btn_save_multimedia" class="btn btn-success ladda-button" form-id="#proyecto-multimedia-form" data-style="expand-right">
+                    <button id="btn_save_multimedia" class="btn btn-success ladda-button"
+                            form-id="#proyecto-multimedia-form" data-style="expand-right">
                         <span class="ladda-label">Registrar</span>
                     </button>
 
@@ -87,7 +96,9 @@ Util::tsRegisterAssetJs('_form_modal.js');
 
         </div>
         <div class="modal-footer">
-            <button type="button" id-grid="#video-grid" class="btn btn-default btn_cerrar_modal" data-dismiss="modal">Close</button>
+            <button type="button" id-grid="#video-grid" class="btn btn-default btn_cerrar_modal" data-dismiss="modal">
+                Close
+            </button>
         </div>
     </div>
 </div>

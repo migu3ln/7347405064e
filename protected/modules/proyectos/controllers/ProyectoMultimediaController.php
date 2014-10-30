@@ -264,6 +264,7 @@ class ProyectoMultimediaController extends AweController
                 } else { // si es de tipo video
                     $this->renderPartial('_form_modal_video', array(
                         'model' => $model,
+                        'tipo' => $tipo,
                     ), false, true);
                 }
             }

@@ -3,17 +3,20 @@ var dataFile = {success: false};
 
 $(function () {
     initconpoment();
-    //$("#ProyectoMultimedia_ubicacion").on('change', function () {
-    //    var urlyoutube = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-    //    if (urlyoutube.test($(this).val())) {
-    //        $('#video').empty();
-    //        html = "<div  class = \"embed-responsive embed-responsive-4by3\" >";
-    //        html = html + "[youtube = " + $(this).val() + "]";
-    //        html = html + " </div>";
-    //        $('#video').append(html);
-    //        $('#video').mb_embedMovies();
-    //    }
-    //});
+    console.log(proyecto_tipo);
+    if (proyecto_tipo == "VIDEO") {
+        $("#ProyectoMultimedia_ubicacion").on('change', function () {
+            var urlyoutube = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+            if (urlyoutube.test($(this).val())) {
+                $('#video').empty();
+                html = "<div  class = \"embed-responsive embed-responsive-4by3\" >";
+                html = html + "[youtube = " + $(this).val() + "]";
+                html = html + " </div>";
+                $('#video').append(html);
+                $('#video').mb_embedMovies();
+            }
+        });
+    }
 
     /****imagen****/
         //btn_actions
@@ -27,16 +30,12 @@ $(function () {
         if (file) {
             var fileName = file.name;
             var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
-            $msj = (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") ? "El archivo seleccionado no es una imagen." : "El archivo seleccionado no es un archivo.";
-            $validacion = (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") ? isImage(fileExtension) : isDocument(fileExtension);
+            $msj = (proyecto_tipo == "IMAGEN" || proyecto_tipo == "LOGO") ? "El archivo seleccionado no es una imagen." : "El archivo seleccionado no es un archivo.";
+            $validacion = (proyecto_tipo == "IMAGEN" || proyecto_tipo == "LOGO") ? isImage(fileExtension) : isDocument(fileExtension);
             if (file && $validacion) {
-                if (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") {
+                if (proyecto_tipo == "IMAGEN" || proyecto_tipo == "LOGO") {
                     mostrarImagen(this, "#img_prev_tipo");
                 }
-//                else {
-//                    $("#img_prev_tipo").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
-//
-//                }
                 upload({
                     successCall: function (data) {
                         if (dataFile.success) {
@@ -44,7 +43,7 @@ $(function () {
 //                            $("#url_archivo").val('');
                         }
                         $("#ProyectoMultimedia_ubicacion").val(data.data.name);
-                        console.log(data);
+                        //console.log(data);
                         $("#img_prev_tipo").html('<i class="icon icon-paper-clip"></i> ' + data.data.name);
 
                         console.log("valor");
@@ -86,6 +85,7 @@ function saveProyectoMultimedia(form) {
                     });
                 }
                 $('#proyecto-multimedia-form').trigger('reset');
+                $("#ProyectoMultimedia_ubicacion").val(null)
                 $('#images-modal-grid').yiiGridView('update');
             } else {
                 btn_save_modal.setProgress(1);
