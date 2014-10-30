@@ -1,6 +1,7 @@
 <?php
 
-class ProyectoMultimediaController extends AweController {
+class ProyectoMultimediaController extends AweController
+{
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -10,7 +11,8 @@ class ProyectoMultimediaController extends AweController {
     public $admin = true;
     public $defaultAction = 'admin';
 
-    public function filters() {
+    public function filters()
+    {
         return array(
             array('CrugeAccessControlFilter'),
         );
@@ -20,7 +22,8 @@ class ProyectoMultimediaController extends AweController {
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -30,7 +33,8 @@ class ProyectoMultimediaController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new ProyectoMultimedia;
         $this->performAjaxValidation($model, 'proyecto-multimedia-form');
 
@@ -51,7 +55,8 @@ class ProyectoMultimediaController extends AweController {
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->loadModel($id);
 
         $this->performAjaxValidation($model, 'proyecto-multimedia-form');
@@ -73,7 +78,8 @@ class ProyectoMultimediaController extends AweController {
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $this->loadModel($id)->delete();
@@ -88,7 +94,8 @@ class ProyectoMultimediaController extends AweController {
     /**
      * Manages all models.
      */
-    public function actionAdmin() {
+    public function actionAdmin()
+    {
         $model = new ProyectoMultimedia('search');
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['ProyectoMultimedia']))
@@ -99,7 +106,8 @@ class ProyectoMultimediaController extends AweController {
         ));
     }
 
-    public function actionUploadTmp() {
+    public function actionUploadTmp()
+    {
         $carpeta = 'tmp';
         $id = '';
         chdir(getcwd()); //me ubico en el directorio del proyecto
@@ -184,18 +192,18 @@ class ProyectoMultimediaController extends AweController {
                     // We do so, using the json structure defined in
                     // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
                     echo json_encode(array(array(
-                            "name" => $model->name,
-                            "type" => $model->mime_type,
-                            "size" => $model->size,
-                            "filename" => $filename,
-                            "url" => $publicPath . '/' . $filename,
-                            "delete_url" => $this->createUrl("uploadTmp", array(
-                                "_method" => "delete",
-                                "file" => $filename,
-                                "id" => $id,
-                                "carpeta" => $carpeta
-                            )),
-                            "delete_type" => "POST"
+                        "name" => $model->name,
+                        "type" => $model->mime_type,
+                        "size" => $model->size,
+                        "filename" => $filename,
+                        "url" => $publicPath . '/' . $filename,
+                        "delete_url" => $this->createUrl("uploadTmp", array(
+                            "_method" => "delete",
+                            "file" => $filename,
+                            "id" => $id,
+                            "carpeta" => $carpeta
+                        )),
+                        "delete_type" => "POST"
                     )));
                     /*
                      * Aqui va la guardado de archivos en l base                     */
@@ -214,7 +222,8 @@ class ProyectoMultimediaController extends AweController {
      * Save new model(ProyectoMultimedia) via ajax(modal) linked for Proyecto
      * @param type $proyecto_id
      */
-    public function actionAjaxCreate($proyecto_id, $tipo) {
+    public function actionAjaxCreate($proyecto_id, $tipo)
+    {
         if (Yii::app()->request->isAjaxRequest) {
 
             $model = new ProyectoMultimedia;
@@ -249,21 +258,20 @@ class ProyectoMultimediaController extends AweController {
             } else {
                 //verifico que sea de tipo logo o imagen
                 if ($tipo != Constants::MULTIMEDIA_TIPO_VIDEO) {
-                    $archivo = new XUploadForm;
                     $this->renderPartial('_form_modal', array(
-                        'model' => $model,
-                        'archivo_modal' => $archivo,
-                            ), false, true);
+                        'model' => $model, 'tipo' => $tipo,
+                    ), false, true);
                 } else { // si es de tipo video
                     $this->renderPartial('_form_modal_video', array(
                         'model' => $model,
-                            ), false, true);
+                    ), false, true);
                 }
             }
         }
     }
 
-    public function actionAjaxLoadForm($proyecto_id, $tipo) {
+    public function actionAjaxLoadForm($proyecto_id, $tipo)
+    {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new ProyectoMultimedia;
             $archivo = new XUploadForm;
@@ -274,7 +282,7 @@ class ProyectoMultimediaController extends AweController {
             $result['success'] = true;
 
             $result['html'] = $this->renderPartial('_form_modal_partial', array('model' => $model, 'archivo_modal' => $archivo,
-                    ), true, true);
+            ), true, true);
             echo CJSON::encode($result);
         }
     }
@@ -284,7 +292,8 @@ class ProyectoMultimediaController extends AweController {
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer the ID of the model to be loaded
      */
-    public function loadModel($id, $modelClass = __CLASS__) {
+    public function loadModel($id, $modelClass = __CLASS__)
+    {
         $model = ProyectoMultimedia::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -295,7 +304,8 @@ class ProyectoMultimediaController extends AweController {
      * Performs the AJAX validation.
      * @param CModel the model to be validated
      */
-    protected function performAjaxValidation($model, $form = null) {
+    protected function performAjaxValidation($model, $form = null)
+    {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'proyecto-multimedia-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
@@ -306,7 +316,8 @@ class ProyectoMultimediaController extends AweController {
      * funcion para validaciones en jquery.ajaxValidate.js
      * @param type $model
      */
-    protected function ajaxValidation($model, $form_id = "proyecto-multimedia-form") {
+    protected function ajaxValidation($model, $form_id = "proyecto-multimedia-form")
+    {
         $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
         $portAtt = ucwords(strtolower($portAtt));
         $portAtt = str_replace(' ', '', $portAtt);

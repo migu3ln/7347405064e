@@ -1,6 +1,6 @@
 var btn_save_modal;
 var dataFile = {success: false};
-$(function() {
+$(function () {
     initcomponents();
 
 });
@@ -8,14 +8,13 @@ function saveElencoMultimedia(form) {
 
     ajaxValidarFormulario({
         formId: form,
-        beforeCall: function() {
+        beforeCall: function () {
             btn_save_modal.setProgress(0.6);
         },
-        successCall: function(data) {
+        successCall: function (data) {
             if (data.success) {
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
-
                 url = 'elencos/elencoMultimedia/ajaxCreate/elenco_id/' + elenco_id + '/tipo/IMAGEN';
 
                 $.fn.yiiGridView.update('images-modal-grid', {url: baseUrl + url});
@@ -24,7 +23,7 @@ function saveElencoMultimedia(form) {
                 btn_save_modal.stop();
             }
         },
-        errorCall: function(data) {
+        errorCall: function (data) {
             if (data.errors.ubicacion) {
                 $('#ElencoMultimedia_ubicacion_em_').parent().parent().addClass('has-error');
                 $('#ElencoMultimedia_ubicacion_em_').addClass('error');
@@ -40,10 +39,10 @@ function saveVideoMultimedia(form) {
 //    console.log($('#container_img_modal').find('img.imageslink'));
     ajaxValidarFormulario({
         formId: form,
-        beforeCall: function() {
+        beforeCall: function () {
             btn_save_modal.setProgress(0.6);
         },
-        successCall: function(data) {
+        successCall: function (data) {
             if (data.success) {
                 btn_save_modal.setProgress(1);
                 btn_save_modal.stop();
@@ -54,7 +53,7 @@ function saveVideoMultimedia(form) {
                 btn_save_modal.stop();
             }
         },
-        errorCall: function(data) {
+        errorCall: function (data) {
             btn_save_modal.setProgress(1);
             btn_save_modal.stop();
         }
@@ -68,7 +67,7 @@ function initcomponents() {
         onColor: 'success',
         onText: 'Si',
         offText: 'No',
-        onSwitchChange: function(event, state) {
+        onSwitchChange: function (event, state) {
             if (state) {
                 $(this).val(1);
             } else {
@@ -80,7 +79,7 @@ function initcomponents() {
         onColor: 'success',
         onText: 'Si',
         offText: 'No',
-        onSwitchChange: function(event, state) {
+        onSwitchChange: function (event, state) {
             if (state) {
                 $(this).val(1);
             } else {
@@ -92,7 +91,7 @@ function initcomponents() {
         onColor: 'success',
         onText: 'Si',
         offText: 'No',
-        onSwitchChange: function(event, state) {
+        onSwitchChange: function (event, state) {
             if (state) {
                 $(this).val(1);
             } else {
@@ -100,7 +99,7 @@ function initcomponents() {
             }
         },
     });
-    $("#btn_save_elenco_multimedia").click(function(e) {
+    $("#btn_save_elenco_multimedia").click(function (e) {
         e.preventDefault();
         btn_save_modal = Ladda.create(this);
         var form_id = $(this).attr('form-id');
@@ -108,7 +107,7 @@ function initcomponents() {
         saveElencoMultimedia(form_id);
         return false;
     });
-    $("#btn_save_multimedia").click(function(e) {
+    $("#btn_save_multimedia").click(function (e) {
         e.preventDefault();
         btn_save_modal = Ladda.create(this);
         var form_id = $(this).attr('form-id');
@@ -116,13 +115,13 @@ function initcomponents() {
         saveVideoMultimedia(form_id);
         return false;
     });
-    $('.btn_cerrar_modal').on('click', function() {
+    $('.btn_cerrar_modal').on('click', function () {
         $('#mainModal').modal('hide');
         $($(this).attr('id-grid')).yiiGridView('update', {url: baseUrl + 'elencos/elenco/create/id/' + elenco_id});
     });
     /****imagen****/
-    //btn_actions
-    $('#btn_upload_action,#btn_upload_change').click(function() {
+        //btn_actions
+    $('#btn_upload_action,#btn_upload_change').click(function () {
         if (dataFile.success) {
             $('#logo_imagen_tipo').click();
         }
@@ -133,7 +132,7 @@ function initcomponents() {
         return false;
     });
     //ation load
-    $("#logo_imagen_tipo").change(function() {
+    $("#logo_imagen_tipo").change(function () {
         var file = $("#logo_imagen_tipo")[0].files[0];
         console.log(file);
         if (file) {
@@ -142,8 +141,7 @@ function initcomponents() {
             $msj = (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") ? "El archivo seleccionado no es una imagen." : "El archivo seleccionado no es un archivo.";
             $validacion = (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") ? isImage(fileExtension) : isDocument(fileExtension);
             if (file && $validacion) {
-                if (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO")
-                {
+                if (elenco_tipo == "IMAGEN" || elenco_tipo == "LOGO") {
                     mostrarImagen(this, "#img_prev_tipo");
                 }
 //                else {
@@ -151,7 +149,7 @@ function initcomponents() {
 //
 //                }
                 upload({
-                    successCall: function(data) {
+                    successCall: function (data) {
                         if (dataFile.success) {
                             deleted({delete_url: dataFile.data.delete_url});
 //                            $("#url_archivo").val('');
@@ -163,7 +161,7 @@ function initcomponents() {
                         console.log("valor");
 //                        $("#url_archivo").val();
                         if ($("#content_prev_tipo").attr('hidden')) {
-                            $("#content_prev_tipo").toggle(200, function() {
+                            $("#content_prev_tipo").toggle(200, function () {
                                 $("#content_action_tipo").toggle(200);
                                 $("#content_prev_tipo").removeAttr('hidden');
                             });
@@ -187,7 +185,7 @@ function initcomponents() {
 function mostrarImagen(input, prev_id) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $(prev_id).attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
@@ -220,7 +218,7 @@ function isDocument(extension) {
 function deleted(options) {
     $.ajax({
         url: options.delete_url,
-        success: function(data) {
+        success: function (data) {
             if (data.success) {
                 if (options.successCall)
                     options.successCall(data);
@@ -251,7 +249,7 @@ function upload(options) {
             contentType: false,
             processData: false,
             //una vez finalizado correctamente
-            success: function(data) {
+            success: function (data) {
                 var json = JSON.parse(data);
                 if (options.successCall)
                     options.successCall(json);
@@ -259,7 +257,7 @@ function upload(options) {
                 dataFile = json;
             },
             //si ha ocurrido un error
-            error: function() {
+            error: function () {
             }
         });
     }
