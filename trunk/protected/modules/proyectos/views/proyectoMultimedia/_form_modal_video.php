@@ -85,6 +85,7 @@ Util::tsRegisterAssetJs('_form_modal.js');
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $model->de_tipo(Constants::MULTIMEDIA_TIPO_VIDEO)->de_proyecto($model->proyecto_id)->search(),
                         'columns' => array(
+
                             'ubicacion'
                         )
                     ));
