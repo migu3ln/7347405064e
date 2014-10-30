@@ -1,6 +1,7 @@
 <?php
 
-class ProyectoController extends AweController {
+class ProyectoController extends AweController
+{
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -10,7 +11,8 @@ class ProyectoController extends AweController {
     public $admin = false;
     public $defaultAction = 'admin';
 
-    public function filters() {
+    public function filters()
+    {
         return array(
             array('CrugeAccessControlFilter'),
         );
@@ -20,7 +22,8 @@ class ProyectoController extends AweController {
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -30,7 +33,8 @@ class ProyectoController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id = null) {
+    public function actionCreate($id = null)
+    {
         $model = new Proyecto;
         if ($id) {
             $model->id = $id;
@@ -79,7 +83,8 @@ class ProyectoController extends AweController {
      * Crear proyecto mediante un popover
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionAjaxCreate() {
+    public function actionAjaxCreate()
+    {
         if (Yii::app()->request->isAjaxRequest) {
             $model = new Proyecto;
             $model->estado = Proyecto::ESTADO_ACTIVO;
@@ -98,7 +103,8 @@ class ProyectoController extends AweController {
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->loadModel($id);
 
         $this->performAjaxValidation($model, 'proyecto-form');
@@ -120,7 +126,8 @@ class ProyectoController extends AweController {
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $model = $this->loadModel($id);
@@ -141,7 +148,8 @@ class ProyectoController extends AweController {
     /**
      * Manages all models.
      */
-    public function actionAdmin() {
+    public function actionAdmin()
+    {
         $model = new Proyecto('search');
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['Proyecto']))
@@ -157,7 +165,8 @@ class ProyectoController extends AweController {
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer the ID of the model to be loaded
      */
-    public function loadModel($id, $modelClass = __CLASS__) {
+    public function loadModel($id, $modelClass = __CLASS__)
+    {
         $model = Proyecto::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -168,7 +177,8 @@ class ProyectoController extends AweController {
      * Performs the AJAX validation.
      * @param CModel the model to be validated
      */
-    protected function performAjaxValidation($model, $form = null) {
+    protected function performAjaxValidation($model, $form = null)
+    {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'proyecto-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
@@ -179,7 +189,8 @@ class ProyectoController extends AweController {
      * funcion para validaciones en jquery.ajaxValidate.js
      * @param type $model
      */
-    protected function ajaxValidation($model, $form_id = "proyecto-form") {
+    protected function ajaxValidation($model, $form_id = "proyecto-form")
+    {
         $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
         $portAtt = ucwords(strtolower($portAtt));
         $portAtt = str_replace(' ', '', $portAtt);

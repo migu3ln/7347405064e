@@ -16,17 +16,46 @@ Util::tsRegisterAssetJs('_form.js');
                 <h3 class="panel-title"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . Proyecto::label(1); ?></h3>
             </div>
             <div class="panel-body">
-                <?php
-                $this->widget('ext.xupload.XUpload', array(
-                    'model' => $archivo,
-                    'url' => CController::createUrl('/proyectos/proyectoMultimedia/uploadTmp'),
-                    'htmlOptions' => array('id' => 'logo-proyecto-form', 'class' => 'form-horizontal'),
-                    'attribute' => 'file',
-                    'multiple' => false,
-                    'previewImages' => true,
-                    'autoUpload' => true,
-                ));
-                ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="content_prev" class="row" hidden>
+                            <div class="col-md-offset-3 col-md-3 col-xs-4">
+                                <div class="thumbnail">
+                                    <img id="img_prev" data-src="holder.js/100%x200" alt="100%x300" src="#">
+
+                                    <div class="caption">
+                                        <h4><strong>Logo</strong></h4>
+
+                                        <p>
+                                            <a id="btn_upload_change" href="#" class="btn btn-info" role="button">
+                                                <i class="fa fa-arrows-h"></i>
+                                                Cambiar</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content_action" class="row">
+                            <div class="col-lg-12">
+                                <form id="logo-form" class="form-horizontal" role="form">
+                                    <div class="form-group form-group-sm">
+                                        <label class="col-sm-3 control-label" for="formGroupInputSmall">Logo</label>
+
+                                        <div class="col-sm-9">
+                                            <button id="btn_upload_action" class="btn btn-default btn-xs"><i
+                                                    class="fa fa-plus"></i> Seleccione
+                                            </button>
+                                            <input name="logo_imagen" id="logo_imagen" type="file"
+                                                   style="display: none">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <?php
                 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
                     'type' => 'horizontal',
@@ -38,11 +67,14 @@ Util::tsRegisterAssetJs('_form.js');
                 ?>
                 <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                 <?php echo $form->textAreaGroup($model, 'descripcion', array('rows' => 3, 'cols' => 50)) ?>
-                <input type="hidden" name="Proyecto[logo]" id="logo" value=null />
+                <input type="hidden" name="Proyecto[logo]" id="Proyecto_logo" value=null/>
+
+
                 <div class="form-group">
                     <div class="col-lg-7 col-lg-offset-2">
 
-                        <button id="btn_save_proyecto" class="btn btn-success ladda-button" form-id="#proyecto-form" data-style="expand-right">
+                        <button id="btn_save_proyecto" class="btn btn-success ladda-button" form-id="#proyecto-form"
+                                data-style="expand-right">
                             <span class="ladda-label">Registrar</span>
                         </button>
                         <?php
@@ -72,13 +104,13 @@ Util::tsRegisterAssetJs('_form.js');
                 <div class="panel-body">
 
                     <?php
-//                    var_dump('id  '.$model->id);
+                    //                    var_dump('id  '.$model->id);
                     $modelImagen = new ProyectoMultimedia('search');
                     $modelImagen->unsetAttributes();
                     $modelImagen->proyecto_id = $model->id ? $model->id : 0;
                     $dataProvider = $modelImagen->de_tipo(Constants::MULTIMEDIA_TIPO_IMAGEN)->de_proyecto($model->id)->search();
                     $fData = $dataProvider->getData();
-//                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
+                    //                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'images-grid',
                         'showTableOnEmpty' => false,
@@ -118,13 +150,13 @@ Util::tsRegisterAssetJs('_form.js');
                 <div class="panel-body">
 
                     <?php
-//                    var_dump('id  '.$model->id);
+                    //                    var_dump('id  '.$model->id);
                     $modelVideo = new ProyectoMultimedia('search');
                     $modelVideo->unsetAttributes();
                     $modelVideo->proyecto_id = $model->id ? $model->id : 0;
                     $dataProvideVideo = $modelVideo->de_tipo(Constants::MULTIMEDIA_TIPO_VIDEO)->de_proyecto($model->id)->search();
                     $fDataVideo = $dataProvideVideo->getData();
-//                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
+                    //                    $numItem = ProyectoMultimedia::model()->de_proyecto($model->id)->search()->itemCount;
                     $this->widget('ext.booster.widgets.TbGridView', array(
                         'id' => 'video-grid',
                         'showTableOnEmpty' => false,

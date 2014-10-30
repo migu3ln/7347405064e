@@ -242,7 +242,7 @@ function upload(options) {
 }
 /************* end Upload archivo****************/
 /**
- * 
+ *
  * @param {type} tipo=1 IMAGEN ,3 ARCHIVO,2 VIDEOS
  * @returns {undefined}
  */
