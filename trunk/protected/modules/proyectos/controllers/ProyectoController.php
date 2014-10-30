@@ -51,14 +51,13 @@ class ProyectoController extends AweController
 
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
-                if ($_POST['Proyecto']['logo'] != null) {
+                if ($_POST['Proyecto']['logo'] != null && $_POST['Proyecto']['logo'] != "null") {
                     $modelpMultimedia->local = 0;
                     $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
                     $modelpMultimedia->menu = 0;
                     $modelpMultimedia->encabezado = 0;
                     $modelpMultimedia->proyecto_id = $model->id;
                     $src = $_POST['Proyecto']['logo'];
-//                    die(var_dump($modelpMultimedia->attributes,$modelpMultimedia->validate(),$modelpMultimedia->errors));
                     if (!file_exists("uploads/proyecto/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {
                         mkdir("uploads/proyecto/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO, 0777, true);
                     }
@@ -67,8 +66,6 @@ class ProyectoController extends AweController
                     $publicPath = Yii::app()->getBaseUrl() . "/uploads/proyecto/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO . '/';
                     if (rename($pathorigen . $src, $path . $src)) {
                         $modelpMultimedia->ubicacion = $publicPath . $src;
-//                        die(var_dump($modelpMultimedia->attributes, $modelpMultimedia->validate(), $modelpMultimedia->errors));
-
                         $modelpMultimedia->save();
                     }
                 }

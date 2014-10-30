@@ -45,8 +45,8 @@ function init() {
 //                            $("#url_archivo").val('');
                         }
                         $("#Proyecto_logo").val(data.data.name);
-                        console.log(data.data.name);
-                        console.log("valor");
+                        //console.log(data.data.name);
+                        //console.log("valor");
 //                        $("#url_archivo").val();
                         if ($("#content_prev").attr('hidden')) {
                             $("#content_prev").toggle(200, function () {
@@ -70,11 +70,11 @@ function init() {
 }
 
 function saveProyecto($form) {
-    if ($('img.imageslink').length > 0) {
-        $('#logo').val($('img.imageslink').attr('filename'));
-    } else {
-        $('#logo').val(null);
-    }
+    //if ($('img.imageslink').length > 0) {
+    //    $('#logo').val($('img.imageslink').attr('filename'));
+    //} else {
+    //    $('#logo').val(null);
+    //}
     ajaxValidarFormulario({
         formId: $form,
         beforeCall: function () {

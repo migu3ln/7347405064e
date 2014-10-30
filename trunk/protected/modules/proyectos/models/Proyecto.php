@@ -2,7 +2,8 @@
 
 Yii::import('proyectos.models._base.BaseProyecto');
 
-class Proyecto extends BaseProyecto {
+class Proyecto extends BaseProyecto
+{
 
     const ESTADO_ACTIVO = 'ACTIVO';
     const ESTADO_INACTIVO = 'INACTIVO';
@@ -10,11 +11,13 @@ class Proyecto extends BaseProyecto {
     /**
      * @return Proyecto
      */
-    public static function model($className = __CLASS__) {
+    public static function model($className = __CLASS__)
+    {
         return parent::model($className);
     }
 
-    public function scopes() {
+    public function scopes()
+    {
         return array(
             'activos' => array(
                 'condition' => 't.estado = :estado',
@@ -25,17 +28,27 @@ class Proyecto extends BaseProyecto {
         );
     }
 
-    public static function label($n = 1) {
+    public static function label($n = 1)
+    {
         return Yii::t('app', 'Proyecto|Proyectos', $n);
     }
 
     /**
      * @return array customized attribute labels (name=>label)
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return array_merge(parent::attributeLabels(), array(
             'descripcion' => Yii::t('app', 'Descripción'),
         ));
+    }
+
+    public function rules()
+    {
+        return array_merge(parent::rules(), array(
+            array('nombre', 'unique'),
+        ));
+
     }
 
 }
