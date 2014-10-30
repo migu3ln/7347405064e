@@ -7,6 +7,8 @@ class Escenario extends BaseEscenario
 
     const ESTADO_ACTIVO = 'ACTIVO';
     const ESTADO_INACTIVO = 'INACTIVO';
+    //attributo logo
+    public $logo;
 
     /**
      * @return Escenario
@@ -24,7 +26,7 @@ class Escenario extends BaseEscenario
     public function rules()
     {
         return array(
-            array('nombre', 'required'),
+            array('nombre,logo', 'required'),
             array('nombre', 'unique'),
             array('teatro_sucre', 'numerical', 'integerOnly' => true),
             array('nombre', 'length', 'max' => 150),

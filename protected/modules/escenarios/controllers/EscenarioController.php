@@ -49,22 +49,17 @@ class EscenarioController extends AweController
             $model_taquilla_seccion->attributes = $_GET['EscenarioTaquillaSeccion'];
         }
         $result = array();
-        $archivo = new XUploadForm;
         $this->ajaxValidation($model);
         if (isset($_POST['Escenario'])) {
             $result['success'] = $model->save();
             if ($result['success']) {
                 $result['attr'] = $model->attributes;
-//                var_dump($model->attributes);
-//                var_dump($_POST['Escenario']['logo']);
-//                die("entro");
                 if ($_POST['Escenario']['logo'] != '' && $_POST['Escenario']['logo'] != 'null') {
                     $modelpMultimedia = new EscenarioMultimedia;
                     $modelpMultimedia->local = 1;
                     $modelpMultimedia->tipo = Constants::MULTIMEDIA_TIPO_LOGO;
                     $modelpMultimedia->escenario_id = $model->id;
                     $src = $_POST['Escenario']['logo'];
-//                    die(var_dump($modelpMultimedia->attributes,$modelpMultimedia->validate(),$modelpMultimedia->errors));
                     if (!file_exists("uploads/escenario/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO)) {
                         mkdir("uploads/escenario/$model->id/" . Constants::MULTIMEDIA_TIPO_LOGO, 0777, true);
                     }
@@ -75,13 +70,12 @@ class EscenarioController extends AweController
                         $modelpMultimedia->ubicacion = $publicPath . $src;
                         $modelpMultimedia->save();
                     }
-                    var_dump("entro");
                 }
             }
             echo CJSON::encode($result);
         } else {
             $this->render('create', array(
-                'model' => $model, 'archivo' => $archivo,
+                'model' => $model,
                 'model_taquilla' => $model_taquilla,
                 'model_taquilla_seccion' => $model_taquilla_seccion
             ));
@@ -230,7 +224,7 @@ class EscenarioController extends AweController
         if (Yii::app()->request->isAjaxRequest) {
             //nombre de la carpeta
             $carpeta = 'tmp';
-            $path = realpath(Yii::app()->getBasePath() . "/../uploads/" . $carpeta . "/") . "\\";
+            $path = realpath(Yii::app()->getBasePath() . "/../uploads/" . $carpeta . "/") . "/";
             $publicPath = Yii::app()->getBaseUrl() . "/uploads/" . $carpeta . "/";
             if (isset($_GET['_method'])) {
                 if ($_GET['_method'] == 'delete') {
