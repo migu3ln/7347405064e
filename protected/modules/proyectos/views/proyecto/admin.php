@@ -3,16 +3,18 @@
 /** @var Proyecto $model */
 $this->menu = array(
     array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'),
-    //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
+        //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
     ),
 );
 ?>
-<div id="flashMsg"  class="flash-messages">
+<div id="flashMsg" class="flash-messages">
 
-</div> 
+</div>
 <div class="widget blue">
     <div class="widget-title">
-        <h4> <i class="icon-fire-extinguisher"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo Proyecto::label(2) ?> </h4>
+        <h4>
+            <i class="icon-fire-extinguisher"></i> <?php echo Yii::t('AweCrud.app', 'Manage') ?> <?php echo Proyecto::label(2) ?>
+        </h4>
         <span class="tools">
             <a href="javascript:;" class="icon-chevron-down"></a>
             <!--a href="javascript:;" class="icon-remove"></a-->
@@ -46,13 +48,13 @@ $this->menu = array(
                             'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
                             'options' => array('title' => 'Actualizar'),
                             'imageUrl' => false,
-                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
+                            //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
                         ),
                         'delete' => array(
                             'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
                             'options' => array('title' => 'Eliminar'),
                             'imageUrl' => false,
-                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
+                            //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
                         ),
                     ),
                     'htmlOptions' => array(
@@ -62,11 +64,5 @@ $this->menu = array(
             ),
         ));
         ?>
-    </div>
-</div>
-
-<div class="bs-example">
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="//www.youtube.com/embed/vRqQRrULSxI" allowfullscreen=""></iframe>
     </div>
 </div>

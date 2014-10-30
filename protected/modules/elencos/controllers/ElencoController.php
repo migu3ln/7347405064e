@@ -1,6 +1,7 @@
 <?php
 
-class ElencoController extends AweController {
+class ElencoController extends AweController
+{
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -10,7 +11,8 @@ class ElencoController extends AweController {
     public $admin = false;
     public $defaultAction = 'admin';
 
-    public function filters() {
+    public function filters()
+    {
         return array(
             array('CrugeAccessControlFilter'),
         );
@@ -20,7 +22,8 @@ class ElencoController extends AweController {
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -30,7 +33,8 @@ class ElencoController extends AweController {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id = null) {
+    public function actionCreate($id = null)
+    {
         $model = new Elenco;
         if ($id) {
             $model->id = $id;
@@ -81,7 +85,8 @@ class ElencoController extends AweController {
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->loadModel($id);
 
         if ($id) {
@@ -140,7 +145,7 @@ class ElencoController extends AweController {
             }
             echo CJSON::encode($result);
         } else {
-            $this->render('update', array('model' => $model, 'modeloMultimedia' => $modeloMultimedia,'multimedia_info_tipo'=>$multimedia_info_tipo));
+            $this->render('update', array('model' => $model, 'modeloMultimedia' => $modeloMultimedia, 'multimedia_info_tipo' => $multimedia_info_tipo));
         }
     }
 
@@ -149,7 +154,8 @@ class ElencoController extends AweController {
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $this->loadModel($id)->delete();
@@ -164,7 +170,8 @@ class ElencoController extends AweController {
     /**
      * Manages all models.
      */
-    public function actionAdmin() {
+    public function actionAdmin()
+    {
         $model = new Elenco('search');
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['Elenco']))
@@ -181,7 +188,8 @@ class ElencoController extends AweController {
      * @param integer the ID of the model to be loaded
      */
     public
-            function loadModel($id, $modelClass = __CLASS__) {
+    function loadModel($id, $modelClass = __CLASS__)
+    {
         $model = Elenco::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -193,7 +201,8 @@ class ElencoController extends AweController {
      * @param CModel the model to be validated
      */
     protected
-            function performAjaxValidation($model, $form = null) {
+    function performAjaxValidation($model, $form = null)
+    {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'elenco-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
@@ -207,7 +216,8 @@ class ElencoController extends AweController {
      * @param string $form_id
      */
     protected
-            function ajaxValidation($model, $form_id = "elenco-form") {
+    function ajaxValidation($model, $form_id = "elenco-form")
+    {
         $portAtt = str_replace('-', ' ', (str_replace('-form', '', $form_id)));
         $portAtt = ucwords(strtolower($portAtt));
         $portAtt = str_replace(' ', '', $portAtt);
