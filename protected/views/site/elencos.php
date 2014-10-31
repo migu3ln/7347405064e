@@ -15,7 +15,7 @@
                 <div class="col-sm-6 col-md-6 col-lg-6 isotope-item modernism" >
                     <div class="portfolio-item">
                         <div class="titulo-imagen"><?php echo $value->nombre ?></div>
-                        <div class="logo">
+                        <div class="logo ">
                             <img class="img-responsive" src="<?php echo $logo['ubicacion'] ?>" alt="...">
 
                         </div>
