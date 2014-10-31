@@ -62,12 +62,12 @@
                             <li>
                                 <!--<a href="#" target="_blank">-->
                                 <img src="<?php echo $value->ubicacion ?>" alt="imagen1"  />
-                                                                <div class="mask">
-                                                                    <p>
-                                                                        <a href="<?php echo $value->ubicacion     ?>" data-lightbox="template_showcase"><i class="fa fa-search-plus fa-2x"></i></a>
-                                                                       
-                                                                    </p>
-                                                                </div>
+                                <div class="mask">
+                                    <p>
+                                        <a href="<?php echo $value->ubicacion ?>" data-lightbox="template_showcase"><i class="fa fa-search-plus fa-2x"></i></a>
+
+                                    </p>
+                                </div>
                                 <!--</a>-->
                                 <!--                                <div class="sb-description">
                                                                     <h3></h3>
@@ -151,7 +151,7 @@
 //
 //                        });
 
-                        
+
 
                     };
 
