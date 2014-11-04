@@ -2,6 +2,7 @@
 /** @var EscenarioController $this */
 /** @var Escenario $model */
 /** @var AweActiveForm $form */
+Util::tsRegisterAssetJs('plugins/jquery.upload.files.ajax.js');
 Util::tsRegisterAssetJs('_form.js');
 ?>
 <script type="text/javascript">
@@ -27,14 +28,17 @@ Util::tsRegisterAssetJs('_form.js');
                     <div class="row-fluid">
                         <div class="row">
                             <div class="col-lg-12">
+                                <input type="hidden" id="aux"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div id="content_prev" class="row" hidden>
                                     <div class="col-md-offset-3 col-md-3 col-xs-4">
                                         <div class="thumbnail">
                                             <img id="img_prev" data-src="holder.js/100%x200" alt="100%x300" src="#">
-
                                             <div class="caption">
                                                 <h4><strong>Logo</strong></h4>
-
                                                 <p>
                                                     <a id="btn_upload_change" href="#" class="btn btn-info ladda-button"
                                                        role="button" data-style="expand-right">
@@ -67,8 +71,6 @@ Util::tsRegisterAssetJs('_form.js');
                                 </div>
                             </div>
                         </div>
-                        <!--                        <input type="hidden" name="Escenario[logo]" id="logo" value=null/>-->
-
                         <?php echo $form->textFieldGroup($model, 'nombre', array('maxlength' => 150)) ?>
                         <div class="form-group">
                             <label class="col-sm-3 control-label required" for="Escenario_teatro_sucre">¿Pertenece al

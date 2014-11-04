@@ -2,61 +2,73 @@ var btn_save;
 var btn_save_taquilla;
 var btn_save_taquilla_seccion;
 var btn_upload_file;
-var sc_teatro_sucre;
-var dataFile = {success: false};
 $(function () {
     /****imagen****/
         //btn_actions
-    $()
-    $('#btn_upload_action,#btn_upload_change').click(function () {
-        btn_upload_file = Ladda.create(this);
-        if (dataFile.success) {
-            $('#logo_imagen').click();
-        }
-        else {
-            $('#logo_imagen').click();
-        }
-
-        return false;
-    });
-    //ation load
-    $("#logo_imagen").change(function () {
-        var file = $("#logo_imagen")[0].files[0];
-        if (file) {
-            var fileName = file.name;
-            var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
-            if (file && isImage(fileExtension)) {
-                btn_upload_file.start();
-                btn_upload_file.setProgress(0.6);
-                mostrarImagen(this, "#img_prev");
-                upload({
-                    successCall: function (data) {
-                        btn_upload_file.setProgress(1);
-                        btn_upload_file.stop();
-                        if (dataFile.success) {
-                            deleted({
-                                delete_url: dataFile.data.delete_url, successCall: function (data) {
-                                    $('#Escenario_logo').val(null);
-                                }
-                            });
-                        }
-                        $('#Escenario_logo').val(data.data.name);
-                        if ($("#content_prev").attr('hidden')) {
-                            $("#content_prev").toggle(200, function () {
-                                $("#content_action").toggle(200);
-                                $("#content_prev").removeAttr('hidden');
-                            });
-                        }
-                    }
-                });
-            }
-            else {
-                $("#logo_imagen").val(null);
-                bootbox.alert('El archivo seleccionado no es una imagen')
-            }
+    $('#Escenario_logo').uploadFile({
+        actionUpload: 'aol',
+        urlUpload: baseUrl + 'escenarios/escenario/ajaxUploadTemp',
+        beforeClickAction: function (attr) {
+            btn_upload_file = Ladda.create(this);
+        },
+        beforeUploadFile: function () {
+            btn_upload_file.start();
+            btn_upload_file.setProgress(0.6);
+        },
+        successUploadCall: function (data) {
+            btn_upload_file.setProgress(1);
+            btn_upload_file.stop();
         }
     });
-    //ckeditor
+    //$('#btn_upload_action,#btn_upload_change').click(function () {
+    //    btn_upload_file = Ladda.create(this);
+    //    if (dataFile.success) {
+    //        $('#logo_imagen').click();
+    //    }
+    //    else {
+    //        $('#logo_imagen').click();
+    //    }
+    //
+    //    return false;
+    //});
+//ation load
+//    $("#logo_imagen").change(function () {
+//        var file = $("#logo_imagen")[0].files[0];
+//        if (file) {
+//            var fileName = file.name;
+//            var fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+//            if (file && isImage(fileExtension)) {
+//                btn_upload_file.start();
+//                btn_upload_file.setProgress(0.6);
+//                mostrarImagen(this, "#img_prev");
+//                upload({
+//                    successCall: function (data) {
+//                        btn_upload_file.setProgress(1);
+//                        btn_upload_file.stop();
+//                        if (dataFile.success) {
+//                            deleted({
+//                                delete_url: dataFile.data.delete_url, successCall: function (data) {
+//                                    $('#Escenario_logo').val(null);
+//                                }
+//                            });
+//                        }
+//                        $('#Escenario_logo').val(data.data.name);
+//                        if ($("#content_prev").attr('hidden')) {
+//                            $("#content_prev").toggle(200, function () {
+//                                $("#content_action").toggle(200);
+//                                $("#content_prev").removeAttr('hidden');
+//                            });
+//                        }
+//                    }
+//                });
+//            }
+//            else {
+//                $("#logo_imagen").val(null);
+//                bootbox.alert('El archivo seleccionado no es una imagen')
+//            }
+//        }
+//    });
+//ckeditor
     $("#Escenario_descripcion").ckeditor(function () {
     }, {
         toolbarGroups: [
@@ -64,8 +76,8 @@ $(function () {
             {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'styles']}
         ]
     });
-    //ladda submit
-    //save escenario
+//ladda submit
+//save escenario
     $("#btn_save_escenario").click(function (e) {
         e.preventDefault();
         btn_save = Ladda.create(this);
@@ -74,7 +86,7 @@ $(function () {
         saveEscenario(form_id);
         return false;
     });
-    //save taquilla
+//save taquilla
     $("#btn_save_taquilla").click(function (e) {
         e.preventDefault();
         btn_save_taquilla = Ladda.create(this);
@@ -83,7 +95,7 @@ $(function () {
         saveTaquilla(form_id);
         return false;
     });
-    //save seccion
+//save seccion
     $("#btn_save_taquilla_seccion").click(function (e) {
         e.preventDefault();
         btn_save_taquilla_seccion = Ladda.create(this);
@@ -92,14 +104,14 @@ $(function () {
         saveTaquillaSeccion(form_id);
         return false;
     });
-    //btn agregar multimedia
+//btn agregar multimedia
     $("#btn_multimedia").click(function () {
         $('#panel_taquilla_secciones').fadeOut(200, function () {
             $('#panel_multimedia').fadeIn(200, function () {
             });
         });
     });
-    //bootstrapSwitch
+//bootstrapSwitch
     $("#Escenario_teatro_sucre").bootstrapSwitch({
         onColor: 'success',
         onText: 'Si',
@@ -112,7 +124,8 @@ $(function () {
             }
         }
     });
-});
+})
+;
 function saveEscenario($form) {
     ajaxValidarFormulario({
         formId: $form,
@@ -139,76 +152,76 @@ function saveEscenario($form) {
  * @autor Alex Yépez <alex.Yepez@outlook.com>
  * @param input
  */
-function mostrarImagen(input, prev_id) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $(prev_id).attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-function isImage(extension) {
-    switch (extension.toLowerCase()) {
-        case 'jpg':
-        case 'gif':
-        case 'png':
-        case 'jpeg':
-            return true;
-            break;
-        default:
-            return false;
-            break;
-    }
-}
-function deleted(options) {
-    $.ajax({
-        url: options.delete_url,
-        success: function (data) {
-            if (data.success) {
-                if (options.successCall)
-                    options.successCall(data);
-            }
-            else {
-                console.log(data);
-                if (options.errorCall)
-                    options.errorCall(data);
-            }
-        }
-    });
-}
-function upload(options) {
-    //información del formulario
-    var inputFileImage = document.getElementById('logo_imagen');
-    if (inputFileImage.files[0]) {
-        var file = inputFileImage.files[0];
-        var formData = new FormData();
-        formData.append('file', file);
-        //hacemos la petición ajax
-        $.ajax({
-            url: baseUrl + 'escenarios/escenario/ajaxUploadTemp',
-            type: 'POST',
-            // Form data
-            //datos del formulario
-            data: formData,
-            //necesario para subir archivos via ajax
-            cache: false,
-            contentType: false,
-            processData: false,
-            //una vez finalizado correctamente
-            success: function (data) {
-                var json = JSON.parse(data);
-                if (options.successCall)
-                    options.successCall(json);
-
-                dataFile = json;
-            },
-            //si ha ocurrido un error
-            error: function () {
-            }
-        });
-    }
-}
+//function mostrarImagen(input, prev_id) {
+//    if (input.files && input.files[0]) {
+//        var reader = new FileReader();
+//        reader.onload = function (e) {
+//            $(prev_id).attr('src', e.target.result);
+//        }
+//        reader.readAsDataURL(input.files[0]);
+//    }
+//}
+//function isImage(extension) {
+//    switch (extension.toLowerCase()) {
+//        case 'jpg':
+//        case 'gif':
+//        case 'png':
+//        case 'jpeg':
+//            return true;
+//            break;
+//        default:
+//            return false;
+//            break;
+//    }
+//}
+//function deleted(options) {
+//    $.ajax({
+//        url: options.delete_url,
+//        success: function (data) {
+//            if (data.success) {
+//                if (options.successCall)
+//                    options.successCall(data);
+//            }
+//            else {
+//                console.log(data);
+//                if (options.errorCall)
+//                    options.errorCall(data);
+//            }
+//        }
+//    });
+//}
+//function upload(options) {
+//    //información del formulario
+//    var inputFileImage = document.getElementById('logo_imagen');
+//    if (inputFileImage.files[0]) {
+//        var file = inputFileImage.files[0];
+//        var formData = new FormData();
+//        formData.append('file', file);
+//        //hacemos la petición ajax
+//        $.ajax({
+//            url: baseUrl + 'escenarios/escenario/ajaxUploadTemp',
+//            type: 'POST',
+//            // Form data
+//            //datos del formulario
+//            data: formData,
+//            //necesario para subir archivos via ajax
+//            cache: false,
+//            contentType: false,
+//            processData: false,
+//            //una vez finalizado correctamente
+//            success: function (data) {
+//                var json = JSON.parse(data);
+//                if (options.successCall)
+//                    options.successCall(json);
+//
+//                dataFile = json;
+//            },
+//            //si ha ocurrido un error
+//            error: function () {
+//            }
+//        });
+//    }
+//}
 /************* end Upload archivo****************/
 /**
  * save taquilla
