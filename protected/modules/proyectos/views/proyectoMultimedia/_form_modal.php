@@ -28,6 +28,16 @@ Util::tsRegisterAssetJs('_form_modal.js');
                 id="myModalLabel"><?php echo Yii::t('AweCrud.app', $model->isNewRecord ? 'Create' : 'Update') . ' ' . ProyectoMultimedia::label(1); ?></h4>
         </div>
         <div class="modal-body">
+            <?php
+            $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
+                'type' => 'horizontal',
+                'id' => 'proyecto-multimedia-form',
+                'action' => Yii::app()->createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id . '/tipo/' . $model->tipo),
+                'enableAjaxValidation' => true,
+                'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
+                'enableClientValidation' => false,
+            ));
+            ?>
             <div class="row" id="contenedor-form-modal">
 
                 <div class="col-md-6">
@@ -72,19 +82,12 @@ Util::tsRegisterAssetJs('_form_modal.js');
                         </div>
 
                     </div>
+                    <?php echo $form->error($model, "ubicacion") ?>
                 </div>
 
+
                 <div class="col-md-6">
-                    <?php
-                    $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
-                        'type' => 'horizontal',
-                        'id' => 'proyecto-multimedia-form',
-                        'action' => Yii::app()->createUrl('/proyectos/proyectoMultimedia/ajaxCreate/proyecto_id/' . $model->proyecto_id . '/tipo/' . $model->tipo),
-                        'enableAjaxValidation' => true,
-                        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
-                        'enableClientValidation' => false,
-                    ));
-                    ?>
+
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label required" for="ProyectoMultimedia_local">Local <span
