@@ -122,15 +122,17 @@ Util::tsRegisterAssetJs('_form.js');
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $dataProvider,
                         'columns' => array(
-                            array(
-                                'class' => 'ext.booster.widgets.TbImageColumn',
-//                                 'name'=>'ubicacion',
-                                'imagePathExpression' => '$data->ubicacion',
-                                'imageOptions' => array(
-                                    'width' => 150,
-                                    'height' => 150
-                                )
-                            )
+                            'ubicacion'
+
+//                            array(
+//                                'class' => 'ext.booster.widgets.TbImageColumn',
+////                                 'name'=>'ubicacion',
+//                                'imagePathExpression' => '$data->ubicacion',
+//                                'imageOptions' => array(
+//                                    'width' => 150,
+//                                    'height' => 150
+//                                )
+//                            )
                         )
                     ));
                     unset($modelImagen);

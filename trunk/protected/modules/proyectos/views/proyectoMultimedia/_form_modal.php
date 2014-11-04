@@ -85,7 +85,6 @@ Util::tsRegisterAssetJs('_form_modal.js');
                     <?php echo $form->error($model, "ubicacion") ?>
                 </div>
 
-
                 <div class="col-md-6">
 
 
@@ -171,15 +170,17 @@ Util::tsRegisterAssetJs('_form_modal.js');
                         'type' => 'striped bordered hover advance',
                         'dataProvider' => $model->de_proyecto($model->proyecto_id)->search(),
                         'columns' => $model->tipo == Constants::MULTIMEDIA_TIPO_IMAGEN ? array(
-                            array(
-                                'class' => 'ext.booster.widgets.TbImageColumn',
-//                                 'name'=>'ubicacion',
-                                'imagePathExpression' => '$data->ubicacion',
-                                'imageOptions' => array(
-                                    'width' => 150,
-                                    'height' => 150
-                                )
-                            )
+                            'ubicacion',
+
+//                            array(
+//                                'class' => 'ext.booster.widgets.TbImageColumn',
+////                                 'name'=>'ubicacion',
+//                                'imagePathExpression' => '$data->ubicacion',
+//                                'imageOptions' => array(
+//                                    'width' => 150,
+//                                    'height' => 150
+//                                )
+//                            )
                         ) : array('ubicacion')
                     ));
                     ?>
