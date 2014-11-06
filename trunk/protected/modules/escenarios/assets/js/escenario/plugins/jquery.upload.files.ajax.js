@@ -37,7 +37,7 @@
         var attr = dataElemento[input_id];
         $('#' + attr.btnUploadChangeId + ',#' + attr.btnUploadActionId).click(function (e) {
             e.preventDefault();
-            if (attr.beforeClickAction === !undefined) {
+            if (attr.beforeClickAction !== undefined) {
                 attr.beforeClickAction(attr);
             }
             $('#' + attr.inputFile).click();
@@ -52,9 +52,6 @@
                     if (attr.beforeUploadFile === !undefined) {
                         attr.beforeUploadFile();
                     }
-                    if (attr.preview && attr.type === 'image') {
-                        previewImage(this, attr.preview);
-                    }
                     upload(input_id);
                 }
                 else {
@@ -63,16 +60,6 @@
                 }
             }
         });
-    }
-
-    function previewImage(input, prev_id) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#' + prev_id).attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
     }
 
     function isImage(extension) {
@@ -92,17 +79,16 @@
     function deleted(input_id) {
         var attr = dataElemento[input_id];
         $.ajax({
-            url: attr.data.delete_url,
+            url: attr.data.data.delete_url,
             success: function (data) {
                 if (data.success) {
                     $('#' + input_id).val(null);
-                    if (attr.successDeleteCall === !undefined)
+                    if (attr.successDeleteCall !== undefined)
                         attr.successDeleteCall(data);
                 }
                 else {
                     if (attr.errorDeleteCall === !undefined)
                         attr.errorDeleteCall(data);
-                    attr.errorDeleteCall(data);
                 }
             }
         });
@@ -128,13 +114,20 @@
                 cache: false,
                 contentType: false,
                 processData: false,
+                beforeSend: function () {
+                    if (attr.beforeUploadFile !== undefined)
+                        attr.beforeUploadFile();
+                },
                 //una vez finalizado correctamente
                 success: function (data) {
                     var json = JSON.parse(data);
-                    if (attr.successUploadCall === !undefined)
+                    if (attr.successUploadCall !== undefined)
                         attr.successUploadCall(json);
                     if (json.success) {
-                        if (attr.data === !undefined && attr.data.success) {
+                        if (attr.preview && attr.type === 'image') {
+                            $('#' + attr.preElement).attr('src', json.data.src)
+                        }
+                        if (attr.data !== undefined && attr.data.success) {
                             deleted(input_id);
                         }
                         $('#' + input_id).val(json.data.name);
@@ -144,6 +137,10 @@
                                 $("#" + attr.pnPreviewId).removeAttr('hidden');
                             });
                         }
+                    }
+                    else {
+                        if (attr.errorUploadCall !== undefined)
+                            attr.errorUploadCall(json);
                     }
                     dataElemento[input_id]['data'] = json;
                 },
